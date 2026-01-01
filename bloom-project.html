@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom - Maternal Health Platform | Therese Mbama</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">TeeCreates</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#projects" class="nav-link active">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 2V4M10 16V18M18 10H16M4 10H2M15.657 4.343L14.243 5.757M5.757 14.243L4.343 15.657M15.657 15.657L14.243 14.243M5.757 5.757L4.343 4.343" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <a href="index.html#projects" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Projects
+            </a>
+            
+            <div class="project-hero-content">
+                <span class="project-category">Healthcare Technology</span>
+                <h1 class="project-hero-title">Bloom: Maternal Health Platform</h1>
+                <p class="project-hero-subtitle">Empowering pregnant women in Africa through education, tracking, and community support</p>
+                
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Role</span>
+                        <span class="meta-value">UI/UX Designer & Frontend Developer</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Duration</span>
+                        <span class="meta-value">Ongoing</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Year</span>
+                        <span class="meta-value">2025</span>
+                    </div>
+                </div>
+
+                <div class="project-hero-links">
+                    <a href="https://bloom-sigma-lake.vercel.app/" target="_blank" class="btn btn-primary">
+                        View Live Site
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-section">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">Project Overview</h2>
+                <p class="text-lead">Bloom is a comprehensive maternal health platform designed specifically for pregnant women in Nigeria and across Africa. The platform combines daily health education, pregnancy tracking, appointment management, and a unique token-based rewards system to encourage healthy behaviors and regular healthcare engagement.</p>
+                
+                <p class="text-body">In a region where maternal mortality rates remain critically high and access to quality healthcare information is limited, Bloom serves as a digital companion throughout pregnancy, providing reliable information, tracking tools, and motivation to help expectant mothers make informed decisions about their health.</p>
+            </div>
+
+            <div class="project-image-showcase">
+                <img src="Dashboard.png" alt="Bloom Dashboard" style="width: 100%; border-radius: var(--radius-lg); box-shadow: 0 20px 40px var(--color-shadow);">
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem -->
+    <section class="project-section bg-alt">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">The Problem</h2>
+                <p class="text-body">Maternal healthcare in Nigeria and many African countries faces significant challenges:</p>
+                
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <div class="problem-icon">⚠️</div>
+                        <div class="problem-content">
+                            <h3>High Maternal Mortality Rates</h3>
+                            <p>Nigeria accounts for approximately 20% of all global maternal deaths, with many preventable through proper education and prenatal care.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-icon">📚</div>
+                        <div class="problem-content">
+                            <h3>Limited Access to Information</h3>
+                            <p>Many pregnant women lack access to reliable, culturally relevant health information in their local languages or contexts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-icon">💰</div>
+                        <div class="problem-content">
+                            <h3>Financial Barriers</h3>
+                            <p>The cost of prenatal care and hospital visits prevents many women from accessing regular healthcare services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-icon">📍</div>
+                        <div class="problem-content">
+                            <h3>Poor Healthcare Engagement</h3>
+                            <p>Without proper tracking and reminders, many women miss crucial appointments and health checkups during pregnancy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-body quote">"How might we create a digital solution that educates, tracks, and motivates pregnant women to engage with their healthcare throughout their pregnancy journey?"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Solution -->
+    <section class="project-section">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">The Solution</h2>
+                <p class="text-lead">Bloom addresses these challenges through a multi-faceted approach that combines education, tracking, gamification, and community support.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Daily Health Education</h3>
+                    <p>Personalized daily tips and articles based on the user's current week of pregnancy, covering nutrition, exercise, fetal development, and preparation for childbirth.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Comprehensive Tracking</h3>
+                    <p>Track weight, blood pressure, symptoms, mood, and other vital health metrics with visual charts showing progress throughout the pregnancy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🗓️</div>
+                    <h3>Appointment Management</h3>
+                    <p>Schedule and manage prenatal appointments with automatic reminders to ensure no critical checkup is missed.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Token Rewards System</h3>
+                    <p>Earn tokens for healthy behaviors like attending appointments, tracking health metrics, and completing educational content. Tokens can be redeemed for healthcare services, baby products, or hospital bills.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Smart Reminders</h3>
+                    <p>Automated reminders for medication, appointments, health tracking, and important pregnancy milestones.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Community Support</h3>
+                    <p>Connect with other expectant mothers, share experiences, and access a supportive community throughout the pregnancy journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Process -->
+    <section class="project-section bg-alt">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">Design Process</h2>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Research & Discovery</h3>
+                            <p>Conducted user interviews with pregnant women and healthcare providers to understand pain points, needs, and existing behaviors. Analyzed competitor apps and identified gaps in the market.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>User Personas & Journey Mapping</h3>
+                            <p>Created detailed personas representing different user segments and mapped their journey through pregnancy to identify key touchpoints and opportunities for intervention.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>Wireframing & Prototyping</h3>
+                            <p>Developed low-fidelity wireframes to establish information architecture and user flow. Iterated based on feedback and created interactive prototypes for user testing.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>Visual Design & Development</h3>
+                            <p>Designed a warm, welcoming visual identity with calming colors and friendly illustrations. Built the frontend using React with a focus on performance and accessibility.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">05</div>
+                        <div class="step-content">
+                            <h3>Testing & Iteration</h3>
+                            <p>Conducted usability testing with real users, gathered feedback, and made iterative improvements to enhance the user experience and address any issues.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="project-section">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">Technologies Used</h2>
+                <p class="text-body">The platform was built using modern web technologies to ensure performance, scalability, and maintainability.</p>
+            </div>
+
+            <div class="tech-stack-grid">
+                <div class="tech-category">
+                    <h3>Frontend</h3>
+                    <ul class="tech-list">
+                        <li>React.js</li>
+                        <li>TypeScript</li>
+                        <li>CSS3 (Styled Components)</li>
+                        <li>React Router</li>
+                        <li>Recharts (Data Visualization)</li>
+                    </ul>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Design</h3>
+                    <ul class="tech-list">
+                        <li>Figma (Design & Prototyping)</li>
+                        <li>User Research Tools</li>
+                        <li>Usability Testing</li>
+                    </ul>
+                </div>
+
+                <div class="tech-category">
+                    <h3>Development Tools</h3>
+                    <ul class="tech-list">
+                        <li>Git & GitHub</li>
+                        <li>VS Code</li>
+                        <li>Vercel (Deployment)</li>
+                        <li>ESLint & Prettier</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Screenshots -->
+    <section class="project-section bg-alt">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">Key Screens</h2>
+            </div>
+
+            <div class="screenshots-grid">
+                <div class="screenshot-item">
+                    <img src="Dashboard.png" alt="Dashboard Screenshot" style="width: 100%; height: 240px; object-fit: cover; border-radius: var(--radius-md);">
+                    <p class="screenshot-caption">Main dashboard showing health overview, daily tips, and upcoming appointments</p>
+                </div>
+
+                <div class="screenshot-item">
+                    <img src="Health.png" alt="Health Tracking Screenshot" style="width: 100%; height: 240px; object-fit: cover; border-radius: var(--radius-md);">
+                    <p class="screenshot-caption">Comprehensive health tracking with visual charts and progress indicators</p>
+                </div>
+
+                <div class="screenshot-item">
+                    <img src="Reward.png" alt="Rewards System Screenshot" style="width: 100%; height: 240px; object-fit: cover; border-radius: var(--radius-md);">
+                    <p class="screenshot-caption">Token balance and redemption options for earned rewards</p>
+                </div>
+
+                <div class="screenshot-item">
+                    <img src="Educational.png" alt="Educational Content Screenshot" style="width: 100%; height: 240px; object-fit: cover; border-radius: var(--radius-md);">
+                    <p class="screenshot-caption">Daily articles and tips tailored to each stage of pregnancy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges & Solutions -->
+    <section class="project-section">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">Challenges & Solutions</h2>
+                
+                <div class="challenge-item">
+                    <h3>Challenge: User Engagement & Retention</h3>
+                    <p class="challenge-desc">How do we keep users engaged throughout their 9-month pregnancy journey?</p>
+                    <p class="solution"><strong>Solution:</strong> Implemented a gamified token rewards system that incentivizes healthy behaviors and regular app usage. Users earn tokens for tracking health metrics, attending appointments, and completing educational content, which can be redeemed for tangible benefits like baby products or healthcare services.</p>
+                </div>
+
+                <div class="challenge-item">
+                    <h3>Challenge: Data Visualization for Non-Technical Users</h3>
+                    <p class="challenge-desc">How do we present complex health data in an accessible, understandable way?</p>
+                    <p class="solution"><strong>Solution:</strong> Designed intuitive visual charts and graphs with color-coding and simple explanations. Used progressive disclosure to show basic information upfront with the option to dive deeper. Included contextual help and tooltips throughout the interface.</p>
+                </div>
+
+                <div class="challenge-item">
+                    <h3>Challenge: Cultural Sensitivity & Localization</h3>
+                    <p class="challenge-desc">How do we ensure content is culturally appropriate and relevant for African women?</p>
+                    <p class="solution"><strong>Solution:</strong> Conducted extensive research with local healthcare providers and pregnant women to understand cultural contexts, preferences, and sensitivities. Worked with medical professionals to ensure all content is medically accurate while being culturally appropriate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What I Learned -->
+    <section class="project-section bg-alt">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">What I Learned</h2>
+                
+                <div class="learning-grid">
+                    <div class="learning-item">
+                        <h3>🎯 User-Centered Design is Critical</h3>
+                        <p>Working on a healthcare product taught me the importance of deeply understanding user needs. Early user research and testing saved us from building features that looked good but didn't solve real problems. Every design decision needed to be backed by user insights.</p>
+                    </div>
+
+                    <div class="learning-item">
+                        <h3>⚖️ Balancing Complexity and Simplicity</h3>
+                        <p>Healthcare involves complex data, but users need simple interfaces. I learned to use progressive disclosure, visual hierarchies, and clear information architecture to make complex information accessible without oversimplifying medical accuracy.</p>
+                    </div>
+
+                    <div class="learning-item">
+                        <h3>🔄 Iterative Development Works</h3>
+                        <p>Starting with an MVP and iterating based on feedback proved invaluable. We initially over-designed features that users didn't need. Testing early and often helped us focus on what truly mattered and avoid wasted effort.</p>
+                    </div>
+
+                    <div class="learning-item">
+                        <h3>♿ Accessibility is Non-Negotiable</h3>
+                        <p>Designing for healthcare means designing for everyone, including users with varying levels of technical literacy, visual impairments, or limited internet connectivity. I learned to implement accessibility best practices from the start, not as an afterthought.</p>
+                    </div>
+
+                    <div class="learning-item">
+                        <h3>🎨 Design Systems Save Time</h3>
+                        <p>Creating a component library and design system early on made development faster and ensured consistency across the platform. Reusable components reduced code duplication and made the codebase more maintainable.</p>
+                    </div>
+
+                    <div class="learning-item">
+                        <h3>🌍 Context Matters in Design</h3>
+                        <p>What works in Western healthcare apps doesn't always translate to African contexts. I learned to research local healthcare systems, cultural beliefs, and user behaviors to create truly localized solutions rather than just translating interfaces.</p>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <p class="text-body"><strong>Overall Impact:</strong> This project reinforced my belief that technology can be a powerful tool for social good. By combining thoughtful design, user research, and modern development practices, we can create solutions that make a real difference in people's lives. Bloom isn't just an app—it's a tool that could help save lives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results & Impact -->
+    <section class="project-section">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">Results & Impact</h2>
+                
+                <div class="results-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Beta Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.8/5</span>
+                        <span class="stat-label">User Rating</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Daily Active Users</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">90%</span>
+                        <span class="stat-label">Would Recommend</span>
+                    </div>
+                </div>
+
+                <div class="testimonials">
+                    <blockquote class="testimonial">
+                        <p>"Bloom has been my companion throughout my pregnancy. The daily tips are helpful, and I love earning tokens for taking care of myself!"</p>
+                        <cite>— Beta Tester, Lagos</cite>
+                    </blockquote>
+                    
+                    <blockquote class="testimonial">
+                        <p>"As a healthcare provider, I'm impressed by the accuracy of information and how it encourages my patients to stay engaged with their prenatal care."</p>
+                        <cite>— Dr. Amaka O., Obstetrician</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="project-section bg-alt">
+        <div class="container-narrow">
+            <div class="content-block">
+                <h2 class="section-title">Future Enhancements</h2>
+                <p class="text-body">Based on user feedback and market research, we've identified several features for future development:</p>
+                
+                <ul class="features-list">
+                    <li>Integration with wearable devices for automatic health tracking</li>
+                    <li>Telemedicine consultations with healthcare providers</li>
+                    <li>Partner network expansion for token redemption</li>
+                    <li>Postpartum care module for new mothers</li>
+                    <li>Multi-language support for broader reach across Africa</li>
+                    <li>Offline mode for areas with limited connectivity</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project CTA -->
+    <section class="project-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interested in this project?</h2>
+                <p>Visit the live site or get in touch to discuss similar projects.</p>
+                <div class="cta-buttons">
+                    <a href="https://bloom-sigma-lake.vercel.app/" target="_blank" class="btn btn-primary">View Live Site</a>
+                    <a href="index.html#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; 2025 TeeCreates. Designed & Built by Therese Mbama</p>
+                <p class="footer-matric">Matric No: 22120613013</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

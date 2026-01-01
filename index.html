@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therese Mbama | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">TeeCreates</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 2V4M10 16V18M18 10H16M4 10H2M15.657 4.343L14.243 5.757M5.757 14.243L4.343 15.657M15.657 15.657L14.243 14.243M5.757 5.757L4.343 4.343" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="hero-greeting">Hello, I'm</p>
+                <h1 class="hero-name">Therese Mbama</h1>
+                <p class="hero-title">UI/UX Designer & Front-end Developer</p>
+                <p class="hero-tagline">I create digital experiences that blend beautiful design with functional code, building solutions that make a real impact.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Me Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Who I Am</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-main">
+                    <p class="about-intro">I'm a Computer Science student with a passion for creating user-centric digital experiences. I bridge the gap between design and development, crafting interfaces that are both beautiful and functional.</p>
+                    
+                    <p class="about-text">My journey into tech started with a curiosity about how things work, which evolved into a deep love for problem-solving through design and code. I specialize in UI/UX design and front-end development, with a particular interest in healthcare technology and accessibility.</p>
+                    
+                    <p class="about-text">When I'm not designing or coding, I'm exploring new design trends, contributing to open-source projects, or helping businesses streamline their digital workflows as a virtual assistant.</p>
+                </div>
+                
+                <div class="skills-section">
+                    <h3 class="subsection-title">Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Design</h4>
+                            <ul class="skill-list">
+                                <li>UI/UX Design</li>
+                                <li>Figma & Prototyping</li>
+                                <li>User Research</li>
+                                <li>Responsive Design</li>
+                                <li>Design Systems</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Development</h4>
+                            <ul class="skill-list">
+                                <li>HTML5 & CSS3</li>
+                                <li>JavaScript (ES6+)</li>
+                                <li>React & TypeScript</li>
+                                <li>Git & GitHub</li>
+                                <li>Responsive Web Design</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Other</h4>
+                            <ul class="skill-list">
+                                <li>Graphic Design</li>
+                                <li>Project Management</li>
+                                <li>Virtual Assistance</li>
+                                <li>Content Creation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interests-section">
+                    <h3 class="subsection-title">Technical Focus</h3>
+                    <p class="interests-text">My work centers around healthcare technology and accessibility. I'm particularly interested in creating digital solutions that address real-world problems, especially for underserved communities. I believe technology should be inclusive, intuitive, and impactful.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">My Work</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1: Bloom - Featured with detailed page -->
+                <article class="project-card featured">
+                    <div class="project-image">
+                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #8B4367 0%, #C17C90 100%);">
+                            <span class="featured-badge">Featured Project</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Bloom</h3>
+                        <p class="project-desc">A comprehensive maternal health platform providing daily education, health tracking, and token-based rewards for pregnant women in Nigeria and Africa.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">UI/UX</span>
+                            <span class="tech-tag">Healthcare</span>
+                            <span class="tech-tag">Web Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="bloom-project.html" class="project-link primary" style="background: linear-gradient(135deg, #8B4367, #6B2D5C); padding: 1rem 2rem; font-size: 1rem; font-weight: 700;">📄 View Full Case Study →</a>
+                            <a href="https://bloom-sigma-lake.vercel.app/" target="_blank" class="project-link secondary">Live Demo</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Echo-Mind -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #6B4E71 0%, #A8927D 100%);"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Echo-Mind</h3>
+                        <p class="project-desc">A voice-first medical records assistant enabling healthcare professionals to query patient documents through natural conversation. Built in 24 hours.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Voice UI</span>
+                            <span class="tech-tag">Healthcare</span>
+                            <span class="tech-tag">Accessibility</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://echo-mind-p83r.vercel.app/login" target="_blank" class="project-link primary">View Live →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: Pilatify -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #8B6B7C 0%, #C1A59B 100%);"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Pilatify</h3>
+                        <p class="project-desc">Mobile fitness app for tracking Pilates workouts with personalized dashboards and social features for motivation and progress sharing.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">Mobile Design</span>
+                            <span class="tech-tag">Health Tech</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.figma.com/proto/9YINDOUFeDqAA4vXfuihSs/Mobile-Navigation-Menu-Bar-%7C-Bottom-Navbar--Community-?page-id=1%3A1215&node-id=550-207&viewport=466%2C-1660%2C0.09&t=XOwHBg1vEpVjlsGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=550%3A194" target="_blank" class="project-link primary">View Prototype →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-text">
+                    <h2 class="contact-title">Let's Work Together</h2>
+                    <p class="contact-desc">I'm always open to discussing new projects, creative ideas, or opportunities to bring your vision to life. Whether you need a designer, developer, or both—let's connect!</p>
+                </div>
+                
+                <div class="contact-methods">
+                    <button class="contact-btn email" id="openEmailModal">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>Send Email</span>
+                    </button>
+                    
+                    <a href="https://wa.me/2348084069515" target="_blank" class="contact-btn whatsapp">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        <span>WhatsApp</span>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/therese-mbama-8aa29b234" target="_blank" class="contact-btn linkedin">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+
+                <!-- Email Modal -->
+                <div id="emailModal" class="modal">
+                    <div class="modal-overlay"></div>
+                    <div class="modal-content">
+                        <button class="modal-close" id="closeModal">&times;</button>
+                        <h3 class="modal-title">Send Me a Message</h3>
+                        <form action="https://formspree.io/f/mvzppglj" method="POST" class="modal-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="_replyto" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+                            </div>
+                            <input type="hidden" name="_subject" value="New message from portfolio!">
+                            <div class="modal-buttons">
+                                <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+                                <button type="submit" class="btn-send">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="contact-info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">mbamatherese2005@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone</span>
+                        <span class="info-value">+234 808 406 9515</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location</span>
+                        <span class="info-value">Lagos, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; 2025 TeeCreates. Designed & Built by Therese Mbama</p>
+                <p class="footer-matric">Matric No: 22120613013</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
