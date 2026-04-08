@@ -1,216 +1,219 @@
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
+// ─── THEME: system preference + localStorage override ───
+const root = document.documentElement;
+const mql = window.matchMedia('(prefers-color-scheme: dark)');
 
-// Theme Toggle
-const themeToggle = document.querySelector('.theme-toggle');
-const html = document.documentElement;
+function applyTheme(theme) { root.setAttribute('data-theme', theme); }
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
-html.setAttribute('data-theme', currentTheme);
+const stored = localStorage.getItem('theme');
+applyTheme(stored || (mql.matches ? 'dark' : 'light'));
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        const theme = html.getAttribute('data-theme');
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
+mql.addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+});
+
+function toggleTheme() {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem('theme', next);
 }
 
-// Mobile Menu Toggle
-const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
+const themeToggle    = document.getElementById('themeToggle');
+const themeToggleMob = document.getElementById('themeToggleMob');
+if (themeToggle)    themeToggle.addEventListener('click', toggleTheme);
+if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
 
-if (mobileMenuToggle && navMenu) {
-    mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-}
-
-// Close mobile menu when clicking on a link
-const navLinks = document.querySelectorAll('.nav-link');
-navLinks.forEach(link => {
+// ─── HAMBURGER → DROPDOWN ───
+const hamburger = document.getElementById('hamburger');
+const dropdown  = document.getElementById('mobileDropdown');
+if (hamburger && dropdown) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    dropdown.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
     link.addEventListener('click', () => {
-        if (mobileMenuToggle && navMenu) {
-            mobileMenuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        }
+      hamburger.classList.remove('active');
+      dropdown.classList.remove('open');
     });
-});
-
-// Active Navigation Link on Scroll
-const sections = document.querySelectorAll('section[id], header[id]');
-
-function setActiveLink() {
-    const scrollPosition = window.scrollY + 100;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-    });
+  });
 }
 
-window.addEventListener('scroll', setActiveLink);
-setActiveLink(); // Call on page load
+// ─── FOLDER PROJECT SYSTEM ───
+const tabs   = document.querySelectorAll('.folder-tab');
+const cards  = document.querySelectorAll('.project-card-overlay');
+const body   = document.getElementById('folderBody');
+const empty  = document.getElementById('folderEmpty');
+let activeCard = null;
 
-// Smooth Scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        
-        if (target) {
-            const offset = 90; // Height of fixed navbar
-            const targetPosition = target.offsetTop - offset;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
+function openProject(index) {
+  closeProject();
+  tabs.forEach(t => t.classList.remove('active'));
+  tabs[index].classList.add('active');
+  if (empty) empty.style.display = 'none';
+  if (body)  body.style.minHeight = '420px';
+  const card = document.querySelector(`[data-card="${index}"]`);
+  requestAnimationFrame(() => {
+    card.classList.add('open');
+    activeCard = card;
+  });
+}
+function closeProject() {
+  if (activeCard) { activeCard.classList.remove('open'); activeCard = null; }
+  tabs.forEach(t => t.classList.remove('active'));
+  if (empty) empty.style.display = 'block';
+  if (body)  body.style.minHeight = '120px';
+}
+tabs.forEach((tab, i) => {
+  tab.addEventListener('click', () => {
+    if (tab.classList.contains('active')) closeProject();
+    else openProject(i);
+  });
+});
+document.querySelectorAll('.pc-close').forEach(btn => {
+  btn.addEventListener('click', (e) => { e.stopPropagation(); closeProject(); });
 });
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+// ─── BUBBLE CURSOR TRAIL ───
+let lastBubble = 0;
+const BUBBLE_INTERVAL = 60;
+const bubbleColors = () => {
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  return isDark
+    ? ['#c4929e','#8ba06e','#B09C8F','#917266','#c4929e']
+    : ['#5D4459','#586144','#917266','#9D6A83','#716361'];
 };
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-const animateElements = document.querySelectorAll(
-    '.project-card, .feature-card, .skill-category, .problem-item, .process-step, .learning-item'
-);
-animateElements.forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
+document.addEventListener('mousemove', (e) => {
+  const now = Date.now();
+  if (now - lastBubble < BUBBLE_INTERVAL) return;
+  lastBubble = now;
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  const size = Math.random() * 18 + 6;
+  const c = bubbleColors();
+  const col = c[Math.floor(Math.random() * c.length)];
+  Object.assign(b.style, {
+    width: size + 'px', height: size + 'px',
+    left:  (e.clientX - size/2) + 'px',
+    top:   (e.clientY - size/2) + 'px',
+    background: col,
+    boxShadow: `0 0 ${size}px ${col}`,
+  });
+  document.body.appendChild(b);
+  b.addEventListener('animationend', () => b.remove());
 });
 
-// Navbar background on scroll
-const navbar = document.querySelector('.navbar');
-let lastScroll = 0;
+// ─── SCROLL REVEAL (with fallbacks) ───
+const rvEls = document.querySelectorAll('.rv');
+function reveal(el) { el.classList.add('vis'); }
+function checkRv() {
+  const vh = window.innerHeight;
+  rvEls.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < vh - 40) reveal(el);
+  });
+}
+if ('IntersectionObserver' in window) {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) reveal(en.target); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  rvEls.forEach(el => obs.observe(el));
+} else {
+  window.addEventListener('scroll', checkRv);
+}
+window.addEventListener('scroll', checkRv);
+setTimeout(checkRv, 50);
+// Final safety: force-reveal anything still hidden after 2s (CSS @keyframes also covers this)
+setTimeout(() => rvEls.forEach(reveal), 2000);
 
+// ─── SMOOTH SCROLL (internal anchors only) ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#' || href.length < 2) return;
+    const t = document.querySelector(href);
+    if (t) {
+      e.preventDefault();
+      t.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+  });
+});
+
+// ─── NAV AUTO-HIDE ───
+let lastY = 0;
+const navEl = document.querySelector('nav');
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        navbar.style.boxShadow = '0 2px 16px var(--color-shadow)';
-    } else {
-        navbar.style.boxShadow = 'none';
-    }
-    
-    lastScroll = currentScroll;
+  const y = window.scrollY;
+  if (navEl && (!dropdown || !dropdown.classList.contains('open'))) {
+    navEl.style.transform = (y > lastY && y > 100) ? 'translateY(-100%)' : 'translateY(0)';
+  }
+  lastY = y;
 });
 
-// Prevent mobile menu from staying open on resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        if (navMenu && mobileMenuToggle) {
-            navMenu.classList.remove('active');
-            mobileMenuToggle.classList.remove('active');
-        }
-    }
-});
-
-// Add keyboard navigation support
-document.addEventListener('keydown', (e) => {
-    // ESC key closes mobile menu
-    if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        if (mobileMenuToggle) {
-            mobileMenuToggle.classList.remove('active');
-        }
-    }
-});
-
-// External links open in new tab
-document.querySelectorAll('a[href^="http"]').forEach(link => {
-    if (link.hostname !== window.location.hostname) {
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
-    }
-});
-
-// Email Modal Functions
-const emailModal = document.getElementById('emailModal');
+// ─── EMAIL MODAL + FORMSPREE FETCH ───
+const emailModal   = document.getElementById('emailModal');
 const openModalBtn = document.getElementById('openEmailModal');
-const closeModalBtn = document.getElementById('closeModal');
-const cancelBtn = document.getElementById('cancelBtn');
-const modalOverlay = document.querySelector('.modal-overlay');
-const contactForm = document.getElementById('contactForm');
+const closeModalBtn= document.getElementById('closeModal');
+const cancelBtn    = document.getElementById('cancelBtn');
+const modalOverlay = emailModal && emailModal.querySelector('.modal-overlay');
+const contactForm  = document.getElementById('contactForm');
+const sendBtn      = document.getElementById('sendBtn');
+const formView     = document.getElementById('formView');
+const successView  = document.getElementById('successView');
+const errorView    = document.getElementById('errorView');
+const successDismiss = document.getElementById('successDismiss');
+const errorDismiss   = document.getElementById('errorDismiss');
 
-// Open modal
-if (openModalBtn && emailModal) {
-    openModalBtn.addEventListener('click', () => {
-        emailModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    });
+function showView(which) {
+  if (!formView) return;
+  formView.style.display    = which === 'form'    ? 'block' : 'none';
+  successView.style.display = which === 'success' ? 'block' : 'none';
+  errorView.style.display   = which === 'error'   ? 'block' : 'none';
 }
-
-// Close modal function
+function openModal() {
+  if (!emailModal) return;
+  emailModal.classList.add('active');
+  emailModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  showView('form');
+}
 function closeModal() {
-    if (emailModal) {
-        emailModal.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
-        if (contactForm) {
-            contactForm.reset(); // Clear form
-        }
-    }
+  if (!emailModal) return;
+  emailModal.classList.remove('active');
+  emailModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (contactForm) contactForm.reset();
+  if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
+  showView('form');
 }
-
-// Close modal on X button
-if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
-}
-
-// Close modal on Cancel button
-if (cancelBtn) {
-    cancelBtn.addEventListener('click', closeModal);
-}
-
-// Close modal when clicking overlay
-if (modalOverlay) {
-    modalOverlay.addEventListener('click', closeModal);
-}
-
-// Close modal on ESC key
+if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+if (successDismiss) successDismiss.addEventListener('click', closeModal);
+if (errorDismiss) errorDismiss.addEventListener('click', () => showView('form'));
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && emailModal && emailModal.classList.contains('active')) {
-        closeModal();
-    }
+  if (e.key === 'Escape' && emailModal && emailModal.classList.contains('active')) closeModal();
 });
 
-// Form submission success message
 if (contactForm) {
-    contactForm.addEventListener('submit', () => {
-        // Show success message (optional)
-        console.log('Form submitted successfully!');
-        // Modal will close on redirect by Formspree
-    });
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (sendBtn.disabled) return;
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending…';
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) showView('success');
+      else showView('error');
+    } catch (err) {
+      showView('error');
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send Message';
+    }
+  });
 }
-
-console.log('Portfolio loaded successfully! 🎨 Built by TeeCreates');
-
-}); // End of DOMContentLoaded

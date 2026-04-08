@@ -1,287 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Therese Mbama | Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Therese Mbama | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unica+One&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">TeeCreates</a>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="theme-toggle" aria-label="Toggle theme">
-                <svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="2"/>
-                    <path d="M10 2V4M10 16V18M18 10H16M4 10H2M15.657 4.343L14.243 5.757M5.757 14.243L4.343 15.657M15.657 15.657L14.243 14.243M5.757 5.757L4.343 4.343" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
+
+<!-- ══ MOBILE DROPDOWN ══ -->
+<div class="mobile-dropdown" id="mobileDropdown">
+  <a href="#about" class="mob-link">About</a>
+  <a href="#projects" class="mob-link">Projects</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <div class="mob-toggle-row">
+    <span class="mob-toggle-label">Theme</span>
+    <button class="theme-toggle" id="themeToggleMob" aria-label="Toggle theme">
+      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="logo">Tee<span>Creates</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="toggle-wrap-desktop">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero-ornament">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+    <div class="ring-dot"></div>
+  </div>
+  <div class="hero-content">
+    <h1>
+      <span class="line">I Design,</span>
+      <span class="line">I <span class="accent">Develop,</span></span>
+      <span class="line">I <span class="accent-olive">Deliver.</span></span>
+    </h1>
+    <div class="hero-eyebrow">
+      <span class="pulse-dot"></span>
+      Available for Projects
+    </div>
+    <p class="hero-sub">
+      I'm <strong>Therese Mbama</strong> — a UI/UX designer &amp; full stack developer from Lagos, crafting digital experiences at the intersection of beautiful design and functional code.
+    </p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn-fill">View My Work ↓</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>UI/UX Design</span><span>React</span><span>Django</span><span>Healthcare Tech</span><span>Figma</span><span>TypeScript</span><span>React Native</span><span>Accessibility</span><span>Design Systems</span><span>Full Stack</span>
+    <span>UI/UX Design</span><span>React</span><span>Django</span><span>Healthcare Tech</span><span>Figma</span><span>TypeScript</span><span>React Native</span><span>Accessibility</span><span>Design Systems</span><span>Full Stack</span>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section class="about" id="about">
+  <div class="about-layout">
+    <div class="about-prose rv">
+      <div class="sec-label">Who I Am</div>
+      <h2 class="sec-title">Building at the intersection of design &amp; code</h2>
+      <p>I'm a Computer Science student with a passion for creating <strong>user-centric digital experiences</strong>. I bridge the gap between design and development — crafting interfaces that are both beautiful and functional.</p>
+      <p>My focus lives in <strong>healthcare technology and accessibility</strong>. I believe tech should be inclusive, intuitive, and impactful — especially for underserved communities.</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-num">5+</div><div class="stat-txt">Projects</div></div>
+        <div class="stat"><div class="stat-num">2+</div><div class="stat-txt">Years Exp</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-txt">Curiosity</div></div>
+      </div>
+    </div>
+    <div class="skill-cols rv">
+      <div class="skill-block">
+        <h3>🎨 Design</h3>
+        <div class="pill-wrap">
+          <span class="pill">UI/UX</span><span class="pill">Figma</span><span class="pill">Prototyping</span><span class="pill">User Research</span><span class="pill">Design Systems</span>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <p class="hero-greeting">Hello, I'm</p>
-                <h1 class="hero-name">Therese Mbama</h1>
-                <p class="hero-title">UI/UX Designer & Full Stack Developer</p>
-                <p class="hero-tagline">I create digital experiences that blend beautiful design with functional code, building solutions that make a real impact.</p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
-            </div>
+      </div>
+      <div class="skill-block">
+        <h3>⚡ Development</h3>
+        <div class="pill-wrap">
+          <span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Django</span><span class="pill">React Native</span><span class="pill">HTML/CSS</span><span class="pill">JavaScript</span><span class="pill">Git/GitHub</span>
         </div>
-    </header>
-
-    <!-- About Me Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Who I Am</span>
-                <h2 class="section-title">About Me</h2>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-main">
-                    <p class="about-intro">I'm a Computer Science student with a passion for creating user-centric digital experiences. I bridge the gap between design and development, crafting interfaces that are both beautiful and functional.</p>
-                    
-                    <p class="about-text">My journey into tech started with a curiosity about how things work, which evolved into a deep love for problem-solving through design and code. I specialize in UI/UX design and front-end development, with a particular interest in healthcare technology and accessibility.</p>
-                    
-                    <p class="about-text">When I'm not designing or coding, I'm exploring new design trends, contributing to open-source projects, or helping businesses streamline their digital workflows as a virtual assistant.</p>
-                </div>
-                
-                <div class="skills-section">
-                    <h3 class="subsection-title">Technical Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4>Design</h4>
-                            <ul class="skill-list">
-                                <li>UI/UX Design</li>
-                                <li>Figma & Prototyping</li>
-                                <li>User Research</li>
-                                <li>Responsive Design</li>
-                                <li>Design Systems</li>
-                            </ul>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Development</h4>
-                            <ul class="skill-list">
-                                <li>HTML5 & CSS3</li>
-                                <li>Django</li>
-                                <li>JavaScript (ES6+)</li>
-                                <li>React & TypeScript</li>
-                                <li>React Native</li>
-                                <li>Git & GitHub</li>
-                                <li>Responsive Web Design</li>
-                            </ul>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Other</h4>
-                            <ul class="skill-list">
-                                <li>Graphic Design</li>
-                                <li>Project Management</li>
-                                <li>Virtual Assistance</li>
-                                <li>Content Creation</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="interests-section">
-                    <h3 class="subsection-title">Technical Focus</h3>
-                    <p class="interests-text">My work centers around healthcare, technology and accessibility. I'm particularly interested in creating digital solutions that address real-world problems, especially for underserved communities. I believe technology should be inclusive, intuitive, and impactful.</p>
-                </div>
-            </div>
+      </div>
+      <div class="skill-block">
+        <h3>🚀 Other</h3>
+        <div class="pill-wrap">
+          <span class="pill">Project Mgmt</span><span class="pill">Graphic Design</span><span class="pill">Content</span><span class="pill">Virtual Assistance</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">My Work</span>
-                <h2 class="section-title">Featured Projects</h2>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- Project 1: Bloom - Featured with detailed page -->
-                <article class="project-card featured">
-                    <div class="project-image">
-                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #8B4367 0%, #C17C90 100%);">
-                            <span class="featured-badge">Featured Project</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Bloom</h3>
-                        <p class="project-desc">A comprehensive maternal health platform providing daily education, health tracking, and token-based rewards for pregnant women in Nigeria and Africa.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">Healthcare</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">UI/UX</span>
-                            <span class="tech-tag">Web Design</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="bloom-project.html" class="project-link primary" style="background: linear-gradient(135deg, #8B4367, #6B2D5C); padding: 1rem 2rem; font-size: 1rem; font-weight: 700;">📄 View Full Case Study →</a>
-                            <a href="https://bloom-sigma-lake.vercel.app/" target="_blank" class="project-link secondary">Live Demo</a>
-                        </div>
-                    </div>
-                </article>
+<!-- ══ PROJECTS ══ -->
+<section class="projects" id="projects">
+  <div style="max-width:900px; margin:0 auto;">
+    <div class="rv">
+      <div class="sec-label">My Work</div>
+      <h2 class="sec-title">Featured Projects</h2>
+    </div>
 
-                <!-- Project 2: Echo-Mind -->
-                <article class="project-card">
-                    <div class="project-image">
-                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #6B4E71 0%, #A8927D 100%);"></div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Echo-Mind</h3>
-                        <p class="project-desc">A voice-first medical records assistant enabling healthcare professionals to query patient documents through natural conversation. Built in 24 hours.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Django</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Voice UI</span>
-                            <span class="tech-tag">Healthcare</span>
-                            <span class="tech-tag">UI/UX</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://echo-mind-p83r.vercel.app/login" target="_blank" class="project-link primary">View Live →</a>
-                        </div>
-                    </div>
-                </article>
+    <div class="folder-wrapper rv">
+      <div class="folder-tabs">
+        <button class="folder-tab" data-project="0">Bloom</button>
+        <button class="folder-tab" data-project="1">Echo-Mind</button>
+        <button class="folder-tab" data-project="2">Pilatify</button>
+      </div>
 
-                <!-- Project 3: Pilatify -->
-                <article class="project-card">
-                    <div class="project-image">
-                        <div class="project-img-placeholder" style="background: linear-gradient(135deg, #8B6B7C 0%, #C1A59B 100%);"></div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Pilatify</h3>
-                        <p class="project-desc">Mobile fitness app for tracking Pilates workouts with personalized dashboards and social features for motivation and progress sharing.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Figma</span>
-                            <span class="tech-tag">Mobile Design</span>
-                            <span class="tech-tag">Health Tech</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.figma.com/proto/9YINDOUFeDqAA4vXfuihSs/Mobile-Navigation-Menu-Bar-%7C-Bottom-Navbar--Community-?page-id=1%3A1215&node-id=550-207&viewport=466%2C-1660%2C0.09&t=XOwHBg1vEpVjlsGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=550%3A194" target="_blank" class="project-link primary">View Prototype →</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
+      <div class="folder-body" id="folderBody">
+        <div class="folder-empty" id="folderEmpty">
+          Click a tab above to open a project file
         </div>
-    </section>
 
-    <!-- Contact / CTA Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-text">
-                    <h2 class="contact-title">Let's Work Together</h2>
-                    <p class="contact-desc">I'm always open to discussing new projects, creative ideas, or opportunities to bring your vision to life, and most importantly GROW. Whether you need a designer, developer, or both—let's connect!</p>
-                </div>
-                
-                <div class="contact-methods">
-                    <button class="contact-btn email" id="openEmailModal">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        <span>Send Email</span>
-                    </button>
-                    
-                    <a href="https://wa.me/2348084069515" target="_blank" class="contact-btn whatsapp">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                        <span>WhatsApp</span>
-                    </a>
-                    
-                    <a href="https://www.linkedin.com/in/therese-mbama-8aa29b234" target="_blank" class="contact-btn linkedin">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                        <span>LinkedIn</span>
-                    </a>
-                </div>
-
-                <!-- Email Modal -->
-                <div id="emailModal" class="modal">
-                    <div class="modal-overlay"></div>
-                    <div class="modal-content">
-                        <button class="modal-close" id="closeModal">&times;</button>
-                        <h3 class="modal-title">Send Me a Message</h3>
-                        <form action="https://formspree.io/f/mvzppglj" method="POST" class="modal-form" id="contactForm">
-                            <div class="form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Your Email</label>
-                                <input type="email" id="email" name="_replyto" placeholder="Enter your email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
-                            </div>
-                            <input type="hidden" name="_subject" value="New message from portfolio!">
-                            <div class="modal-buttons">
-                                <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
-                                <button type="submit" class="btn-send">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="contact-info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Email</span>
-                        <span class="info-value">mbamatherese2005@gmail.com</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Phone</span>
-                        <span class="info-value">+234 808 406 9515</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Location</span>
-                        <span class="info-value">Lagos, Nigeria</span>
-                    </div>
-                </div>
+        <!-- Card 0: Bloom -->
+        <div class="project-card-overlay" data-card="0">
+          <div class="pc-inner">
+            <div class="pc-visual">
+              <div class="pc-visual-bg bg-bloom"></div>
+              <img src="Health.png" alt="Bloom — Maternal Health Platform" class="pc-image">
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p class="footer-text">&copy; 2025 TeeCreates. Designed & Built by Therese Mbama</p>
-                <p class="footer-matric">Matric No: 22120613013</p>
+            <div class="pc-content">
+              <div class="pc-num">Project 01</div>
+              <h3>Bloom</h3>
+              <p>A comprehensive maternal health platform providing daily education, health tracking, and token-based rewards for pregnant women in Nigeria and Africa.</p>
+              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Healthcare</span><span class="pc-tag">UI/UX</span></div>
+              <div class="pc-links">
+                <a href="bloom-project.html" class="pc-link">Case Study →</a>
+                <a href="https://bloom-sigma-lake.vercel.app/" target="_blank" rel="noopener noreferrer" class="pc-link">Live Demo →</a>
+              </div>
+              <button class="pc-close" data-close>✕ Close</button>
             </div>
+          </div>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <!-- Card 1: Echo-Mind -->
+        <div class="project-card-overlay" data-card="1">
+          <div class="pc-inner">
+            <div class="pc-visual">
+              <div class="pc-visual-bg bg-echo"></div>
+              <img src="Dashboard.png" alt="Echo-Mind — Voice Medical Assistant" class="pc-image">
+            </div>
+            <div class="pc-content">
+              <div class="pc-num">Project 02</div>
+              <h3>Echo-Mind</h3>
+              <p>A voice-first medical records assistant enabling healthcare professionals to query patient documents through natural conversation. Built in 24 hours.</p>
+              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Voice UI</span><span class="pc-tag">Healthcare</span></div>
+              <div class="pc-links">
+                <a href="https://echo-mind-p83r.vercel.app/login" target="_blank" rel="noopener noreferrer" class="pc-link">View Live →</a>
+              </div>
+              <button class="pc-close" data-close>✕ Close</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Pilatify -->
+        <div class="project-card-overlay" data-card="2">
+          <div class="pc-inner">
+            <div class="pc-visual">
+              <div class="pc-visual-bg bg-pilat"></div>
+              <img src="Reward.png" alt="Pilatify — Pilates Fitness App" class="pc-image">
+            </div>
+            <div class="pc-content">
+              <div class="pc-num">Project 03</div>
+              <h3>Pilatify</h3>
+              <p>Mobile fitness app for tracking Pilates workouts with personalized dashboards and social features for motivation and progress sharing.</p>
+              <div class="pc-tags"><span class="pc-tag">Figma</span><span class="pc-tag">Mobile Design</span><span class="pc-tag">Health Tech</span></div>
+              <div class="pc-links">
+                <a href="https://www.figma.com/proto/9YINDOUFeDqAA4vXfuihSs/Mobile-Navigation-Menu-Bar-%7C-Bottom-Navbar--Community-?page-id=1%3A1215&node-id=550-207&viewport=466%2C-1660%2C0.09&t=XOwHBg1vEpVjlsGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=550%3A194" target="_blank" rel="noopener noreferrer" class="pc-link">View Prototype →</a>
+              </div>
+              <button class="pc-close" data-close>✕ Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="contact" id="contact">
+  <div class="rv">
+    <div class="sec-label">Get In Touch</div>
+    <h2 class="sec-title">Let's create something <span style="color:var(--accent)">amazing</span></h2>
+    <p class="contact-sub">I'm always open to new projects, creative ideas, or opportunities. Let's connect and build together!</p>
+    <div class="contact-row">
+      <button type="button" class="contact-pill" id="openEmailModal"><span class="c-icon">✉</span> Send Email</button>
+      <a href="https://wa.me/2348084069515" target="_blank" rel="noopener noreferrer" class="contact-pill"><span class="c-icon">💬</span> WhatsApp</a>
+      <a href="https://www.linkedin.com/in/therese-mbama-8aa29b234" target="_blank" rel="noopener noreferrer" class="contact-pill"><span class="c-icon">in</span> LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EMAIL MODAL ══ -->
+<div id="emailModal" class="modal" aria-hidden="true">
+  <div class="modal-overlay"></div>
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="closeModal" aria-label="Close">&times;</button>
+    <div id="formView">
+      <h3 class="modal-title" id="modalTitle">Send Me a Message</h3>
+      <form action="https://formspree.io/f/mvzppglj" method="POST" class="modal-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="_replyto" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="New message from portfolio!">
+        <div class="modal-buttons">
+          <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn-send" id="sendBtn">Send Message</button>
+        </div>
+      </form>
+    </div>
+    <div id="successView" class="form-status" style="display:none;">
+      <span class="status-icon">✓</span>
+      <h4>Message Sent</h4>
+      <p>Thanks for reaching out — I'll get back to you soon.</p>
+      <button type="button" class="btn-send" id="successDismiss">Close</button>
+    </div>
+    <div id="errorView" class="form-status" style="display:none;">
+      <span class="status-icon">⚠</span>
+      <h4>Something Went Wrong</h4>
+      <p>Your message didn't send. Please try again or email me directly at mbamatherese2005@gmail.com.</p>
+      <button type="button" class="btn-send" id="errorDismiss">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2025 TeeCreates · Designed &amp; Built by Therese Mbama</span>
+  <span>Matric No: 22120613013</span>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
