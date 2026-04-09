@@ -1020,21 +1020,15 @@ footer {
   .pc-content { padding:1.5rem; }
   .pc-content h3 { font-size:1.4rem; }
 
-  /* Mobile: project cards flow naturally, no absolute overlay clipping */
+  /* Mobile: expanded (open) card flows in doc flow so content isn't clipped */
   .folder-body { overflow: visible; min-height: auto; }
-  .folder-empty { display: none; }
-  .project-card-overlay {
+  .project-card-overlay.open {
     position: relative;
     inset: auto;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-    overflow: visible;
     height: auto;
     max-height: none;
-    margin-bottom: 1rem;
+    overflow: visible;
   }
-  .project-card-overlay:last-child { margin-bottom: 0; }
 
   .folder-tab { padding:0.5rem 1.2rem; font-size:0.72rem; }
 
