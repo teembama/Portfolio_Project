@@ -641,15 +641,6 @@ section { padding: 7rem 3rem; position: relative; }
 }
 .pc-close:hover { border-color: var(--accent); color: var(--accent); }
 
-/* Force Bloom + Echo images to render at identical size (Pilatify unchanged) */
-[data-card="0"] .pc-image,
-[data-card="1"] .pc-image {
-  width: 100%;
-  height: 260px;
-  max-width: none;
-  max-height: none;
-}
-
 .bg-bloom  { background: linear-gradient(135deg, #586144, #9D6A83); }
 .bg-echo   { background: linear-gradient(135deg, #9D6A83, #5D4459); }
 .bg-pilat  { background: linear-gradient(135deg, #917266, #586144); }
@@ -1026,8 +1017,6 @@ footer {
   .pc-inner { grid-template-columns:1fr; }
   .pc-visual { min-height:220px; padding: 1rem; }
   .pc-image { max-height: 200px; }
-  [data-card="0"] .pc-image,
-  [data-card="1"] .pc-image { height: 200px; }
   .pc-content { padding:1.5rem; }
   .pc-content h3 { font-size:1.4rem; }
 
@@ -1062,8 +1051,6 @@ footer {
   .pc-content h3 { font-size: 1.25rem; }
   .pc-visual { padding: 1rem; min-height: 190px; }
   .pc-image { max-height: 170px; }
-  [data-card="0"] .pc-image,
-  [data-card="1"] .pc-image { height: 170px; }
   .stats { gap: 0.4rem; }
   .stat { padding: 0.8rem 0.4rem; }
   .stat-num { font-size: 1.3rem; }
