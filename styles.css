@@ -644,6 +644,17 @@ section { padding: 7rem 3rem; position: relative; }
 .bg-bloom  { background: linear-gradient(135deg, #586144, #9D6A83); }
 .bg-echo   { background: linear-gradient(135deg, #9D6A83, #5D4459); }
 .bg-pilat  { background: linear-gradient(135deg, #917266, #586144); }
+/* Image-less cards: gradient carries the visual, so it sits stronger */
+.bg-echopay { background: linear-gradient(135deg, #5D4459, #B09C8F); opacity: 0.45; }
+.bg-hyper   { background: linear-gradient(135deg, #716361, #8ba06e); opacity: 0.45; }
+.pc-placeholder {
+  position: relative; z-index: 1;
+  font-family:'Unica One',cursive;
+  font-size: 3rem;
+  letter-spacing: 0.18em;
+  color: var(--text);
+  opacity: 0.55;
+}
 
 /* CONTACT */
 .contact { text-align:center; background:var(--mesh); }

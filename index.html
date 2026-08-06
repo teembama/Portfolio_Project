@@ -132,8 +132,10 @@
     <div class="folder-wrapper rv">
       <div class="folder-tabs">
         <button class="folder-tab" data-project="0">Bloom</button>
-        <button class="folder-tab" data-project="1">Echo-Mind</button>
-        <button class="folder-tab" data-project="2">Pilatify</button>
+        <button class="folder-tab" data-project="1">EchoMind</button>
+        <button class="folder-tab" data-project="2">EchoPay</button>
+        <button class="folder-tab" data-project="3">Thesis</button>
+        <button class="folder-tab" data-project="4">Pilatify</button>
       </div>
 
       <div class="folder-body" id="folderBody">
@@ -151,52 +153,76 @@
             <div class="pc-content">
               <div class="pc-num">Project 01</div>
               <h3>Bloom</h3>
-              <p>A comprehensive maternal health platform providing daily education, health tracking, and token-based rewards for pregnant women in Nigeria and Africa.</p>
-              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Healthcare</span><span class="pc-tag">UI/UX</span></div>
-              <div class="pc-links">
-                <a href="bloom-project.html" class="pc-link">Case Study →</a>
-                <a href="https://bloom-sigma-lake.vercel.app/" target="_blank" rel="noopener noreferrer" class="pc-link">Live Demo →</a>
-              </div>
+              <p>A maternal health web app with dynamic pregnancy tracking, a personalized content pipeline, and a gamified token rewards system across 40+ weeks of content. Built with React Query for data fetching, cutting API calls by 60%.</p>
+              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Healthcare</span><span class="pc-tag">React Query</span></div>
               <button class="pc-close" data-close>✕ Close</button>
             </div>
           </div>
         </div>
 
-        <!-- Card 1: Echo-Mind -->
+        <!-- Card 1: EchoMind -->
         <div class="project-card-overlay" data-card="1">
           <div class="pc-inner">
             <div class="pc-visual">
               <div class="pc-visual-bg bg-echo"></div>
-              <img src="echo.jpg" alt="Echo-Mind — Voice Medical Assistant" class="pc-image" width="1536" height="1024" loading="lazy" decoding="async">
+              <img src="echo.jpg" alt="EchoMind — Voice-First Document Assistant" class="pc-image" width="1536" height="1024" loading="lazy" decoding="async">
             </div>
             <div class="pc-content">
               <div class="pc-num">Project 02</div>
-              <h3>Echo-Mind</h3>
-              <p>A voice-first medical records assistant enabling healthcare professionals to query patient documents through natural conversation. Built in 24 hours.</p>
-              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Voice UI</span><span class="pc-tag">Healthcare</span></div>
-              <div class="pc-links">
-                <a href="https://echo-mind-p83r.vercel.app/login" target="_blank" rel="noopener noreferrer" class="pc-link">View Live →</a>
-              </div>
+              <h3>EchoMind</h3>
+              <p>A voice-first document assistant integrating OpenAI Whisper for real-time voice-to-text transcription, with a custom hook managing live audio streams and JWT-based authentication for persistent sessions.</p>
+              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Voice UI</span><span class="pc-tag">JWT</span></div>
               <button class="pc-close" data-close>✕ Close</button>
             </div>
           </div>
         </div>
 
-        <!-- Card 2: Pilatify -->
+        <!-- Card 2: EchoPay -->
         <div class="project-card-overlay" data-card="2">
+          <div class="pc-inner">
+            <div class="pc-visual">
+              <div class="pc-visual-bg bg-echopay"></div>
+              <div class="pc-placeholder" aria-hidden="true">EP</div>
+            </div>
+            <div class="pc-content">
+              <div class="pc-num">Project 03</div>
+              <h3>EchoPay</h3>
+              <p>A cross-platform voice-powered banking assistant built with React Native, Django REST Framework, and a FastAPI middleware layer for real-time audio processing. A fast-path routing system bypasses the LLM for 80% of requests, cutting response time from ~2s to under 50ms, alongside prompt-injection detection and PIN-based transaction authorization.</p>
+              <div class="pc-tags"><span class="pc-tag">React Native</span><span class="pc-tag">FastAPI</span><span class="pc-tag">Django</span><span class="pc-tag">Voice UI</span></div>
+              <button class="pc-close" data-close>✕ Close</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Multimodal Hypertension Detection -->
+        <div class="project-card-overlay" data-card="3">
+          <div class="pc-inner">
+            <div class="pc-visual">
+              <div class="pc-visual-bg bg-hyper"></div>
+              <div class="pc-placeholder" aria-hidden="true">HD</div>
+            </div>
+            <div class="pc-content">
+              <div class="pc-num">Project 04</div>
+              <h3>Multimodal Hypertension Detection</h3>
+              <p>A final year thesis project fusing ECG signals, retinal fundus imaging, and clinical parameters through a trimodal attention-based framework — the first work to combine all three modalities for this task. Achieved 91.45% accuracy, a 7.45-point improvement over the prior published baseline, with an equity-conscious design avoiding optical sensor bias across skin tones.</p>
+              <div class="pc-tags"><span class="pc-tag">Machine Learning</span><span class="pc-tag">Computer Vision</span><span class="pc-tag">Healthcare</span><span class="pc-tag">Research</span></div>
+              <button class="pc-close" data-close>✕ Close</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Pilatify -->
+        <div class="project-card-overlay" data-card="4">
           <div class="pc-inner">
             <div class="pc-visual">
               <div class="pc-visual-bg bg-pilat"></div>
               <img src="pilatify.jpg" alt="Pilatify — Pilates Fitness App" class="pc-image" width="736" height="1288" loading="lazy" decoding="async">
             </div>
             <div class="pc-content">
-              <div class="pc-num">Project 03</div>
+              <div class="pc-num">Project 05</div>
               <h3>Pilatify</h3>
               <p>Mobile fitness app for tracking Pilates workouts with personalized dashboards and social features for motivation and progress sharing.</p>
               <div class="pc-tags"><span class="pc-tag">Figma</span><span class="pc-tag">Mobile Design</span><span class="pc-tag">Health Tech</span></div>
-              <div class="pc-links">
-                <a href="https://www.figma.com/proto/9YINDOUFeDqAA4vXfuihSs/Mobile-Navigation-Menu-Bar-%7C-Bottom-Navbar--Community-?page-id=1%3A1215&node-id=550-207&viewport=466%2C-1660%2C0.09&t=XOwHBg1vEpVjlsGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=550%3A194" target="_blank" rel="noopener noreferrer" class="pc-link">View Prototype →</a>
-              </div>
               <button class="pc-close" data-close>✕ Close</button>
             </div>
           </div>
