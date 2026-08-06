@@ -1,7 +1,10 @@
 /* ══════════════════════════════════════
    THEME SYSTEM — Timeless Earth
    ══════════════════════════════════════ */
-:root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
+:root {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
 
 [data-theme="light"] {
   --bg:          #ece6df;
@@ -362,10 +365,10 @@ nav {
 /* SECTIONS */
 section { padding: 7rem 3rem; position: relative; }
 .sec-label {
-  font-family: 'Unica One', cursive;
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
   color: var(--accent);
   margin-bottom: 0.8rem;
   display: flex; align-items: center; gap: 0.8rem;
