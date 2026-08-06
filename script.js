@@ -50,7 +50,7 @@ function openProject(index) {
   tabs.forEach(t => t.classList.remove('active'));
   tabs[index].classList.add('active');
   if (empty) empty.style.display = 'none';
-  if (body)  body.style.minHeight = '420px';
+  if (body)  body.style.minHeight = '380px'; // matches .pc-inner min-height; card grows the folder past this
   const card = document.querySelector(`[data-card="${index}"]`);
   requestAnimationFrame(() => {
     card.classList.add('open');
