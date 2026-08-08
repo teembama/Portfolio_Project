@@ -38,6 +38,17 @@ if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
   onScroll();
   window.addEventListener('scroll', onScroll, {passive:true});
 
+  // ─── NAV HEIGHT → --nav-h ───
+  // Anchor landings key off the nav's real height rather than a guessed rem, so
+  // they stay flush when the nav reflows (font swap, burger row, zoom).
+  function syncNavHeight(){
+    document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+  }
+  syncNavHeight();
+  window.addEventListener('resize', syncNavHeight);
+  window.addEventListener('orientationchange', function(){ setTimeout(syncNavHeight, 120); });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(syncNavHeight);
+
   // ─── IN-PAGE ANCHOR SCROLLING ───
   // offset by the real nav height, and immune to any scroll-container
   // weirdness the browser might apply to native jumps
@@ -51,7 +62,7 @@ if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
 
     e.preventDefault();
 
-    var offset = id === '#home' ? 0 : nav.getBoundingClientRect().height + 8;
+    var offset = id === '#home' ? 0 : nav.offsetHeight;
     var y = target.getBoundingClientRect().top + window.pageYOffset - offset;
 
     window.scrollTo({
