@@ -236,7 +236,10 @@ section{padding-block:var(--sect); position:relative;}
 .hero-eyebrow b{color:var(--accent-ink); font-weight:400;}
 .hero h1{
   font-family:var(--display); font-weight:700;
-  font-size:clamp(2.35rem,10.5vw,6.4rem); line-height:.94;
+  /* min(10.5vw, 8.5vh) caps the display size on viewport HEIGHT as well as
+     width, so a short laptop screen shrinks the three-line h1 instead of
+     pushing the buttons past the fold. */
+  font-size:clamp(2.35rem,min(10.5vw,8.5vh),6.4rem); line-height:.94;
   letter-spacing:-.045em; margin:0 0 1.7rem; text-transform:uppercase;
   overflow-wrap:break-word;
 }
@@ -713,4 +716,16 @@ section{padding-block:var(--sect); position:relative;}
   }
   .nav-links a::after{bottom:.55rem;}
   .burger{display:block; z-index:70;}
+}
+
+/* ---------- short desktop viewports ----------
+   1366x768, and 1920x1080 at 150% scaling which yields 1280x720 CSS. The hero
+   is min-height:100svh but its stacked content exceeds the viewport below
+   roughly 820px tall, pushing the button row under the fold. min-width:901px
+   keeps this off phones, where .hero already has its own smaller padding.
+   Placed last so it wins over the earlier hero rules where it applies. */
+@media (min-width:901px) and (max-height:820px){
+  .hero{padding-top:5.5rem; padding-bottom:2.5rem;}
+  .scroll-hint{margin-top:2rem;}
+  .hero-stack{margin:1rem 0 1.75rem;}
 }
