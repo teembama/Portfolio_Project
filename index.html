@@ -1,271 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Therese Mbama | Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unica+One&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Therese Chimbusonma Mbama — Mobile &amp; Full-Stack Engineer</title>
+<meta name="author" content="Therese Chimbusonma Mbama" />
+<meta name="description" content="Therese Chimbusonma Mbama — mobile and full-stack engineer. React Native, Django/DRF, FastAPI, Python. Building fintech, health and AI products. Based in Lagos, Nigeria." />
+<meta name="keywords" content="Therese Mbama, Mobile Engineer, Full-Stack Developer, React Native, Django, FastAPI, Python, Supabase, Portfolio, Lagos, Nigeria" />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Therese Mbama" />
+<meta property="og:title" content="Therese Chimbusonma Mbama — Mobile &amp; Full-Stack Engineer" />
+<meta property="og:description" content="Mobile and full-stack engineer building fintech, health and AI products with React Native, Django &amp; FastAPI." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Therese Chimbusonma Mbama — Mobile &amp; Full-Stack Engineer" />
+<meta name="twitter:description" content="Mobile and full-stack engineer building fintech, health and AI products." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+<div class="shell">
 
-<!-- ══ MOBILE DROPDOWN ══ -->
-<div class="mobile-dropdown" id="mobileDropdown">
-  <a href="#about" class="mob-link">About</a>
-  <a href="#projects" class="mob-link">Projects</a>
-  <a href="#contact" class="mob-link">Contact</a>
-  <div class="mob-toggle-row">
-    <span class="mob-toggle-label">Theme</span>
-    <button class="theme-toggle" id="themeToggleMob" aria-label="Toggle theme">
-      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-  </div>
-</div>
-
-<!-- ══ NAV ══ -->
-<nav>
-  <a href="#" class="logo">Tee<span>Creates</span></a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="toggle-wrap-desktop">
+<!-- ================= NAV ================= -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="brand">therese<span>.dev</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </div>
+    <div class="nav-end">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
+      <a class="nav-cta" href="mailto:mbamatherese2005@gmail.com?subject=Resume%20Request">resume →</a>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false">menu</button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
   </div>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero" id="home">
-  <div class="hero-ornament">
-    <div class="ring ring-1"></div>
-    <div class="ring ring-2"></div>
-    <div class="ring ring-3"></div>
-    <div class="ring-dot"></div>
-  </div>
-  <div class="hero-content">
+<!-- ================= HERO ================= -->
+<header class="hero" id="home">
+  <div class="wrap">
+    <p class="hero-eyebrow">// mobile &amp; full-stack engineer — <b>lagos, nigeria</b></p>
     <h1>
-      <span class="line">I Design,</span>
-      <span class="line">I <span class="accent">Develop,</span></span>
-      <span class="line">I <span class="accent-olive">Deliver.</span></span>
+      <span class="ln">Therese</span>
+      <span class="ln">Chimbusonma</span>
+      <span class="ln l2">Mbama</span>
     </h1>
-    <div class="hero-eyebrow">
-      <span class="pulse-dot"></span>
-      Available for Projects
-    </div>
     <p class="hero-sub">
-      I'm <strong>Therese Mbama</strong> — a UI/UX designer &amp; full stack developer from Lagos, crafting digital experiences at the intersection of beautiful design and functional code.
+      <strong>Mobile engineer with a full-stack backbone.</strong> I ship production systems
+      end to end — authentication, payments infrastructure, KYC pipelines and the machine
+      learning research behind health equity.
     </p>
-    <div class="hero-buttons">
-      <a href="#projects" class="btn-fill">View My Work ↓</a>
-      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    <p class="hero-stack">
+      React Native <span>·</span> Django &amp; DRF <span>·</span> FastAPI <span>·</span> Python
+      <span>·</span> TypeScript <span>·</span> Supabase <span>·</span> PostgreSQL
+    </p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#projects">View Work ↓</a>
+      <a class="btn btn-ghost" href="mailto:mbamatherese2005@gmail.com?subject=Resume%20Request">Request Resume →</a>
+    </div>
+    <div class="scroll-hint"><i></i> scroll</div>
+  </div>
+</header>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <p class="eyebrow reveal">// 01 — about</p>
+    <h2 class="sect-title reveal">Who I <em>Am</em></h2>
+
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>
+          I'm a <strong>mobile and full-stack engineer</strong>, currently building at
+          <strong>ShareCar (CodeReset)</strong> — where I rebuilt the core booking system for
+          production scale and shipped an end-to-end KYC identity verification flow on a
+          webhook-based architecture.
+        </p>
+        <p>
+          My work runs from <strong>React Native</strong> clients through
+          <strong>Django/DRF and FastAPI</strong> backends down to schema design in
+          <strong>Supabase and PostgreSQL</strong>. I like the problems that sit between
+          layers: session race conditions, WebView context loss, OTP providers that need
+          swapping without touching the client.
+        </p>
+        <p>
+          Alongside that I research <strong>multimodal machine learning for health</strong>.
+          My final-year thesis fuses ECG, retinal imaging and clinical data for hypertension
+          detection — the first work to combine all three, with an equity-conscious design
+          that avoids optical sensor bias across skin tones.
+        </p>
+        <p>
+          Previously an <strong>AI &amp; Data Intern at Deloitte Nigeria</strong>. Graduating
+          <strong>First Class (4.85/5.0)</strong> in Computer Science from Pan-Atlantic
+          University in June 2026.
+        </p>
+
+        <div class="stats">
+          <div class="stat"><b>4.85</b><small>first class gpa</small></div>
+          <div class="stat"><b>91.45%</b><small>thesis model accuracy</small></div>
+          <div class="stat"><b>13</b><small>entities reverse-engineered</small></div>
+          <div class="stat"><b>60%</b><small>data fetching cut</small></div>
+        </div>
+      </div>
+
+      <div class="code-card reveal">
+        <div class="code-bar">
+          <i class="dot dot-1"></i>
+          <i class="dot dot-2"></i>
+          <i class="dot dot-3"></i>
+          <span>therese.ts</span>
+        </div>
+<pre><code><span class="k">const</span> <span class="p">therese</span> = {
+  <span class="p">name</span>: <span class="s">"Therese Chimbusonma Mbama"</span>,
+  <span class="p">focus</span>: <span class="s">"Mobile / Full-Stack"</span>,
+  <span class="p">stack</span>: [
+    <span class="s">"React Native"</span>, <span class="s">"Django"</span>,
+    <span class="s">"FastAPI"</span>, <span class="s">"Python"</span>,
+    <span class="s">"TypeScript"</span>, <span class="s">"Supabase"</span>
+  ],
+  <span class="p">currently</span>: <span class="s">"ShareCar (CodeReset)"</span>,
+  <span class="p">researching</span>: <span class="s">"Multimodal ML for health"</span>,
+  <span class="p">seeking</span>: <span class="s">"Next great challenge"</span>
+};
+
+<span class="c">// lagos, nigeria — open to opportunities</span>
+</code></pre>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ MARQUEE ══ -->
-<div class="marquee">
-  <div class="marquee-inner">
-    <span>UI/UX Design</span><span>React</span><span>Django</span><span>Healthcare Tech</span><span>Figma</span><span>TypeScript</span><span>React Native</span><span>Accessibility</span><span>Design Systems</span><span>Full Stack</span>
-    <span>UI/UX Design</span><span>React</span><span>Django</span><span>Healthcare Tech</span><span>Figma</span><span>TypeScript</span><span>React Native</span><span>Accessibility</span><span>Design Systems</span><span>Full Stack</span>
-  </div>
-</div>
+<!-- ================= STACK ================= -->
+<section id="skills">
+  <div class="wrap">
+    <p class="eyebrow reveal">// 02 — technologies</p>
+    <h2 class="sect-title reveal">The <em>Stack</em></h2>
 
-<!-- ══ ABOUT ══ -->
-<section class="about" id="about">
-  <div class="about-layout">
-    <div class="about-prose rv">
-      <div class="sec-label">Who I Am</div>
-      <h2 class="sec-title">Building at the intersection of design &amp; code</h2>
-      <p>I'm a Computer Science student with a passion for creating <strong>user-centric digital experiences</strong>. I bridge the gap between design and development — crafting interfaces that are both beautiful and functional.</p>
-      <p>My focus lives in <strong>healthcare, technological solutions and accessibility</strong>. I believe tech should be inclusive, intuitive, and impactful, especially for underserved communities.</p>
-      <div class="stats">
-        <div class="stat"><div class="stat-num">5+</div><div class="stat-txt">Projects</div></div>
-        <div class="stat"><div class="stat-num">3+</div><div class="stat-txt">Years Exp</div></div>
-        <div class="stat"><div class="stat-num">∞</div><div class="stat-txt">Curiosity</div></div>
-      </div>
+    <div class="globe-container reveal">
+      <canvas id="globe-canvas" role="img"
+              aria-label="Interactive rotating globe of the technologies Therese works with"></canvas>
     </div>
-    <div class="skill-cols rv">
-      <div class="skill-block">
-        <h3>🎨 Design</h3>
-        <div class="pill-wrap">
-          <span class="pill">UI/UX</span><span class="pill">Figma</span><span class="pill">Prototyping</span><span class="pill">User Research</span><span class="pill">Design Systems</span>
-        </div>
-      </div>
-      <div class="skill-block">
-        <h3>⚡ Development</h3>
-        <div class="pill-wrap">
-          <span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">Django</span><span class="pill">React Native</span><span class="pill">HTML/CSS</span><span class="pill">JavaScript</span><span class="pill">Git/GitHub</span>
-        </div>
-      </div>
-      <div class="skill-block">
-        <h3>🚀 Other</h3>
-        <div class="pill-wrap">
-          <span class="pill">Project Mgmt</span><span class="pill">Graphic Design</span><span class="pill">Content</span><span class="pill">Virtual Assistance</span>
-        </div>
-      </div>
-    </div>
+    <p class="globe-hint">drag to spin</p>
+
+    <ul class="sr-only">
+      <li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li><li>C++</li><li>Rust</li>
+      <li>HTML and CSS</li><li>React</li><li>React Native</li><li>Expo</li><li>Django</li>
+      <li>Django REST Framework</li><li>FastAPI</li><li>Node.js</li><li>React Query</li>
+      <li>PostgreSQL</li><li>Supabase</li><li>Docker</li><li>Git and GitHub</li><li>Figma</li>
+      <li>VS Code</li><li>Jupyter</li><li>REST API design</li><li>Authentication and authorization</li>
+      <li>Database schema design</li><li>Object-oriented programming</li>
+      <li>Systems analysis and design</li><li>JWT</li><li>XGBoost</li><li>OpenAI Whisper</li>
+    </ul>
   </div>
 </section>
 
-<!-- ══ PROJECTS ══ -->
-<section class="projects" id="projects">
-  <div style="max-width:900px; margin:0 auto;">
-    <div class="rv">
-      <div class="sec-label">My Work</div>
-      <h2 class="sec-title">Featured Projects</h2>
-    </div>
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <p class="eyebrow reveal">// 03 — work</p>
+    <h2 class="sect-title reveal">Selected <em>Projects</em></h2>
 
-    <div class="folder-wrapper rv">
-      <div class="folder-tabs">
-        <button class="folder-tab" data-project="0">Bloom</button>
-        <button class="folder-tab" data-project="1">Echo-Mind</button>
-        <button class="folder-tab" data-project="2">Pilatify</button>
-      </div>
+    <div class="projects">
 
-      <div class="folder-body" id="folderBody">
-        <div class="folder-empty" id="folderEmpty">
-          Click a tab above to open a project file
-        </div>
-
-        <!-- Card 0: Bloom -->
-        <div class="project-card-overlay" data-card="0">
-          <div class="pc-inner">
-            <div class="pc-visual">
-              <div class="pc-visual-bg bg-bloom"></div>
-              <img src="bloom.jpg" alt="Bloom — Maternal Health Platform" class="pc-image" width="1900" height="871" loading="lazy" decoding="async">
-            </div>
-            <div class="pc-content">
-              <div class="pc-num">Project 01</div>
-              <h3>Bloom</h3>
-              <p>A comprehensive maternal health platform providing daily education, health tracking, and token-based rewards for pregnant women in Nigeria and Africa.</p>
-              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Healthcare</span><span class="pc-tag">UI/UX</span></div>
-              <div class="pc-links">
-                <a href="bloom-project.html" class="pc-link">Case Study →</a>
-                <a href="https://bloom-sigma-lake.vercel.app/" target="_blank" rel="noopener noreferrer" class="pc-link">Live Demo →</a>
-              </div>
-              <button class="pc-close" data-close>✕ Close</button>
-            </div>
+      <article class="proj reveal" data-label="Multimodal Hypertension Detection">
+        <div class="proj-num">_01</div>
+        <div>
+          <div class="proj-head">
+            <h3>Multimodal Hypertension Detection</h3>
+            <span class="badge">B.Sc. Thesis</span>
+          </div>
+          <p class="proj-meta">Final Year Project · 2026</p>
+          <ul>
+            <li>Trimodal attention-based fusion framework combining ECG (custom CNN + Transformer), retinal fundus imaging (EfficientNet-B0) and clinical parameters (XGBoost) — <strong>the first work to fuse all three modalities</strong> for this task.</li>
+            <li>Achieved <strong>91.45% accuracy</strong>, a 7.45 percentage-point improvement over the prior published baseline of 84%.</li>
+            <li>Equity-conscious design using internal biological markers to avoid optical sensor bias across skin tones. Publication manuscript in preparation.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">CNN + Transformer</span>
+            <span class="tag">EfficientNet-B0</span><span class="tag">XGBoost</span>
+            <span class="tag">Multimodal Fusion</span>
           </div>
         </div>
+      </article>
 
-        <!-- Card 1: Echo-Mind -->
-        <div class="project-card-overlay" data-card="1">
-          <div class="pc-inner">
-            <div class="pc-visual">
-              <div class="pc-visual-bg bg-echo"></div>
-              <img src="echo.jpg" alt="Echo-Mind — Voice Medical Assistant" class="pc-image" width="1536" height="1024" loading="lazy" decoding="async">
-            </div>
-            <div class="pc-content">
-              <div class="pc-num">Project 02</div>
-              <h3>Echo-Mind</h3>
-              <p>A voice-first medical records assistant enabling healthcare professionals to query patient documents through natural conversation. Built in 24 hours.</p>
-              <div class="pc-tags"><span class="pc-tag">Django</span><span class="pc-tag">React</span><span class="pc-tag">Voice UI</span><span class="pc-tag">Healthcare</span></div>
-              <div class="pc-links">
-                <a href="https://echo-mind-p83r.vercel.app/login" target="_blank" rel="noopener noreferrer" class="pc-link">View Live →</a>
-              </div>
-              <button class="pc-close" data-close>✕ Close</button>
-            </div>
+      <article class="proj reveal" data-label="EchoPay">
+        <div class="proj-num">_02</div>
+        <div>
+          <div class="proj-head">
+            <h3>EchoPay</h3>
+            <span class="badge alt">Voice Banking</span>
+          </div>
+          <p class="proj-meta">Full-Stack Developer · October 2025</p>
+          <ul>
+            <li>Cross-platform mobile banking assistant on a three-tier architecture (React Native/Expo, Django REST Framework, FastAPI middleware) handling real-time audio and multi-turn conversation state.</li>
+            <li>Built a fast-path routing system that bypasses the LLM for 80% of requests — <strong>cutting response time from ~2s to under 50ms</strong>.</li>
+            <li>Prompt-injection detection, output sanitization and PIN-based transaction authorization.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">React Native</span><span class="tag">Expo</span>
+            <span class="tag">Django REST</span><span class="tag">FastAPI</span>
+            <span class="tag">LLM Routing</span>
           </div>
         </div>
+      </article>
 
-        <!-- Card 2: Pilatify -->
-        <div class="project-card-overlay" data-card="2">
-          <div class="pc-inner">
-            <div class="pc-visual">
-              <div class="pc-visual-bg bg-pilat"></div>
-              <img src="pilatify.jpg" alt="Pilatify — Pilates Fitness App" class="pc-image" width="736" height="1288" loading="lazy" decoding="async">
-            </div>
-            <div class="pc-content">
-              <div class="pc-num">Project 03</div>
-              <h3>Pilatify</h3>
-              <p>Mobile fitness app for tracking Pilates workouts with personalized dashboards and social features for motivation and progress sharing.</p>
-              <div class="pc-tags"><span class="pc-tag">Figma</span><span class="pc-tag">Mobile Design</span><span class="pc-tag">Health Tech</span></div>
-              <div class="pc-links">
-                <a href="https://www.figma.com/proto/9YINDOUFeDqAA4vXfuihSs/Mobile-Navigation-Menu-Bar-%7C-Bottom-Navbar--Community-?page-id=1%3A1215&node-id=550-207&viewport=466%2C-1660%2C0.09&t=XOwHBg1vEpVjlsGv-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=550%3A194" target="_blank" rel="noopener noreferrer" class="pc-link">View Prototype →</a>
-              </div>
-              <button class="pc-close" data-close>✕ Close</button>
-            </div>
+      <article class="proj reveal" data-img="bloom.jpg" data-label="Bloom">
+        <div class="proj-num">_03</div>
+        <div>
+          <div class="proj-head">
+            <h3>Bloom</h3>
+            <span class="badge alt">Maternal Health</span>
+          </div>
+          <p class="proj-meta">Full-Stack Developer · December 2025</p>
+          <ul>
+            <li>Maternal health web platform with dynamic pregnancy tracking, a personalized content pipeline and a gamified token rewards system spanning <strong>40+ weeks of content</strong>.</li>
+            <li>React Query for data fetching and caching, <strong>cutting API calls by 60%</strong>, with custom hooks and a responsive component architecture.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">React</span><span class="tag">Django REST</span>
+            <span class="tag">React Query</span><span class="tag">Python</span>
           </div>
         </div>
+      </article>
+
+      <article class="proj reveal" data-img="echo.jpg" data-label="EchoMind">
+        <div class="proj-num">_04</div>
+        <div>
+          <div class="proj-head">
+            <h3>EchoMind</h3>
+            <span class="badge alt">Document AI</span>
+          </div>
+          <p class="proj-meta">Full-Stack Developer · October 2025</p>
+          <ul>
+            <li>Voice-powered document chat app integrating <strong>OpenAI Whisper</strong> for transcription, with a custom <code>useWhisperVoice</code> hook managing live audio streams.</li>
+            <li>JWT-based authentication with protected routes and persistent sessions across the app.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">React</span><span class="tag">Django</span>
+            <span class="tag">OpenAI Whisper</span><span class="tag">JWT Auth</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <p class="eyebrow reveal">// 04 — journey</p>
+    <h2 class="sect-title reveal"><em>Experience</em></h2>
+
+    <div class="timeline">
+
+      <div class="job reveal">
+        <div class="job-date">April 2026 — Present</div>
+        <h3>Mobile Engineer</h3>
+        <div class="org">ShareCar (CodeReset)</div>
+        <ul>
+          <li>Reverse-engineered the complete Supabase schema — <strong>13 entities across 6 domains</strong> — directly from TypeScript types without dashboard access, producing an ERD adopted by the engineering team.</li>
+          <li>Resolved critical authentication failures across mobile and web after a backend API migration: session race conditions, network-failure resilience and phone verification for Nigerian numbers.</li>
+          <li>Migrated the web SMS OTP provider (Twilio → Africa's Talking) with <strong>zero changes required in the mobile client</strong>, adding server-side OTP generation and hashing.</li>
+          <li>Rebuilt the core booking system for production scale: infinite scroll pagination, optimistic UI updates and caching that <strong>cut data fetching by 60%</strong>.</li>
+          <li>Shipped an end-to-end KYC identity verification system — webhook architecture, image compression pipeline, real-time status — solving a WebView context-loss bug that broke standard callback handling.</li>
+          <li><strong>6+ pull requests</strong> to staging and production across auth, pricing logic, KYC and third-party vehicle verification (Prembly API).</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date">June 2025 — September 2025</div>
+        <h3>AI &amp; Data Intern</h3>
+        <div class="org">Deloitte Nigeria</div>
+        <ul>
+          <li>Built the knowledge base for an AI-powered humanoid interface showcased at a company exposition.</li>
+          <li>Ran quality assurance and code testing for a client SaaS product; contributed to client proposals and AI/RPA content.</li>
+          <li>Supported data research and AI deliverables for Deloitte publications and client demos.</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date">July 2025 — June 2026</div>
+        <h3>UI/UX Design Lead</h3>
+        <div class="org">Pan-Atlantic University Career Website</div>
+        <ul>
+          <li>Design lead alongside a front-end engineer on the university's new career website, driving visualization and design in Figma.</li>
+          <li>Performed code testing and QA, and wrote the onboarding manual for internal and external users.</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date">July 2024 — October 2024</div>
+        <h3>Intern</h3>
+        <div class="org">Nathan Claire Africa</div>
+        <ul>
+          <li>Led a team presentation on Dynatrace full-stack monitoring, improving shared understanding of system insights.</li>
+          <li>Supported client onboarding and optimized deployment workflows for smoother project delivery.</li>
+        </ul>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-date">Class of June 2026</div>
+        <h3>B.Sc. Computer Science</h3>
+        <div class="org">Pan-Atlantic University — Ibeju-Lekki, Lagos</div>
+        <ul>
+          <li><strong>First Class — 4.85/5.0 GPA.</strong></li>
+          <li>Coursework: Data Structures &amp; Algorithms, Systems Design, Operating Systems, Compiler Construction, Numerical Analysis, Linear Algebra, Discrete Structures.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEYOND ================= -->
+<section id="beyond">
+  <div class="wrap">
+    <p class="eyebrow reveal">// 05 — beyond code</p>
+    <h2 class="sect-title reveal">On <em>Campus</em></h2>
+
+    <div class="beyond-grid">
+      <div class="beyond-card reveal">
+        <div class="job-date">October 2024 — Present</div>
+        <h3>First-Year Interaction Group Tutor</h3>
+        <p>Mentor freshmen on academic planning and time management, helping them land a smoother transition into university.</p>
+      </div>
+      <div class="beyond-card reveal">
+        <div class="job-date">October 2024 — Present</div>
+        <h3>Finance Society — FinTech Division</h3>
+        <p>Active in the division working at the intersection of technology, data and financial services.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CONTACT ══ -->
-<section class="contact" id="contact">
-  <div class="rv">
-    <div class="sec-label">Get In Touch</div>
-    <h2 class="sec-title">Let's create something <span style="color:var(--accent)">amazing</span></h2>
-    <p class="contact-sub">I'm always open to new projects, creative ideas, or opportunities. Let's connect and build together!</p>
-    <div class="contact-row">
-      <button type="button" class="contact-pill" id="openEmailModal"><span class="c-icon">✉</span> Send Email</button>
-      <a href="https://wa.me/2348084069515" target="_blank" rel="noopener noreferrer" class="contact-pill"><span class="c-icon">💬</span> WhatsApp</a>
-      <a href="https://www.linkedin.com/in/therese-mbama-8aa29b234" target="_blank" rel="noopener noreferrer" class="contact-pill"><span class="c-icon">in</span> LinkedIn</a>
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <p class="eyebrow reveal">// 06 — contact</p>
+    <h2 class="reveal">Let's Build<br /><em>Something</em><br />Amazing</h2>
+    <p class="reveal">Open to mobile and full-stack roles, research collaborations, and anything at the intersection of engineering and health.</p>
+    <a class="mail reveal" href="mailto:mbamatherese2005@gmail.com">mbamatherese2005@gmail.com →</a>
+    <div class="socials reveal">
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/therese-mbama-8aa29b234" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/teembama" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn btn-ghost" href="https://wa.me/2348084069515" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="btn btn-ghost" href="tel:+2348084069515">+234 808 406 9515</a>
+      <a class="btn btn-ghost" href="mailto:mbamatherese2005@gmail.com?subject=Resume%20Request">Request Resume</a>
     </div>
   </div>
 </section>
 
-<!-- ══ EMAIL MODAL ══ -->
-<div id="emailModal" class="modal" aria-hidden="true">
-  <div class="modal-overlay"></div>
-  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="closeModal" aria-label="Close">&times;</button>
-    <div id="formView">
-      <h3 class="modal-title" id="modalTitle">Send Me a Message</h3>
-      <form action="https://formspree.io/f/mvzppglj" method="POST" class="modal-form" id="contactForm">
-        <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Your Email</label>
-          <input type="email" id="email" name="_replyto" placeholder="Enter your email" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
-        </div>
-        <input type="hidden" name="_subject" value="New message from portfolio!">
-        <div class="modal-buttons">
-          <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
-          <button type="submit" class="btn-send" id="sendBtn">Send Message</button>
-        </div>
-      </form>
-    </div>
-    <div id="successView" class="form-status" style="display:none;">
-      <span class="status-icon">✓</span>
-      <h4>Message Sent</h4>
-      <p>Thanks for reaching out — I'll get back to you soon.</p>
-      <button type="button" class="btn-send" id="successDismiss">Close</button>
-    </div>
-    <div id="errorView" class="form-status" style="display:none;">
-      <span class="status-icon">⚠</span>
-      <h4>Something Went Wrong</h4>
-      <p>Your message didn't send. Please try again or email me directly at mbamatherese2005@gmail.com.</p>
-      <button type="button" class="btn-send" id="errorDismiss">Try Again</button>
-    </div>
+<footer class="wrap">
+  <div class="foot">
+    <span>© 2026 Therese Chimbusonma Mbama</span>
+    <span>Lagos, Nigeria — built with care.</span>
   </div>
-</div>
-
-<footer>
-  <span>© 2025 TeeCreates</span>
-  <span>Designed &amp; Built by Therese Mbama</span>
 </footer>
+
+</div>
+
+<div class="preview" id="preview" aria-hidden="true">
+  <div class="ph"><b id="phLabel"></b><small>image coming soon</small></div>
+  <img id="phImg" alt="" />
+</div>
 
 <script src="script.js"></script>
 </body>
