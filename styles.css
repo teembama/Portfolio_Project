@@ -77,7 +77,13 @@
   --code-key:     #F2EEF5;                  /* neutral — object keys */
   --code-string:  #E8C4A0;                  /* sand    — string literals */
   --code-punct:   rgba(240,217,228,0.72);   /* dimmed  — braces, colons */
-  --code-comment: #C9B2BF;                  /* mauve   — // comments */
+  --code-comment: #A9BDD4;                  /* blue-grey — // comments. Cool on
+                                               purpose: the card is light enough
+                                               that a dimmer or more saturated
+                                               mauve cannot clear 4.5:1, so the
+                                               comment has to separate from the
+                                               mauve punctuation by hue at
+                                               similar lightness, not by dimming. */
 
   --shadow:        0 40px 80px rgba(0,0,0,0.6);
   --card-shadow:   var(--shadow);
