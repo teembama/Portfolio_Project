@@ -264,6 +264,11 @@ section{padding-block:var(--sect); position:relative;}
   min-height:100vh; min-height:100svh; min-height:100dvh; display:flex; align-items:center;
   padding-top:7rem; padding-bottom:4rem;
 }
+/* .hero is a flex container, so .wrap becomes a flex item: it shrink-wraps to
+   its content instead of filling the line, and .wrap's `margin:0 auto` then
+   centres that narrow box. width:100% restores the normal wrap geometry so the
+   hero starts on the same left edge as every other section. */
+.hero > .wrap{width:100%;}
 .hero-eyebrow{
   font-family:var(--mono); font-size:.8rem; color:var(--text-soft);
   letter-spacing:.06em; margin:0 0 1.6rem;
