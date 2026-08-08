@@ -64,6 +64,18 @@
   --globe-line:    rgba(193,160,172,0.10);
   --globe-ring:    rgba(128,108,121,0.05);
 
+  /* Syntax colours. Two of these sit outside the dusty-pink family on purpose:
+     a single-hue palette cannot separate token types, which is the whole point
+     of a code block. Violet and sand are muted to stay inside the palette's
+     range. Note the class names are inverted relative to the usual scheme --
+     .p is applied to object KEYS in the markup, and real punctuation carries no
+     class at all and reads the pre colour below. */
+  --code-keyword: #C9AEE8;                  /* violet  — const */
+  --code-key:     #F2EEF5;                  /* neutral — object keys */
+  --code-string:  #E8C4A0;                  /* sand    — string literals */
+  --code-punct:   rgba(240,217,228,0.72);   /* dimmed  — braces, colons */
+  --code-comment: #C9B2BF;                  /* mauve   — // comments */
+
   --shadow:        0 40px 80px rgba(0,0,0,0.6);
   --card-shadow:   var(--shadow);
   --btn-glow:      0 12px 32px -10px rgba(193,160,172,0.55);
@@ -291,13 +303,18 @@ section{padding-block:var(--sect); position:relative;}
 .code-bar span{margin-left:.6rem; font-family:var(--mono); font-size:.68rem; color:var(--text-muted);}
 .code-card pre{
   margin:0; padding:1.3rem 1.15rem; overflow-x:auto;
-  font-family:var(--mono); font-size:.76rem; line-height:1.85; color:var(--text-soft);
+  font-family:var(--mono); font-size:.76rem; line-height:1.85; color:var(--code-punct);
 }
 /* The UA sheet declares code{font-family:monospace} directly on the element,
    which beats the family inherited from the pre above, so without this the
    block renders in the platform default rather than JetBrains Mono. */
 .code-card code{font-family:inherit;}
-.k{color:var(--accent-alt-soft);} .s{color:var(--accent-alt-soft);} .p{color:var(--text);} .c{color:var(--text-muted);}
+/* .k keyword · .p object key (not punctuation) · .s string · .c comment.
+   Unclassed punctuation inherits --code-punct from .code-card pre above. */
+.k{color:var(--code-keyword);}
+.p{color:var(--code-key);}
+.s{color:var(--code-string);}
+.c{color:var(--code-comment); font-style:italic;}
 
 /* ============================================================
    STACK + GLOBE
