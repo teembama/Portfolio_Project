@@ -274,10 +274,10 @@
         <ul>
           <li>Reverse-engineered the complete Supabase schema — <strong>13 entities across 6 domains</strong> — directly from TypeScript types without dashboard access, producing an ERD adopted by the engineering team.</li>
           <li>Resolved critical authentication failures across mobile and web after a backend API migration: session race conditions, network-failure resilience and phone verification for Nigerian numbers.</li>
-          <li>Migrated the web SMS OTP provider (Twilio → Africa's Talking) with <strong>zero changes required in the mobile client</strong>, adding server-side OTP generation and hashing.</li>
+          <li>Migrated the web SMS OTP provider (Twilio → Africa's Talking), moving OTP generation and hashing server-side so the provider swap stayed a backend concern — <strong>zero changes required in the mobile client</strong>.</li>
           <li>Rebuilt the core booking system for production scale: infinite scroll pagination, optimistic UI updates and caching that <strong>cut data fetching by 60%</strong>.</li>
-          <li>Shipped an end-to-end KYC identity verification system — webhook architecture, image compression pipeline, real-time status — solving a WebView context-loss bug that broke standard callback handling.</li>
-          <li><strong>6+ pull requests</strong> to staging and production across auth, pricing logic, KYC and third-party vehicle verification (Prembly API).</li>
+          <li>Shipped an end-to-end KYC identity verification system: a submission triggers an image compression pipeline, the provider's webhook callback carries the result back, and verification status updates in real time — including a fix for a WebView context-loss bug that broke standard callback handling.</li>
+          <li><strong>6+ pull requests</strong> to staging and production across auth, pricing logic, KYC and third-party vehicle verification chained through the Prembly API.</li>
         </ul>
       </div>
 
