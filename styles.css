@@ -173,9 +173,10 @@ body::after{
   letter-spacing:-.02em; color:var(--text);
 }
 .brand span{color:var(--accent-ink);}
-/* .nav-end collapses to 0x0 at desktop now the theme toggle is gone, so
-   space-between alone leaves the links mid-row. margin-left:auto pushes them
-   right without touching justify-content, which the <=900px panel relies on. */
+/* margin-left:auto pushes the links right without touching justify-content,
+   which the <=900px panel relies on. The burger sits directly in .nav-inner:
+   it is display:none above 900px, so there is no trailing flex item and no
+   trailing gap between the links and the padding edge. */
 .nav-links{display:flex; align-items:center; gap:1.9rem; margin-left:auto;}
 .nav-links a{
   font-family:var(--mono); font-size:.78rem; color:var(--text-soft);
@@ -190,7 +191,6 @@ body::after{
 .nav-links a:hover,.nav-links a.active{color:var(--text);}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
 
-.nav-end{display:flex; align-items:center; gap:.85rem;}
 .burger{display:none; background:none; border:0; color:var(--text); font-family:var(--mono); font-size:.8rem; cursor:pointer; padding:.5rem;}
 
 /* ============================================================
