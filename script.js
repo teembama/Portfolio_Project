@@ -155,8 +155,9 @@ if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
     var baseVelY = reduced ? 0 : 0.003;
     var rotX = 0.3, rotY = 0, velX = 0, velY = baseVelY;
     var dragging = false, lastMX = 0, lastMY = 0;
-    var accent = '#A855F7', accent2 = '#FF4FA3', label = '#EFEAF7';
-    var lineCol = 'rgba(168,85,247,0.10)', ringCol = 'rgba(255,79,163,0.05)';
+    // fallbacks mirror the dark-theme tokens; readColours() overwrites them
+    var accent = '#F0D9E4', accent2 = '#806C79', label = '#F0D9E4';
+    var lineCol = 'rgba(193,160,172,0.10)', ringCol = 'rgba(128,108,121,0.05)';
 
     // Size the bitmap only — CSS owns the layout box, so every coordinate
     // below is a fraction of the canvas's own W/H. A bad read costs one
@@ -183,7 +184,9 @@ if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
     // colours come from the theme tokens, so the sphere follows the toggle
     function readColours(){
       var cs = getComputedStyle(document.documentElement);
-      accent  = cs.getPropertyValue('--accent').trim()      || accent;
+      // --accent-ink, not --accent: canvas labels are text and need the
+      // text-safe end of the accent on a light background
+      accent  = cs.getPropertyValue('--accent-ink').trim()  || accent;
       accent2 = cs.getPropertyValue('--accent-alt').trim()  || accent2;
       label   = cs.getPropertyValue('--text').trim()        || label;
       lineCol = cs.getPropertyValue('--globe-line').trim()  || lineCol;
