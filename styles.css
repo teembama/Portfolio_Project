@@ -208,13 +208,6 @@ body::after{
 .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
 
 .nav-end{display:flex; align-items:center; gap:.85rem;}
-.nav-cta{
-  font-family:var(--mono); font-size:.78rem; color:var(--text);
-  border:1px solid var(--border-strong); border-radius:999px;
-  padding:.5rem 1.05rem; white-space:nowrap;
-  transition:background .25s ease, border-color .25s ease, transform .25s ease;
-}
-.nav-cta:hover{background:var(--wash); border-color:var(--accent); transform:translateY(-1px);}
 .burger{display:none; background:none; border:0; color:var(--text); font-family:var(--mono); font-size:.8rem; cursor:pointer; padding:.5rem;}
 
 /* theme toggle - kept from the previous build, restyled */
@@ -675,7 +668,7 @@ section{padding-block:var(--sect); position:relative;}
   .btn-row{gap:.6rem;}
   .btn{padding:.8rem 1.15rem; font-size:.78rem; min-height:44px;
        display:inline-flex; align-items:center;}
-  .btn-row .btn{flex:1 1 auto; justify-content:center;}
+  .btn-row .btn{flex:0 1 auto; justify-content:center;}
   .scroll-hint{margin-top:2.75rem;}
 
   h2.sect-title{margin-bottom:1.75rem;}
@@ -711,7 +704,6 @@ section{padding-block:var(--sect); position:relative;}
 @media (max-width:380px){
   .stats{grid-template-columns:1fr;}
   .hero h1{font-size:2.2rem;}
-  .btn-row .btn{flex:1 1 100%;}
 }
 
 /* ---------- landscape phone: don't force a full-height hero ---------- */
@@ -735,5 +727,4 @@ section{padding-block:var(--sect); position:relative;}
   }
   .nav-links a::after{bottom:.55rem;}
   .burger{display:block; z-index:70;}
-  .nav-cta{display:none;}
 }
