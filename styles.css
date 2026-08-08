@@ -451,10 +451,14 @@ section{padding-block:var(--sect); position:relative;}
    ============================================================ */
 /* Last scroll target: without at least a viewport's worth of room below the nav,
    the page hits its scroll end before #contact reaches the nav and the landing
-   stops short. This guarantees the room; on tall screens it changes nothing. */
+   stops short. Anchors aim at the label, which sits --sect into the section, so
+   the reservation has to cover that padding on top of the viewport. Adding
+   --sect leaves at least (100svh - nav-h) of content below the label while the
+   landing only needs (100svh - nav-h - 32), which holds at any viewport
+   height -- a fixed pixel value would not, since the deficit scales with it. */
 .contact{
   text-align:center; padding-bottom:calc(var(--sect) * .7);
-  min-height:calc(100svh - var(--nav-h, 4.5rem));
+  min-height:calc(100svh - var(--nav-h, 4.5rem) + var(--sect));
 }
 .contact h2{
   font-family:var(--display); font-weight:700;
