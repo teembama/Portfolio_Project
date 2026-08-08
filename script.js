@@ -375,6 +375,39 @@
         }, 320);
       });
     });
+
+    // Warm the preview images once the page has finished loading, so the fetch
+    // lands in idle time rather than on first hover, where it showed the
+    // gradient placeholder until the image arrived. Detached Image objects
+    // only: nothing enters the DOM and no markup changes.
+    //
+    // Deliberately not <link rel="preload" as="image">, which would raise these
+    // to high priority and make them compete with render-critical work for what
+    // is an optional hover effect. Background warming is the right priority.
+    //
+    // This sits inside the preview IIFE on purpose, so the (hover: none) bail
+    // above covers it too and a touch device never spends data on images it
+    // cannot trigger.
+    function prewarm(){
+      try{
+        document.querySelectorAll('.proj[data-img]').forEach(function(card){
+          var src = card.dataset.img;
+          if(!src) return;
+          var warm = new Image();
+          warm.onerror = function(){};   // a failed warm is silent; hover retries
+          warm.src = src;
+        });
+      }catch(e){ /* never let an optional optimisation surface an error */ }
+    }
+    function schedulePrewarm(){
+      if(typeof window.requestIdleCallback === 'function'){
+        window.requestIdleCallback(prewarm, {timeout:3000});
+      } else {
+        setTimeout(prewarm, 1500);   // Safari has no requestIdleCallback
+      }
+    }
+    if(document.readyState === 'complete') schedulePrewarm();
+    else window.addEventListener('load', schedulePrewarm);
   })();
 
   // ─── ACTIVE NAV LINK ───
