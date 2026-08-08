@@ -17,9 +17,11 @@
 /* Palette hues, used by both themes:
    #16131F ink · #4A3F4B plum · #806C79 taupe · #C1A0AC mauve · #F0D9E4 blush
    Derived tints: #0d0b13 #5c4f5e #e8cbdb #F5E7EE #FBF5F8
-   --accent-ink is the text-safe accent: --accent (#C1A0AC) only clears 1.8:1
-   on the light background, so accent-coloured *text* reads from this instead.
-   Same hue family, no new colour. */
+   --text is a clean neutral in both themes; only tokens below carry the dust.
+   --accent-ink is the text-safe accent: it is the true accent (#C1A0AC) in dark,
+   but --accent only clears 1.8:1 on the light background, so light mode reads
+   from the plum instead. --accent-alt-soft is the accent tint for text sitting
+   ON a card, where #C1A0AC would fall to 4.23:1. Same hue family throughout. */
 [data-theme="dark"]{
   --bg:            #16131F;
   --bg-deep:       #0d0b13;
@@ -27,18 +29,19 @@
   --bg-card-alt:   #5c4f5e;
 
   --accent:        #C1A0AC;
-  --accent-ink:    #F0D9E4;
+  --accent-ink:    #C1A0AC;
   --accent-dim:    #F0D9E4;
   --accent-deep:   #4A3F4B;
   --accent-alt:    #806C79;
   --accent-alt-soft:#F0D9E4;
   --on-accent:     #16131F;
 
-  --text:          #F0D9E4;
-  /* --bg-card (#4A3F4B) is lighter than --bg, so a dimmer secondary tone can
-     never clear 4.5:1 on it. Both secondaries are alpha tints of --text --
-     same hue, opacity only -- which keeps soft > muted and clears AA on the
-     page, the card and the card hover tone. */
+  --text:          #F2EEF5;
+  /* Secondaries stay on the blush tone (#F0D9E4) rather than the neutral above,
+     so headings read clean white and supporting copy keeps the dusty cast.
+     --bg-card (#4A3F4B) is lighter than --bg, so a dimmer tone can never clear
+     4.5:1 on a card; these are opacity steps of the blush, which keeps
+     soft > muted and clears AA on the page, the card and the card hover tone. */
   --text-soft:     rgba(240,217,228,0.92);
   --text-muted:    rgba(240,217,228,0.83);
 
@@ -357,7 +360,7 @@ section{padding-block:var(--sect); position:relative;}
   margin:0; padding:1.3rem 1.15rem; overflow-x:auto;
   font-family:var(--mono); font-size:.76rem; line-height:1.85; color:var(--text-soft);
 }
-.k{color:var(--accent-ink);} .s{color:var(--accent-alt-soft);} .p{color:var(--text);} .c{color:var(--text-muted);}
+.k{color:var(--accent-alt-soft);} .s{color:var(--accent-alt-soft);} .p{color:var(--text);} .c{color:var(--text-muted);}
 
 /* ============================================================
    STACK + GLOBE
@@ -432,13 +435,13 @@ section{padding-block:var(--sect); position:relative;}
 .badge{
   font-family:var(--mono); font-size:.64rem; letter-spacing:.09em; text-transform:uppercase;
   padding:.26rem .6rem; border-radius:999px;
-  background:var(--alt-wash); color:var(--accent-ink); border:1px solid var(--alt-border);
+  background:var(--alt-wash); color:var(--accent-alt-soft); border:1px solid var(--alt-border);
 }
-.badge.alt{background:var(--wash-soft); color:var(--accent-ink); border-color:var(--border-strong);}
+.badge.alt{background:var(--wash-soft); color:var(--accent-alt-soft); border-color:var(--border-strong);}
 .proj-meta{font-family:var(--mono); font-size:.72rem; color:var(--text-muted); margin:.15rem 0 1rem;}
 .proj ul{margin:0 0 1.35rem; padding-left:1.05rem; color:var(--text-soft); font-size:.97rem;}
 .proj li{margin-bottom:.55rem;}
-.proj li::marker{color:var(--accent-ink);}
+.proj li::marker{color:var(--accent-alt-soft);}
 .proj li strong{color:var(--text); font-weight:600;}
 .proj code{font-family:var(--mono); font-size:.9em; color:var(--accent-alt-soft);}
 .tags{display:flex; flex-wrap:wrap; gap:.42rem;}
@@ -506,7 +509,7 @@ section{padding-block:var(--sect); position:relative;}
   padding:1.8rem 1.6rem; transition:border-color .3s ease, transform .3s ease;
 }
 .beyond-card:hover{border-color:var(--border-strong); transform:translateY(-3px);}
-.beyond-card .job-date{margin-bottom:.6rem;}
+.beyond-card .job-date{margin-bottom:.6rem; color:var(--accent-alt-soft);}
 .beyond-card h3{font-family:var(--display); font-weight:600; font-size:1.12rem; letter-spacing:-.02em; margin:0 0 .6rem;}
 .beyond-card p{margin:0; color:var(--text-soft); font-size:.95rem;}
 
