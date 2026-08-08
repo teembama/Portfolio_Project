@@ -34,8 +34,14 @@
 
     e.preventDefault();
 
-    var offset = id === '#home' ? 0 : nav.offsetHeight;
-    var y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    // Land the section's label 32px under the nav, not the section box. The box
+    // carries --sect of top padding, so aiming at it leaves that whole band
+    // exposed; aiming at the label lets the nav overlap the excess instead.
+    // #home has no .eyebrow, so it falls back to the header and offset 0.
+    var label = target.querySelector('.eyebrow');
+    var anchorEl = label || target;
+    var offset = (id === '#home') ? 0 : nav.offsetHeight + 32;
+    var y = anchorEl.getBoundingClientRect().top + window.pageYOffset - offset;
 
     window.scrollTo({
       top: Math.max(0, y),

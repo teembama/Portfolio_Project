@@ -88,10 +88,16 @@ body{
   transition:background .5s ease, color .5s ease;
 }
 
-/* Anchors land flush under the fixed nav. --nav-h is written by script.js from
-   the nav's measured height on load, resize and font load; the rem value is only
-   a pre-JS fallback. */
-section[id], header[id]{scroll-margin-top:var(--nav-h, 4.5rem);}
+/* Anchors land the section's label 32px under the fixed nav, which means the
+   nav has to overlap the section's own --sect top padding. Subtracting --sect
+   makes this resolve negative wherever the padding exceeds nav + 32 (-50px at
+   desktop, +55px at 375 where --sect drops to 3.5rem). Negative is intended and
+   valid: it parks the box above the viewport top so the nav covers the excess.
+   This governs direct URL loads; the click handler in script.js does the same
+   sum against the label element, since it calls preventDefault(). --nav-h is
+   written by script.js from the nav's measured height on load, resize and font
+   load; the rem value is only a pre-JS fallback. */
+section[id]{scroll-margin-top:calc(var(--nav-h, 4.5rem) + 2rem - var(--sect));}
 #home{scroll-margin-top:0;}
 img{max-width:100%;display:block;}
 pre,code{max-width:100%;}
