@@ -173,7 +173,10 @@ body::after{
   letter-spacing:-.02em; color:var(--text);
 }
 .brand span{color:var(--accent-ink);}
-.nav-links{display:flex; align-items:center; gap:1.9rem;}
+/* .nav-end collapses to 0x0 at desktop now the theme toggle is gone, so
+   space-between alone leaves the links mid-row. margin-left:auto pushes them
+   right without touching justify-content, which the <=900px panel relies on. */
+.nav-links{display:flex; align-items:center; gap:1.9rem; margin-left:auto;}
 .nav-links a{
   font-family:var(--mono); font-size:.78rem; color:var(--text-soft);
   letter-spacing:.02em; position:relative; padding-block:.2rem;
