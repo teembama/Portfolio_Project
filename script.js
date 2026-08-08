@@ -1,31 +1,3 @@
-// ─── THEME: system preference + localStorage override ───
-const root = document.documentElement;
-const mql = window.matchMedia('(prefers-color-scheme: dark)');
-
-function applyTheme(theme) {
-  root.setAttribute('data-theme', theme);
-  // the globe reads its colours from CSS tokens, so let it re-read on a swap
-  window.dispatchEvent(new Event('themechange'));
-}
-
-const stored = localStorage.getItem('theme');
-applyTheme(stored || (mql.matches ? 'dark' : 'light'));
-
-mql.addEventListener('change', (e) => {
-  if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
-});
-
-function toggleTheme() {
-  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  applyTheme(next);
-  localStorage.setItem('theme', next);
-}
-
-const themeToggle    = document.getElementById('themeToggle');
-const themeToggleMob = document.getElementById('themeToggleMob');
-if (themeToggle)    themeToggle.addEventListener('click', toggleTheme);
-if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
-
 (function(){
   var nav = document.getElementById('nav');
   var burger = document.getElementById('burger');
@@ -192,11 +164,11 @@ if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
       return true;
     }
 
-    // colours come from the theme tokens, so the sphere follows the toggle
+    // colours come from the palette tokens rather than being hard-coded here
     function readColours(){
       var cs = getComputedStyle(document.documentElement);
       // --accent-ink, not --accent: canvas labels are text and need the
-      // text-safe end of the accent on a light background
+      // text-safe end of the accent
       accent  = cs.getPropertyValue('--accent-ink').trim()  || accent;
       accent2 = cs.getPropertyValue('--accent-alt').trim()  || accent2;
       label   = cs.getPropertyValue('--text').trim()        || label;
@@ -209,7 +181,6 @@ if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
     }
     window.addEventListener('resize', measure);
     window.addEventListener('orientationchange', function(){ setTimeout(measure, 120); });
-    window.addEventListener('themechange', readColours);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     measure();
 

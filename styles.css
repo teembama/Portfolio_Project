@@ -1,8 +1,16 @@
 /* ============================================================
    THEME TOKENS
-   Every palette colour lives in the two blocks below. Nothing
-   further down the file hard-codes a colour, so swapping the
-   palette is a values-only edit inside [data-theme="..."].
+   The site is dark-only. Every palette colour lives in the block
+   below. Nothing further down the file hard-codes a colour, so
+   swapping the palette is a values-only edit inside :root.
+
+   Palette hues:
+   #16131F ink · #4A3F4B plum · #806C79 taupe · #C1A0AC mauve · #F0D9E4 blush
+   Derived tints: #0d0b13 #5c4f5e
+   --text is a clean neutral; only the tokens below carry the dust.
+   --accent-ink is the text-safe accent, here the true accent (#C1A0AC).
+   --accent-alt-soft is the accent tint for text sitting ON a card, where
+   #C1A0AC would fall to 4.23:1. Same hue family throughout.
    ============================================================ */
 :root{
   --display: 'Space Grotesk', system-ui, sans-serif;
@@ -12,17 +20,7 @@
   --maxw: 1180px;
   --pad:  clamp(1.25rem, 5vw, 4.5rem);
   --sect: clamp(5rem, 11vw, 9rem);
-}
 
-/* Palette hues, used by both themes:
-   #16131F ink · #4A3F4B plum · #806C79 taupe · #C1A0AC mauve · #F0D9E4 blush
-   Derived tints: #0d0b13 #5c4f5e #e8cbdb #F5E7EE #FBF5F8
-   --text is a clean neutral in both themes; only tokens below carry the dust.
-   --accent-ink is the text-safe accent: it is the true accent (#C1A0AC) in dark,
-   but --accent only clears 1.8:1 on the light background, so light mode reads
-   from the plum instead. --accent-alt-soft is the accent tint for text sitting
-   ON a card, where #C1A0AC would fall to 4.23:1. Same hue family throughout. */
-[data-theme="dark"]{
   --bg:            #16131F;
   --bg-deep:       #0d0b13;
   --bg-card:       #4A3F4B;
@@ -73,55 +71,6 @@
   --proj-glow:     rgba(128,108,121,0.13);
   --preview-shadow:0 34px 70px -28px rgba(0,0,0,0.85), 0 0 40px -18px rgba(193,160,172,0.50);
   --modal-scrim:   rgba(13,11,19,0.72);
-}
-
-[data-theme="light"]{
-  --bg:            #F0D9E4;
-  --bg-deep:       #e8cbdb;
-  --bg-card:       #FBF5F8;
-  --bg-card-alt:   #F5E7EE;
-
-  --accent:        #C1A0AC;
-  --accent-ink:    #4A3F4B;
-  --accent-dim:    #16131F;
-  --accent-deep:   #4A3F4B;
-  --accent-alt:    #806C79;
-  --accent-alt-soft:#4A3F4B;
-  --on-accent:     #F0D9E4;
-
-  --text:          #16131F;
-  --text-soft:     #4A3F4B;
-  /* #806C79 lands at 3.63:1 on --bg; the same plum as --text-soft at 80% */
-  --text-muted:    rgba(74,63,75,0.80);
-
-  --border:        rgba(74,63,75,0.14);
-  --border-strong: rgba(74,63,75,0.28);
-
-  --glass:         rgba(240,217,228,0.7);
-  --nav-bg:        var(--glass);
-  --panel-bg:      rgba(240,217,228,0.97);
-
-  --wash:          rgba(74,63,75,0.12);
-  --wash-soft:     rgba(74,63,75,0.08);
-  --wash-faint:    rgba(74,63,75,0.05);
-  --alt-wash:      rgba(128,108,121,0.10);
-  --alt-border:    rgba(128,108,121,0.28);
-  --alt-halo:      rgba(128,108,121,0.16);
-  --tap:           rgba(128,108,121,0.16);
-
-  --grid-line:     rgba(74,63,75,0.05);
-  --glow-1:        rgba(193,160,172,0.20);
-  --glow-2:        rgba(128,108,121,0.11);
-  --glow-3:        rgba(74,63,75,0.10);
-  --globe-line:    rgba(74,63,75,0.16);
-  --globe-ring:    rgba(128,108,121,0.10);
-
-  --shadow:        0 40px 80px rgba(22,19,31,0.08);
-  --card-shadow:   var(--shadow);
-  --btn-glow:      0 12px 32px -10px rgba(22,19,31,0.30);
-  --proj-glow:     rgba(128,108,121,0.09);
-  --preview-shadow:0 34px 70px -28px rgba(22,19,31,0.30), 0 0 40px -18px rgba(128,108,121,0.35);
-  --modal-scrim:   rgba(22,19,31,0.45);
 }
 
 /* ============================================================
@@ -214,27 +163,6 @@ body::after{
 
 .nav-end{display:flex; align-items:center; gap:.85rem;}
 .burger{display:none; background:none; border:0; color:var(--text); font-family:var(--mono); font-size:.8rem; cursor:pointer; padding:.5rem;}
-
-/* theme toggle - kept from the previous build, restyled */
-.theme-toggle{
-  position:relative; z-index:70;
-  width:38px; height:38px; flex:none;
-  display:flex; align-items:center; justify-content:center;
-  background:none; border:1px solid var(--border); border-radius:50%;
-  color:var(--text); cursor:pointer; padding:0;
-  transition:background .25s ease, border-color .25s ease;
-}
-.theme-toggle:hover{background:var(--wash); border-color:var(--accent);}
-.theme-toggle svg{
-  width:18px; height:18px; position:absolute;
-  transition:transform .5s cubic-bezier(0.68,-0.55,0.27,1.55), opacity .3s;
-}
-.sun-icon{color:var(--accent-alt);}
-.moon-icon{color:var(--accent);}
-[data-theme="light"] .sun-icon{opacity:1; transform:rotate(0deg) scale(1);}
-[data-theme="light"] .moon-icon{opacity:0; transform:rotate(90deg) scale(.5);}
-[data-theme="dark"] .sun-icon{opacity:0; transform:rotate(-90deg) scale(.5);}
-[data-theme="dark"] .moon-icon{opacity:1; transform:rotate(0deg) scale(1);}
 
 /* ============================================================
    TYPE PRIMITIVES
