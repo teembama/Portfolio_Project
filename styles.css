@@ -293,6 +293,10 @@ section{padding-block:var(--sect); position:relative;}
   margin:0; padding:1.3rem 1.15rem; overflow-x:auto;
   font-family:var(--mono); font-size:.76rem; line-height:1.85; color:var(--text-soft);
 }
+/* The UA sheet declares code{font-family:monospace} directly on the element,
+   which beats the family inherited from the pre above, so without this the
+   block renders in the platform default rather than JetBrains Mono. */
+.code-card code{font-family:inherit;}
 .k{color:var(--accent-alt-soft);} .s{color:var(--accent-alt-soft);} .p{color:var(--text);} .c{color:var(--text-muted);}
 
 /* ============================================================
