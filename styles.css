@@ -511,7 +511,8 @@ section{padding-block:var(--sect); position:relative;}
 .mail{
   display:inline-block; font-family:var(--mono);
   font-size:clamp(.88rem,2.4vw,1.25rem); color:var(--text);
-  padding-bottom:.4rem; border-bottom:1px solid var(--border-strong);
+  padding:0 0 .4rem; border:0; border-bottom:1px solid var(--border-strong);
+  background:none; cursor:pointer; min-height:44px;
   transition:color .25s ease, border-color .25s ease;
   word-break:break-word;
 }
@@ -523,6 +524,90 @@ section{padding-block:var(--sect); position:relative;}
   display:flex; flex-wrap:wrap; gap:.6rem; justify-content:space-between;
   font-family:var(--mono); font-size:.72rem; color:var(--text-muted);
 }
+
+/* ============================================================
+   CONTACT MODAL (Formspree)
+   ============================================================ */
+.modal{
+  position:fixed; inset:0; z-index:200;
+  display:none; align-items:center; justify-content:center;
+  padding:1.25rem;
+}
+.modal.active{display:flex;}
+.modal-overlay{
+  position:absolute; inset:0;
+  background:var(--modal-scrim);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+}
+.modal-content{
+  position:relative; z-index:1;
+  width:min(520px,100%); max-height:90vh; overflow-y:auto;
+  background:var(--bg-card); border:1px solid var(--border); border-radius:16px;
+  padding:2.2rem 1.9rem 1.7rem;
+  box-shadow:var(--card-shadow);
+  text-align:left;
+}
+.modal-close{
+  position:absolute; top:.75rem; right:.9rem;
+  width:38px; height:38px;
+  background:none; border:0; border-radius:50%;
+  color:var(--text-soft); font-size:1.5rem; line-height:1; cursor:pointer;
+  transition:color .25s ease, background .25s ease;
+}
+.modal-close:hover{color:var(--accent-alt); background:var(--wash-soft);}
+.modal-title{
+  font-family:var(--display); font-weight:700;
+  font-size:1.5rem; letter-spacing:-.03em; margin:0 0 1.4rem;
+}
+.form-group{margin-bottom:1.05rem;}
+.form-group label{
+  display:block; margin-bottom:.4rem;
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.1em;
+  text-transform:lowercase; color:var(--text-muted);
+}
+.form-group input,
+.form-group textarea{
+  width:100%;
+  background:var(--bg); color:var(--text);
+  border:1px solid var(--border); border-radius:10px;
+  padding:.8rem .9rem;
+  font-family:var(--body); font-size:.95rem;
+  transition:border-color .25s ease, box-shadow .25s ease;
+}
+.form-group textarea{resize:vertical; min-height:120px;}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:var(--text-muted);}
+.form-group input:focus,
+.form-group textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--wash-soft);
+}
+.modal-buttons{display:flex; justify-content:flex-end; gap:.7rem; margin-top:1.4rem;}
+.btn-cancel,.btn-send{
+  font-family:var(--mono); font-size:.8rem;
+  padding:.75rem 1.4rem; border-radius:999px; cursor:pointer;
+  border:1px solid var(--border-strong); background:none; color:var(--text);
+  min-height:44px;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+}
+.btn-cancel:hover{background:var(--wash-soft); border-color:var(--accent);}
+.btn-send{
+  background:linear-gradient(96deg,var(--accent-dim),var(--accent-alt));
+  border-color:transparent; color:var(--on-accent); font-weight:700;
+}
+.btn-send:hover:not(:disabled){transform:translateY(-2px); box-shadow:var(--btn-glow);}
+.btn-send:disabled{opacity:.6; cursor:not-allowed;}
+.form-status{text-align:center; padding:1rem 0 .5rem;}
+.form-status .status-icon{
+  display:block; font-size:2.4rem; margin-bottom:.8rem;
+  color:var(--accent-alt);
+}
+.form-status h4{
+  font-family:var(--display); font-weight:600; font-size:1.2rem;
+  letter-spacing:-.02em; margin:0 0 .5rem;
+}
+.form-status p{color:var(--text-soft); font-size:.95rem; margin:0 0 1.4rem;}
 
 /* ============================================================
    MOTION

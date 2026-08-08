@@ -349,7 +349,7 @@
     <p class="eyebrow reveal">// 06 — contact</p>
     <h2 class="reveal">Let's Build<br /><em>Something</em><br />Amazing</h2>
     <p class="reveal">Open to mobile and full-stack roles, research collaborations, and anything at the intersection of engineering and health.</p>
-    <a class="mail reveal" href="mailto:mbamatherese2005@gmail.com">mbamatherese2005@gmail.com →</a>
+    <button type="button" class="mail reveal" id="openEmailModal">mbamatherese2005@gmail.com →</button>
     <div class="socials reveal">
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/therese-mbama-8aa29b234" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a class="btn btn-ghost" href="https://github.com/teembama" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -367,6 +367,48 @@
   </div>
 </footer>
 
+</div>
+
+<!-- ================= CONTACT MODAL (Formspree) ================= -->
+<div id="emailModal" class="modal" aria-hidden="true">
+  <div class="modal-overlay"></div>
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="closeModal" aria-label="Close">&times;</button>
+    <div id="formView">
+      <h3 class="modal-title" id="modalTitle">Send Me a Message</h3>
+      <form action="https://formspree.io/f/mvzppglj" method="POST" class="modal-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">your name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">your email</label>
+          <input type="email" id="email" name="_replyto" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="New message from portfolio!">
+        <div class="modal-buttons">
+          <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn-send" id="sendBtn">Send Message</button>
+        </div>
+      </form>
+    </div>
+    <div id="successView" class="form-status" style="display:none;">
+      <span class="status-icon">✓</span>
+      <h4>Message Sent</h4>
+      <p>Thanks for reaching out — I'll get back to you soon.</p>
+      <button type="button" class="btn-send" id="successDismiss">Close</button>
+    </div>
+    <div id="errorView" class="form-status" style="display:none;">
+      <span class="status-icon">⚠</span>
+      <h4>Something Went Wrong</h4>
+      <p>Your message didn't send. Please try again or email me directly at mbamatherese2005@gmail.com.</p>
+      <button type="button" class="btn-send" id="errorDismiss">Try Again</button>
+    </div>
+  </div>
 </div>
 
 <div class="preview" id="preview" aria-hidden="true">

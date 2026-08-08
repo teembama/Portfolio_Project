@@ -402,3 +402,72 @@ if (themeToggleMob) themeToggleMob.addEventListener('click', toggleTheme);
     sections.forEach(function(s){ spy.observe(s); });
   }
 })();
+
+// ─── EMAIL MODAL + FORMSPREE FETCH ───
+const emailModal   = document.getElementById('emailModal');
+const openModalBtn = document.getElementById('openEmailModal');
+const closeModalBtn= document.getElementById('closeModal');
+const cancelBtn    = document.getElementById('cancelBtn');
+const modalOverlay = emailModal && emailModal.querySelector('.modal-overlay');
+const contactForm  = document.getElementById('contactForm');
+const sendBtn      = document.getElementById('sendBtn');
+const formView     = document.getElementById('formView');
+const successView  = document.getElementById('successView');
+const errorView    = document.getElementById('errorView');
+const successDismiss = document.getElementById('successDismiss');
+const errorDismiss   = document.getElementById('errorDismiss');
+
+function showView(which) {
+  if (!formView) return;
+  formView.style.display    = which === 'form'    ? 'block' : 'none';
+  successView.style.display = which === 'success' ? 'block' : 'none';
+  errorView.style.display   = which === 'error'   ? 'block' : 'none';
+}
+function openModal() {
+  if (!emailModal) return;
+  emailModal.classList.add('active');
+  emailModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  showView('form');
+}
+function closeModal() {
+  if (!emailModal) return;
+  emailModal.classList.remove('active');
+  emailModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (contactForm) contactForm.reset();
+  if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
+  showView('form');
+}
+if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+if (successDismiss) successDismiss.addEventListener('click', closeModal);
+if (errorDismiss) errorDismiss.addEventListener('click', () => showView('form'));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && emailModal && emailModal.classList.contains('active')) closeModal();
+});
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (sendBtn.disabled) return;
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending…';
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) showView('success');
+      else showView('error');
+    } catch (err) {
+      showView('error');
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send Message';
+    }
+  });
+}
