@@ -345,7 +345,10 @@
       raf = requestAnimationFrame(loop);
     }
 
-    document.querySelectorAll('.proj').forEach(function(card){
+    // Only cards with an actual image bind the preview. Without the guard every
+    // .proj bound it, so an image-less card raised the box on just the gradient
+    // placeholder.
+    document.querySelectorAll('.proj[data-img]').forEach(function(card){
       card.addEventListener('mouseenter', function(e){
         label.textContent = card.dataset.label || '';
         img.removeAttribute('src');
