@@ -21,7 +21,10 @@
   --sect: clamp(5rem, 11vw, 9rem);
 
   --bg:            #16131F;
-  --bg-deep:       #0d0b13;
+  /* Section band. Translucent on purpose: body::before (ambient glow) and
+     body::after (grid) sit at z-index 0 behind .shell at z-index 1, so an
+     opaque band would punch a hole in both. */
+  --band:          rgba(13,11,19,0.55);
   --bg-card:       #4A3F4B;
   --bg-card-alt:   #5c4f5e;
 
@@ -204,6 +207,9 @@ h2.sect-title em{
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 section{padding-block:var(--sect); position:relative;}
+/* Alternating bands give the page vertical rhythm:
+   home / ABOUT / skills / PROJECTS / experience / BEYOND / contact. */
+#about, #projects, #beyond{background:var(--band);}
 
 /* ============================================================
    HERO
