@@ -432,6 +432,50 @@ section{padding-block:var(--sect); position:relative;}
   border:1px solid var(--border); border-radius:6px; padding:.28rem .58rem;
 }
 
+/* .proj-pitch and .proj-links reuse the card's bullet text and the contact
+   section's ghost buttons; only spacing is new. */
+.proj-pitch{margin:0 0 1rem; color:var(--text-soft); font-size:.97rem; max-width:52rem;}
+.proj-links{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.35rem;}
+
+/* Project media: a screenshot (<img class="proj-media">) or, until there is
+   one, a placeholder drawn from its data-title / data-tags with the hover
+   preview's recipe below. That element is the one source for both: the card
+   shows it where the cursor preview can't (touch, and 900px and below), and
+   the preview shows it on hover everywhere else. Swapping the placeholder div
+   for an <img class="proj-media" ...> is the whole change for a screenshot. */
+.proj-media{
+  display:none; position:relative; width:100%; aspect-ratio:16/10; margin:0;
+  border-radius:13px; overflow:hidden; border:1px solid var(--border-strong);
+  object-fit:cover;
+}
+div.proj-media{
+  place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
+  background:
+    radial-gradient(18rem 12rem at 20% 12%, var(--wash), transparent 70%),
+    linear-gradient(140deg, var(--accent-deep) 0%, var(--bg-card-alt) 52%, var(--alt-wash) 100%);
+}
+div.proj-media::before{
+  content:attr(data-title);
+  font-family:var(--display); font-weight:600; font-size:.95rem;
+  letter-spacing:-.02em; color:var(--text);
+}
+div.proj-media::after{
+  content:attr(data-tags);
+  font-family:var(--mono); font-size:.6rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent-alt-soft);
+}
+@media (max-width:900px), (hover:none), (pointer:coarse){
+  div.proj-media{display:grid;}
+  img.proj-media{display:block;}
+}
+/* touch screens wider than 900px: media gets its own column */
+@media (min-width:901px) and (hover:none), (min-width:901px) and (pointer:coarse){
+  .proj{grid-template-columns:auto 1fr minmax(220px,34%);}
+}
+@media (max-width:900px){
+  .proj-media{order:-1;}
+}
+
 /* cursor-following project preview */
 .preview{
   position:fixed; top:0; left:0; z-index:55; pointer-events:none;
@@ -647,7 +691,8 @@ section{padding-block:var(--sect); position:relative;}
   .about-grid{grid-template-columns:1fr;}
   .code-card{position:static;}
 }
-@media (hover:none), (max-width:760px){
+/* the exact complement of where .proj-media shows in the card */
+@media (max-width:900px), (hover:none), (pointer:coarse){
   .preview{display:none;}
 }
 

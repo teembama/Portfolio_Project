@@ -255,89 +255,156 @@
     <h2 class="sect-title reveal">Selected <em>Projects</em></h2>
 
     <div class="projects">
-
       <article class="proj reveal">
         <div class="proj-num">_01</div>
         <div>
           <div class="proj-head">
-            <h3>Multimodal Hypertension Detection</h3>
-            <span class="badge">B.Sc. Thesis</span>
+            <h3>RelayPay Voice Support</h3>
+            <span class="badge">Demo build</span>
+            <span class="badge alt">Voice AI</span>
           </div>
-          <p class="proj-meta">Final Year Project · 2026</p>
+          <p class="proj-meta">AI agent · Sep–Oct 2026</p>
+          <p class="proj-pitch">A browser voice agent for a fictional fintech's help desk: it answers from approved policy, checks account records, and books a human callback when a case needs one.</p>
           <ul>
-            <li>Trimodal attention-based fusion framework combining ECG (custom CNN + Transformer), retinal fundus imaging (EfficientNet-B0) and clinical parameters (XGBoost) — <strong>the first work to fuse all three modalities</strong> for this task.</li>
-            <li>Achieved <strong>91.45% accuracy</strong>, a 7.45 percentage-point improvement over the prior published baseline of 84%.</li>
-            <li>Equity-conscious design using internal biological markers to avoid optical sensor bias across skin tones. Publication manuscript in preparation.</li>
+            <li>Every answer passes a <strong>grounding gate in code</strong> before it's spoken. It must cite knowledge-base passages the agent actually retrieved, and each sentence is filtered again before it's spoken.</li>
+            <li>Built on the <strong>Claude Agent SDK</strong> with a custom <strong>MCP server</strong> (6 tools over Supabase) and <strong>Vapi</strong> for voice. Caller text is escaped and marked untrusted, and each turn is capped at $0.05 of spend and 4 model turns, with at most 3 calls at once.</li>
+            <li>Evals went from <strong>15/34 to 31/34 passing</strong>. The first spoken sentence comes in <strong>~1.4s</strong> (median, deployed) at <strong>~$0.003</strong> of model spend per turn, with 31 test files.</li>
           </ul>
           <div class="tags">
-            <span class="tag">Python</span><span class="tag">CNN + Transformer</span>
-            <span class="tag">EfficientNet-B0</span><span class="tag">XGBoost</span>
-            <span class="tag">Multimodal Fusion</span>
+            <span class="tag">Claude Agent SDK</span><span class="tag">MCP</span><span class="tag">Vapi</span><span class="tag">Supabase</span><span class="tag">TypeScript</span><span class="tag">Docker</span>
+          </div>
+          <div class="proj-links">
+            <a class="btn btn-ghost" href="https://relaypay-backend-production-aa34.up.railway.app/" target="_blank" rel="noopener noreferrer" aria-label="Live demo of RelayPay Voice Support (opens in a new tab)">Live&nbsp;<span aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost" href="https://github.com/teembama/Therese-week6-support-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for RelayPay Voice Support (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
           </div>
         </div>
+        <div class="proj-media" data-title="RelayPay Voice Support" data-tags="Agent SDK · MCP · Vapi" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal" data-img="echopay.jpg" data-label="EchoPay">
+      <article class="proj reveal">
         <div class="proj-num">_02</div>
         <div>
           <div class="proj-head">
-            <h3>EchoPay</h3>
-            <span class="badge">1st Place — Team Echo</span>
-            <span class="badge alt">Voice Banking</span>
+            <h3>Lead Studio</h3>
+            <span class="badge">Demo build</span>
+            <span class="badge alt">Research agent</span>
           </div>
-          <p class="proj-meta">Full-Stack Developer · October 2025</p>
+          <p class="proj-meta">AI agent · September 2026</p>
+          <p class="proj-pitch">An agent that finds companies matching a sales brief, cites evidence for each one, and drafts outreach for a reviewer to approve. Nothing is sent automatically.</p>
           <ul>
-            <li>Built at a hackathon where <strong>Team Echo placed 1st</strong> — one team, one first-place finish, two products shipped in under 24 hours: EchoPay and EchoMind, both named for the team.</li>
-            <li>Cross-platform mobile banking assistant on a three-tier architecture (React Native/Expo, Django REST Framework, FastAPI middleware) handling real-time audio and multi-turn conversation state.</li>
-            <li>Built a fast-path routing system that bypasses the LLM for 80% of requests — <strong>cutting response time from ~2s to under 50ms</strong>.</li>
-            <li>Prompt-injection detection, output sanitization and PIN-based transaction authorization.</li>
+            <li>Plans the search, discovers companies through <strong>Apify</strong>, reads their sites with <strong>Firecrawl</strong>, then qualifies leads. Every cited URL must be a page the run actually scraped.</li>
+            <li><strong>Hard per-run limits the model can't raise:</strong> 10 leads, 40 scrapes, 120 tool calls and $5 of spend. Budgets are reserved before parallel tool calls run, so they can't overspend.</li>
+            <li>Reviewer roles, approve / reject / regenerate on drafts, every tool call logged, and <strong>162 tests</strong>.</li>
           </ul>
           <div class="tags">
-            <span class="tag">React Native</span><span class="tag">Expo</span>
-            <span class="tag">Django REST</span><span class="tag">FastAPI</span>
-            <span class="tag">LLM Routing</span>
+            <span class="tag">Claude Agent SDK</span><span class="tag">Apify</span><span class="tag">Firecrawl</span><span class="tag">Zod</span><span class="tag">Supabase</span><span class="tag">Next.js</span>
+          </div>
+          <div class="proj-links">
+            <a class="btn btn-ghost" href="https://github.com/teembama/Therese-week-5-lead-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Lead Studio (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
           </div>
         </div>
+        <div class="proj-media" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal" data-img="bloom.jpg" data-label="Bloom">
+      <article class="proj reveal">
         <div class="proj-num">_03</div>
         <div>
           <div class="proj-head">
-            <h3>Bloom</h3>
-            <span class="badge alt">Maternal Health</span>
+            <h3>Lead Triage System</h3>
+            <span class="badge">Demo build</span>
+            <span class="badge alt">Lead scoring</span>
           </div>
-          <p class="proj-meta">Full-Stack Developer · December 2025</p>
+          <p class="proj-meta">Lead qualification</p>
+          <p class="proj-pitch">Turns a raw export of inbound leads into a ranked call list, so an agency no longer has to review hundreds of leads a month by hand.</p>
           <ul>
-            <li>Maternal health web platform with dynamic pregnancy tracking, a personalized content pipeline and a gamified token rewards system spanning <strong>40+ weeks of content</strong>.</li>
-            <li>React Query for data fetching and caching, <strong>cutting API calls by 60%</strong>, with custom hooks and a responsive component architecture.</li>
+            <li>Cleans the lead export (contact details, company info and notes from earlier conversations) into a consistent dataset.</li>
+            <li>Reads each lead's notes to judge intent and fit against qualification criteria she defined, then scores every lead.</li>
+            <li>Produces a ranked list with a recommendation for every lead (<strong>contact now</strong>, <strong>nurture</strong> or <strong>disqualify</strong>) and runs again on the next export with minimal manual effort.</li>
           </ul>
           <div class="tags">
-            <span class="tag">React</span><span class="tag">Django REST</span>
-            <span class="tag">React Query</span><span class="tag">Python</span>
+            <span class="tag">Streamlit</span>
+          </div>
+          <div class="proj-links">
+            <a class="btn btn-ghost" href="https://lead-triage-system1.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="Live demo of Lead Triage System (opens in a new tab)">Live&nbsp;<span aria-hidden="true">↗</span></a>
           </div>
         </div>
+        <div class="proj-media" data-title="Lead Triage System" data-tags="Clean · Score · Rank" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal" data-img="echo.jpg" data-label="EchoMind">
+      <article class="proj reveal">
         <div class="proj-num">_04</div>
         <div>
           <div class="proj-head">
-            <h3>EchoMind</h3>
-            <span class="badge">1st Place — Team Echo</span>
-            <span class="badge alt">Document AI</span>
+            <h3>Content Lab</h3>
+            <span class="badge">Demo build</span>
+            <span class="badge alt">Content pipeline</span>
           </div>
-          <p class="proj-meta">Full-Stack Developer · October 2025</p>
+          <p class="proj-meta">AI workflow · September 2026</p>
+          <p class="proj-pitch">Turns a topic or URL into a source-checked article, then adapts it for LinkedIn, X and a newsletter. Nothing moves forward until an approver signs off.</p>
           <ul>
-            <li>Built at the same October 2025 hackathon as EchoPay — <strong>Team Echo's single 1st-place finish</strong> covered both products, two shipped by one team in under 24 hours.</li>
-            <li>Voice-powered document chat app integrating <strong>OpenAI Whisper</strong> for transcription, with a custom <code>useWhisperVoice</code> hook managing live audio streams.</li>
-            <li>JWT-based authentication with protected routes and persistent sessions across the app.</li>
+            <li>Researches with <strong>Firecrawl</strong> and <strong>Claude's web search</strong>. It refuses to draft from fewer than 2 usable sources and checks the draft <strong>claim by claim</strong> against them.</li>
+            <li>Drafts two angles, scores each against 8 criteria and revises up to twice. Rule checks flag any X post over 280 characters.</li>
+            <li>Creator and approver roles, a server-enforced review queue, per-request cost estimates and an activity log. Approved newsletters are emailed to subscribers; LinkedIn and X drafts are approved in the queue, not posted automatically.</li>
           </ul>
           <div class="tags">
-            <span class="tag">React</span><span class="tag">Django</span>
-            <span class="tag">OpenAI Whisper</span><span class="tag">JWT Auth</span>
+            <span class="tag">Claude API</span><span class="tag">Web search</span><span class="tag">Firecrawl</span><span class="tag">Next.js</span><span class="tag">Supabase</span><span class="tag">Tailwind</span>
+          </div>
+          <div class="proj-links">
+            <a class="btn btn-ghost" href="https://github.com/teembama/aat-c3-week-4-content-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Content Lab (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
           </div>
         </div>
+        <div class="proj-media" data-title="Content Lab" data-tags="Claude · Web search · Firecrawl" aria-hidden="true"></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-num">_05</div>
+        <div>
+          <div class="proj-head">
+            <h3>Proposal Studio</h3>
+            <span class="badge">Demo build</span>
+            <span class="badge alt">Document AI</span>
+          </div>
+          <p class="proj-meta">AI workflow · September 2026</p>
+          <p class="proj-pitch">Turns discovery-call notes or a transcript into a six-section client proposal that a second person must approve before it can be emailed.</p>
+          <ul>
+            <li>Claude can pre-fill the intake form from a pasted transcript. Generated sections are parsed and validated before anything is saved.</li>
+            <li>A status lifecycle (draft → pending approval → approved → sent) is <strong>checked on the server</strong> for approve, send and PDF, and the approver can't be the proposal's author.</li>
+            <li>A shared cap of 3 AI regenerations per proposal keeps cost bounded. Email goes through Resend, and approval requests ping Discord.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Claude API</span><span class="tag">Next.js</span><span class="tag">Supabase</span><span class="tag">Resend</span><span class="tag">TypeScript</span>
+          </div>
+          <div class="proj-links">
+            <a class="btn btn-ghost" href="https://github.com/teembama/therese-week3-proposal-app" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Proposal Studio (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="proj-media" data-title="Proposal Studio" data-tags="Claude · Supabase · Resend" aria-hidden="true"></div>
+      </article>
+
+      <article class="proj reveal">
+        <div class="proj-num">_06</div>
+        <div>
+          <div class="proj-head">
+            <h3>Ops Reporting Dashboard</h3>
+            <span class="badge">Case study</span>
+            <span class="badge alt">Workflow automation</span>
+          </div>
+          <p class="proj-meta">n8n workflow · September 2026</p>
+          <p class="proj-pitch">An n8n pipeline that pulls Sales, Delivery and People data from three systems, computes the metrics in code, and has Claude write the commentary.</p>
+          <ul>
+            <li><strong>Problem:</strong> one report, for any period, across Sales, Delivery and People data held in Google Sheets, Airtable and an internal API.</li>
+            <li><strong>How it works:</strong> the dashboard triggers an <strong>n8n</strong> workflow that pulls all three sources, calculates the metrics deterministically, sends a summary to <strong>Claude</strong> for commentary, and stores the report in Supabase. The page polls and renders it.</li>
+            <li><strong>Design decisions:</strong> the numbers never come from the model. If one source is down, the report still renders with those metrics labelled <strong>“unknown, not zero”</strong>. If the AI step fails, a banner says the metrics are unaffected. Stored reports are reused unless a recalculation is forced.</li>
+            <li><strong>Outcome:</strong> a one-page report with 23 metrics, AI commentary and data-quality warnings for any chosen period.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">Claude</span><span class="tag">Supabase</span><span class="tag">JavaScript</span>
+          </div>
+          <div class="proj-links">
+            <a class="btn btn-ghost" href="https://github.com/teembama/therese-week2-ops-reporting" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Ops Reporting Dashboard (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="proj-media" data-title="Ops Reporting Dashboard" data-tags="n8n · Claude · Supabase" aria-hidden="true"></div>
       </article>
 
     </div>
@@ -501,7 +568,7 @@
 </div>
 
 <div class="preview" id="preview" aria-hidden="true">
-  <div class="ph"><b id="phLabel"></b><small>image coming soon</small></div>
+  <div class="ph"><b id="phLabel"></b><small id="phTags"></small></div>
   <img id="phImg" alt="" />
 </div>
 

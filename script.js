@@ -344,8 +344,13 @@
     var box = document.getElementById('preview');
     var img = document.getElementById('phImg');
     var label = document.getElementById('phLabel');
+    var tags = document.getElementById('phTags');
     if(!box) return;
     if(window.matchMedia('(hover: none)').matches) return;
+    // The preview stands in for the in-card media only where CSS hides that
+    // (a fine pointer that can hover, above 900px). Checked on every hover so
+    // a resize across 900px is honoured.
+    var previewMQ = window.matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
 
     var tx = 0, ty = 0, cx = 0, cy = 0, active = false, raf = null;
 
@@ -357,15 +362,19 @@
       raf = requestAnimationFrame(loop);
     }
 
-    // Only cards with an actual image bind the preview. Without the guard every
-    // .proj bound it, so an image-less card raised the box on just the gradient
-    // placeholder.
-    document.querySelectorAll('.proj[data-img]').forEach(function(card){
+    // Each card's .proj-media is the single source: its data-title and
+    // data-tags fill the placeholder, and once it is an <img> its src fills
+    // the preview image.
+    document.querySelectorAll('.proj').forEach(function(card){
+      var media = card.querySelector('.proj-media');
+      if(!media) return;
       card.addEventListener('mouseenter', function(e){
-        label.textContent = card.dataset.label || '';
+        if(!previewMQ.matches) return;
+        label.textContent = media.dataset.title || '';
+        if(tags) tags.textContent = media.dataset.tags || '';
         img.removeAttribute('src');
         img.style.display = 'none';
-        var src = card.dataset.img;
+        var src = media.tagName === 'IMG' ? (media.currentSrc || media.src) : '';
         if(src){
           img.onload  = function(){ img.style.display = 'block'; };
           img.onerror = function(){ img.style.display = 'none'; };
@@ -402,8 +411,8 @@
     // cannot trigger.
     function prewarm(){
       try{
-        document.querySelectorAll('.proj[data-img]').forEach(function(card){
-          var src = card.dataset.img;
+        document.querySelectorAll('.proj img.proj-media').forEach(function(media){
+          var src = media.currentSrc || media.src;
           if(!src) return;
           var warm = new Image();
           warm.onerror = function(){};   // a failed warm is silent; hover retries
