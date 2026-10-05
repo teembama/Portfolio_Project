@@ -444,36 +444,64 @@ const errorView    = document.getElementById('errorView');
 const successDismiss = document.getElementById('successDismiss');
 const errorDismiss   = document.getElementById('errorDismiss');
 
-function showView(which) {
+const shell = document.querySelector('.shell');
+let lastFocus = null;
+
+// Where focus lands when each view appears. The form's buttons vanish with the
+// form, so without a target focus drops to <body> on success or error.
+const viewFocus = { form: 'name', success: 'successDismiss', error: 'errorDismiss' };
+
+function showView(which, moveFocus) {
   if (!formView) return;
   formView.style.display    = which === 'form'    ? 'block' : 'none';
   successView.style.display = which === 'success' ? 'block' : 'none';
   errorView.style.display   = which === 'error'   ? 'block' : 'none';
+  if (moveFocus) {
+    const target = document.getElementById(viewFocus[which]);
+    if (target) target.focus();
+  }
 }
 function openModal() {
   if (!emailModal) return;
+  lastFocus = document.activeElement;
   emailModal.classList.add('active');
   emailModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  showView('form');
+  // The page behind the scrim can't take focus or clicks while the form is open.
+  if (shell) shell.inert = true;
+  showView('form', true);
 }
 function closeModal() {
   if (!emailModal) return;
   emailModal.classList.remove('active');
   emailModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (shell) shell.inert = false;
   if (contactForm) contactForm.reset();
   if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
   showView('form');
+  // Back to whatever opened it, so keyboard users keep their place.
+  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  lastFocus = null;
 }
 if (openModalBtn) openModalBtn.addEventListener('click', openModal);
 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
 if (successDismiss) successDismiss.addEventListener('click', closeModal);
-if (errorDismiss) errorDismiss.addEventListener('click', () => showView('form'));
+if (errorDismiss) errorDismiss.addEventListener('click', () => showView('form', true));
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && emailModal && emailModal.classList.contains('active')) closeModal();
+  if (!emailModal || !emailModal.classList.contains('active')) return;
+  if (e.key === 'Escape') { closeModal(); return; }
+  if (e.key !== 'Tab') return;
+  // inert keeps focus off the page; this wraps it at the dialog's edges
+  // rather than letting it leave for the browser UI.
+  const items = Array.from(emailModal.querySelectorAll('button, input, textarea, a[href]'))
+    .filter((el) => !el.disabled && el.offsetParent !== null);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
 
 if (contactForm) {
@@ -488,10 +516,10 @@ if (contactForm) {
         body: new FormData(contactForm),
         headers: { 'Accept': 'application/json' }
       });
-      if (res.ok) showView('success');
-      else showView('error');
+      if (res.ok) showView('success', true);
+      else showView('error', true);
     } catch (err) {
-      showView('error');
+      showView('error', true);
     } finally {
       sendBtn.disabled = false;
       sendBtn.textContent = 'Send Message';
