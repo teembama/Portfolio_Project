@@ -431,6 +431,9 @@
     else window.addEventListener('load', schedulePrewarm);
   })();
 
+  // ─── THERESE.TS LIVE TERMINAL (terminal.js, frames in terminal-frames.js) ───
+  if(window.ThereseTerminal) window.ThereseTerminal.init(document.querySelector('.code-card'));
+
   // ─── ACTIVE NAV LINK ───
   var sections = ['about','skills','projects','experience','contact']
     .map(function(id){ return document.getElementById(id); })

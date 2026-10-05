@@ -333,6 +333,14 @@ section{padding-block:var(--sect); position:relative;}
 .p{color:var(--code-key);}
 .s{color:var(--code-string);}
 .c{color:var(--code-comment); font-style:italic;}
+/* The live terminal's cursor (terminal.js). 1ch wide, so it fills exactly the
+   38th cell the frame budget leaves free; key-coloured. The global
+   reduced-motion rule stops the blink, and in that mode no cursor is drawn. */
+.code-card .tcur{
+  display:inline-block; width:1ch; height:1.2em; margin-bottom:-.25em;
+  background:var(--code-key); animation:tblink 1.05s steps(1) infinite;
+}
+@keyframes tblink{50%{opacity:0;}}
 
 /* ============================================================
    STACK + GLOBE
