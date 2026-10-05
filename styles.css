@@ -452,7 +452,7 @@ section{padding-block:var(--sect); position:relative;}
    the preview shows it on hover everywhere else. Swapping the placeholder div
    for an <img class="proj-media" ...> is the whole change for a screenshot. */
 .proj-media{
-  display:none; position:relative; width:100%; aspect-ratio:16/10; margin:0;
+  display:none; position:relative; width:100%; height:auto; aspect-ratio:16/10; margin:0;
   border-radius:13px; overflow:hidden; border:1px solid var(--border-strong);
   object-fit:cover;
 }

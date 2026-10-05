@@ -366,10 +366,9 @@
     // data-tags fill the placeholder, and once it is an <img> its src fills
     // the preview image.
     document.querySelectorAll('.proj').forEach(function(card){
-      var media = card.querySelector('.proj-media');
-      if(!media) return;
       card.addEventListener('mouseenter', function(e){
-        if(!previewMQ.matches) return;
+        var media = card.querySelector('.proj-media');   // looked up per hover, so a swapped-in <img> is picked up
+        if(!media || !previewMQ.matches) return;
         label.textContent = media.dataset.title || '';
         if(tags) tags.textContent = media.dataset.tags || '';
         img.removeAttribute('src');
