@@ -208,8 +208,13 @@
       return [x2, y2, z3];
     }
 
+    // The loop only runs while the canvas is on screen: off-screen it used to
+    // redraw at 60fps for nothing. The observer restarts it on the way back.
+    var raf = null, onScreen = true;
     function draw() {
-      if (!measured || !pts) { requestAnimationFrame(draw); return; }
+      raf = null;
+      if (!onScreen) return;
+      if (!measured || !pts) { raf = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, W, H);
 
       // sphere outline
@@ -273,7 +278,13 @@
         rotX += velX;
         velX *= 0.98;
       }
-      requestAnimationFrame(draw);
+      raf = requestAnimationFrame(draw);
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        if (onScreen && !raf) raf = requestAnimationFrame(draw);
+      }).observe(canvas);
     }
     draw();
 
