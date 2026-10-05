@@ -352,6 +352,15 @@ section{padding-block:var(--sect); position:relative;}
 }
 #globe-canvas.is-ready{opacity:1;}
 #globe-canvas:active{cursor:grabbing;}
+/* The skimmable list under the globe. The section centres the globe, so the
+   list opts back to left-aligned; fixed column counts keep the six groups in
+   full rows (auto-fit left a lone orphan cell at wide widths). */
+#skills .stack-grid{
+  text-align:left; margin-top:clamp(2.5rem,6vw,3.75rem);
+  grid-template-columns:repeat(3,1fr);
+}
+@media (max-width:1100px){ #skills .stack-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:640px){ #skills .stack-grid{grid-template-columns:1fr;} }
 .globe-hint{
   margin-top:.75rem; font-family:var(--mono); font-size:.64rem;
   letter-spacing:.16em; color:var(--text-muted); text-transform:lowercase;
@@ -366,9 +375,10 @@ section{padding-block:var(--sect); position:relative;}
 .stack-col:hover{background:var(--bg-card-alt);}
 .stack-col h3{
   font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--accent-ink); margin:0 0 1.3rem; font-weight:500;
+  /* on a card, so the card-safe accent tint (see the token notes up top) */
+  color:var(--accent-alt-soft); margin:0 0 1.3rem; font-weight:500;
 }
-.chips{display:flex; flex-wrap:wrap; gap:.5rem;}
+.chips{display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; margin:0; padding:0;}
 .chip{
   font-family:var(--mono); font-size:.74rem; color:var(--text-soft);
   border:1px solid var(--border); border-radius:7px; padding:.36rem .7rem;

@@ -118,18 +118,19 @@
     // trimmed list. Point count is derived from the array, so swapping sets
     // is just a re-run of fibSphere().
     var SKILLS_FULL = [
-      'Python', 'TypeScript', 'JavaScript', 'React', 'React Native',
-      'Django', 'DRF', 'FastAPI', 'Node.js', 'Expo',
-      'PostgreSQL', 'Supabase', 'SQL', 'Docker', 'Git',
-      'Figma', 'VS Code', 'Jupyter', 'React Query', 'JWT',
-      'REST APIs', 'Auth & AuthZ', 'Schema Design', 'OOP', 'Systems Design',
-      'C++', 'Rust', 'HTML/CSS', 'XGBoost', 'Whisper'
+      'Claude', 'Agent SDK', 'MCP', 'n8n', 'Python',
+      'TypeScript', 'JavaScript', 'Node.js', 'React', 'React Native',
+      'Next.js', 'Expo', 'Django', 'DRF', 'FastAPI',
+      'Streamlit', 'Supabase', 'PostgreSQL', 'SQL', 'Docker',
+      'Git', 'Vercel', 'Railway', 'Firecrawl', 'Apify',
+      'Vapi', 'Zod', 'Tailwind', 'React Query', 'REST APIs',
+      'JWT', 'XGBoost', 'Whisper', 'Figma'
     ];
     var SKILLS_SM = [
-      'Python', 'TypeScript', 'React', 'React Native', 'Django',
-      'DRF', 'FastAPI', 'Node.js', 'PostgreSQL', 'Supabase',
-      'Docker', 'Git', 'Figma', 'SQL', 'REST APIs',
-      'JWT', 'C++', 'Rust'
+      'Claude', 'Agent SDK', 'MCP', 'n8n', 'Python',
+      'TypeScript', 'React Native', 'Next.js', 'Django', 'FastAPI',
+      'Supabase', 'PostgreSQL', 'Docker', 'Git', 'Vercel',
+      'Firecrawl', 'Vapi', 'REST APIs'
     ];
     var skills = SKILLS_FULL, pts = null, baseFont = 10;
 
