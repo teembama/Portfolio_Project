@@ -710,9 +710,14 @@ section{padding-block:var(--sect); position:relative;}
     background:var(--panel-bg); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
     flex-direction:column; align-items:flex-start; gap:1.5rem;
     border-bottom:1px solid var(--border);
-    transform:translateY(-105%); transition:transform .38s cubic-bezier(.2,.7,.3,1);
+    transform:translateY(-105%);
+    /* Off-screen is not hidden: without this the closed panel's links stayed
+       in the tab order. visibility flips only after the slide-up ends, so the
+       close still animates, and flips back at once when the menu opens. */
+    visibility:hidden;
+    transition:transform .38s cubic-bezier(.2,.7,.3,1), visibility 0s linear .38s;
   }
-  .nav-links.open{transform:translateY(0);}
+  .nav-links.open{transform:translateY(0); visibility:visible; transition-delay:0s;}
   .nav-links a{
     font-size:1.15rem; min-height:44px;
     display:flex; align-items:center; width:100%;
