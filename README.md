@@ -53,6 +53,16 @@ Replace that line with the image, keeping the class and the data attributes:
 
 The card and the desktop hover preview both pick it up.
 
+### Adding a demo video
+
+A card's demo video sits on the same element as its picture, as `data-demo`. Set it to the video's share link (for Google Drive, shared as "Anyone with the link") and a **Demo ↗** link appears beside the card's other links:
+
+```html
+<div class="proj-media" data-title="Lead Triage System" data-demo="https://drive.google.com/file/d/…/view" data-tags="…" aria-hidden="true"></div>
+```
+
+Keep `data-demo` when swapping the placeholder for a screenshot.
+
 ## Deploy
 
 Vercel builds production from `main`; other branches get preview deployments. GitHub Pages also serves `main`, and the canonical tag points search engines at the Vercel URL.

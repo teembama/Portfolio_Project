@@ -430,6 +430,26 @@
     else window.addEventListener('load', schedulePrewarm);
   })();
 
+  // ─── PROJECT DEMO LINKS ───
+  // A card's demo video lives with its picture, as data-demo on its
+  // .proj-media, and gets a "Demo ↗" pill between Live and GitHub. An empty
+  // data-demo (a video still to come) adds nothing. Drive's player isn't
+  // embedded: it opens in a new tab like the other links.
+  document.querySelectorAll('.proj').forEach(function(card){
+    var media = card.querySelector('.proj-media');
+    var row = card.querySelector('.proj-links');
+    var url = media && media.getAttribute('data-demo');
+    if(!url || !row) return;
+    var a = document.createElement('a');
+    a.className = 'btn btn-ghost';
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.setAttribute('aria-label', 'Watch the ' + (media.getAttribute('data-title') || 'project') + ' demo (opens in a new tab)');
+    a.innerHTML = 'Demo&nbsp;<span aria-hidden="true">↗</span>';
+    row.insertBefore(a, row.querySelector('a[href*="github.com"]'));
+  });
+
   // ─── THERESE.TS LIVE TERMINAL (terminal.js, frames in terminal-frames.js) ───
   if(window.ThereseTerminal) window.ThereseTerminal.init(document.querySelector('.code-card'));
 
