@@ -8,7 +8,7 @@ Personal site for Therese Mbama, an AI automation and full-stack engineer in Lag
 
 - About, with a `therese.ts` card that types a rotating set of short facts
 - The stack: a drag-to-spin globe and a skimmable grouped list
-- Selected projects: AI agents and automation builds, each with tools and links
+- Selected projects: recent AI agent and automation builds with tools, demo videos and links, then earlier work (thesis, hackathon and full-stack projects)
 - Experience, education and campus roles
 - Contact: email form (Formspree), LinkedIn, GitHub, WhatsApp
 
@@ -52,6 +52,10 @@ Replace that line with the image, keeping the class and the data attributes:
 ```
 
 The card and the desktop hover preview both pick it up.
+
+### Adding a demo video
+
+Demo videos are plain links in each card's link row, between Live and GitHub. Lead Triage System has a ready-made one commented out in its link row: replace `VIDEO_LINK` with the video's share link (for Google Drive, shared as "Anyone with the link") and remove the comment markers around the link.
 
 ## Deploy
 

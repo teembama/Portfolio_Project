@@ -484,6 +484,12 @@ div.proj-media::after{
   .proj-media{order:-1;}
 }
 
+/* The earlier cards (_07 onwards) keep the same card, with bullets one step
+   down the existing text scale (--text-muted, AA on the card) so the newer
+   work reads first. */
+.proj-earlier ul{color:var(--text-muted);}
+.proj-earlier li strong{color:var(--text-soft);}
+
 /* cursor-following project preview */
 .preview{
   position:fixed; top:0; left:0; z-index:55; pointer-events:none;
