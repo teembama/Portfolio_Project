@@ -8,7 +8,7 @@ Personal site for Therese Mbama, an AI automation and full-stack engineer in Lag
 
 - About, with a `therese.ts` card that types a rotating set of short facts
 - The stack: a drag-to-spin globe and a skimmable grouped list
-- Selected projects: AI agents and automation builds, each with tools and links
+- Selected projects: recent AI agent and automation builds with tools and links, then earlier work (thesis, hackathon and full-stack projects) below an "earlier work" label
 - Experience, education and campus roles
 - Contact: email form (Formspree), LinkedIn, GitHub, WhatsApp
 

@@ -484,6 +484,14 @@ div.proj-media::after{
   .proj-media{order:-1;}
 }
 
+/* "// earlier work" divides the current builds from the older ones; it is the
+   section eyebrow, with room above so it reads as a break in the list. The
+   older cards keep the same card, with bullets one step down the existing
+   text scale (--text-muted, AA on the card) so the newer work reads first. */
+.projects > .proj-group{margin:1.85rem 0 0;}
+.proj-earlier ul{color:var(--text-muted);}
+.proj-earlier li strong{color:var(--text-soft);}
+
 /* cursor-following project preview */
 .preview{
   position:fixed; top:0; left:0; z-index:55; pointer-events:none;
