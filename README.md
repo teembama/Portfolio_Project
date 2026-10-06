@@ -8,7 +8,7 @@ Personal site for Therese Mbama, an AI automation and full-stack engineer in Lag
 
 - About, with a `therese.ts` card that types a rotating set of short facts
 - The stack: a drag-to-spin globe and a skimmable grouped list
-- Selected projects: recent AI agent and automation builds with tools and links, then earlier work (thesis, hackathon and full-stack projects) below an "earlier work" label
+- Selected projects: recent AI agent and automation builds with tools, demo videos and links, then earlier work (thesis, hackathon and full-stack projects)
 - Experience, education and campus roles
 - Contact: email form (Formspree), LinkedIn, GitHub, WhatsApp
 
@@ -55,13 +55,7 @@ The card and the desktop hover preview both pick it up.
 
 ### Adding a demo video
 
-A card's demo video sits on the same element as its picture, as `data-demo`. Set it to the video's share link (for Google Drive, shared as "Anyone with the link") and a **Demo ↗** link appears beside the card's other links:
-
-```html
-<div class="proj-media" data-title="Lead Triage System" data-demo="https://drive.google.com/file/d/…/view" data-tags="…" aria-hidden="true"></div>
-```
-
-Keep `data-demo` when swapping the placeholder for a screenshot.
+Demo videos are plain links in each card's link row, between Live and GitHub. Lead Triage System has a ready-made one commented out in its link row: replace `VIDEO_LINK` with the video's share link (for Google Drive, shared as "Anyone with the link") and remove the comment markers around the link.
 
 ## Deploy
 
