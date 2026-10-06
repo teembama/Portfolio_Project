@@ -1,106 +1,58 @@
-# Personal Portfolio Website
+# Therese Chimbusonma Mbama — portfolio
 
-**Student Name:** Therese Mbama  
-**Matric Number:** 22120613013  
-**Course:** Web Development / Frontend Development  
-**Project Type:** Individual Assignment
+Personal site for Therese Mbama, an AI automation and full-stack engineer in Lagos, Nigeria.
 
----
+**Live:** https://portfolio-project-brown-two.vercel.app
 
-## Live Demo
+## What's on it
 
-**Live URL:** [Portfolio Website](https://github.com/teembama/Portfolio_Project.git
-)  
-**GitHub Repository:** [View Source Code](https://github.com/teembama/Portfolio_Project.git)
+- About, with a `therese.ts` card that types a rotating set of short facts
+- The stack: a drag-to-spin globe and a skimmable grouped list
+- Selected projects: AI agents and automation builds, each with tools and links
+- Experience, education and campus roles
+- Contact: email form (Formspree), LinkedIn, GitHub, WhatsApp
 
----
+## Stack
 
-## Project Overview
+Plain HTML, CSS and JavaScript. There's no framework, package manager or build step, and the only external services are Google Fonts and Formspree.
 
-This is a fully responsive, production-ready personal portfolio website showcasing my work as a UI/UX Designer and Front-end Developer. The project demonstrates proficiency in web development fundamentals, responsive design, and modern deployment practices.
+## Run it locally
 
----
+Any static server works, for example:
 
-## Features
-
-- **Fully Responsive Design** - Works seamlessly on mobile, tablet, and desktop
-- **Light/Dark Theme Toggle** - User preference saved in local storage
-- **Multi-page Navigation** - Clean routing between home and project detail pages
-- **Dedicated Project Page** - Complete case study for Bloom project
-- **Modern UI/UX** - Clean, professional interface with smooth animations
-- **Semantic HTML** - Proper use of HTML5 semantic tags
-- **Accessible** - Built with accessibility best practices
-- **Fast Loading** - Optimized for performance
-
----
-
-## Assignment Requirements Met
-
-###  Required Sections
-
-1. **About Me Section**
-   - Clear introduction
-   - Technical focus and interests
-   - Skills and expertise
-
-2. **Projects Section**
-   - 3 featured projects
-   - Screenshots/placeholders
-   - Tech stack for each
-   - Live demo links
-
-3. **Dedicated Project Details Page**
-   - Full description of Bloom project
-   - Problem statement
-   - Solution and features
-   - Technologies used
-   - Design process
-   - Challenges and learnings
-   - Results and impact
-
-4. **Call to Action**
-   - Multiple contact methods (Email, WhatsApp, LinkedIn)
-   - Clear "Get In Touch" buttons
-   - Contact information display
-
-### Technical Requirements
-
-- **Responsiveness:** Tested on mobile, tablet, and desktop
-- **Deployment:** Deployed to Vercel/Netlify
-- **Clean Code:** Semantic HTML5, organized CSS, modular JavaScript
-- **Originality:** Custom design with unique color scheme and typography
-
----
-
-## Technologies Used
-
-### Frontend
-- HTML5 (Semantic markup)
-- CSS3 (Custom properties, Flexbox, Grid)
-- JavaScript (ES6+)
-
-### Design
-- Custom wine and cream color scheme
-- Crimson Pro (Display font)
-- Outfit (Body font)
-- Responsive typography with clamp()
-
-### Tools
-- Git & GitHub for version control
-- VS Code for development
-- Vercel/Netlify for deployment
-
----
-
-## Project Structure
-
-```
-portfolio-project/
-├── index.html              # Main homepage
-├── bloom-project.html      # Dedicated project detail page
-├── styles.csss              # All styling (mobile-first responsive)
-├── script.js               # Interactive features
-└── README.md               # This file
+```sh
+python3 -m http.server 8000
 ```
 
----
+Then open http://localhost:8000.
+
+## Where things live
+
+| File | What it holds |
+|---|---|
+| `index.html` | All page content |
+| `styles.css` | All styling. Colours are tokens in the `:root` block at the top |
+| `script.js` | Nav, scroll reveal, skills globe, project hover preview, contact form |
+| `terminal.js` | The `therese.ts` typing engine |
+| `terminal-frames.js` | The text of terminal frames 2–8. Frame 1 is the static markup in `index.html`. Keep lines to 37 characters or fewer and frames to 14 lines or fewer, so the card never scrolls or changes height |
+| `og-image.jpg`, `robots.txt`, `sitemap.xml` | Link previews and search |
+
+### Adding a project screenshot
+
+Each project card ends with a placeholder:
+
+```html
+<div class="proj-media" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl" aria-hidden="true"></div>
+```
+
+Replace that line with the image, keeping the class and the data attributes:
+
+```html
+<img class="proj-media" src="assets/projects/lead-studio.webp" alt="…" width="1440" height="900" loading="lazy" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl">
+```
+
+The card and the desktop hover preview both pick it up.
+
+## Deploy
+
+Vercel builds production from `main`; other branches get preview deployments. GitHub Pages also serves `main`, and the canonical tag points search engines at the Vercel URL.

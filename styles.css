@@ -333,6 +333,14 @@ section{padding-block:var(--sect); position:relative;}
 .p{color:var(--code-key);}
 .s{color:var(--code-string);}
 .c{color:var(--code-comment); font-style:italic;}
+/* The live terminal's cursor (terminal.js). 1ch wide, so it fills exactly the
+   38th cell the frame budget leaves free; key-coloured. The global
+   reduced-motion rule stops the blink, and in that mode no cursor is drawn. */
+.code-card .tcur{
+  display:inline-block; width:1ch; height:1.2em; margin-bottom:-.25em;
+  background:var(--code-key); animation:tblink 1.05s steps(1) infinite;
+}
+@keyframes tblink{50%{opacity:0;}}
 
 /* ============================================================
    STACK + GLOBE
@@ -352,6 +360,15 @@ section{padding-block:var(--sect); position:relative;}
 }
 #globe-canvas.is-ready{opacity:1;}
 #globe-canvas:active{cursor:grabbing;}
+/* The skimmable list under the globe. The section centres the globe, so the
+   list opts back to left-aligned; fixed column counts keep the six groups in
+   full rows (auto-fit left a lone orphan cell at wide widths). */
+#skills .stack-grid{
+  text-align:left; margin-top:clamp(2.5rem,6vw,3.75rem);
+  grid-template-columns:repeat(3,1fr);
+}
+@media (max-width:1100px){ #skills .stack-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:640px){ #skills .stack-grid{grid-template-columns:1fr;} }
 .globe-hint{
   margin-top:.75rem; font-family:var(--mono); font-size:.64rem;
   letter-spacing:.16em; color:var(--text-muted); text-transform:lowercase;
@@ -366,9 +383,10 @@ section{padding-block:var(--sect); position:relative;}
 .stack-col:hover{background:var(--bg-card-alt);}
 .stack-col h3{
   font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--accent-ink); margin:0 0 1.3rem; font-weight:500;
+  /* on a card, so the card-safe accent tint (see the token notes up top) */
+  color:var(--accent-alt-soft); margin:0 0 1.3rem; font-weight:500;
 }
-.chips{display:flex; flex-wrap:wrap; gap:.5rem;}
+.chips{display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; margin:0; padding:0;}
 .chip{
   font-family:var(--mono); font-size:.74rem; color:var(--text-soft);
   border:1px solid var(--border); border-radius:7px; padding:.36rem .7rem;
@@ -420,6 +438,50 @@ section{padding-block:var(--sect); position:relative;}
 .tag{
   font-family:var(--mono); font-size:.68rem; color:var(--text-muted);
   border:1px solid var(--border); border-radius:6px; padding:.28rem .58rem;
+}
+
+/* .proj-pitch and .proj-links reuse the card's bullet text and the contact
+   section's ghost buttons; only spacing is new. */
+.proj-pitch{margin:0 0 1rem; color:var(--text-soft); font-size:.97rem; max-width:52rem;}
+.proj-links{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.35rem;}
+
+/* Project media: a screenshot (<img class="proj-media">) or, until there is
+   one, a placeholder drawn from its data-title / data-tags with the hover
+   preview's recipe below. That element is the one source for both: the card
+   shows it where the cursor preview can't (touch, and 900px and below), and
+   the preview shows it on hover everywhere else. Swapping the placeholder div
+   for an <img class="proj-media" ...> is the whole change for a screenshot. */
+.proj-media{
+  display:none; position:relative; width:100%; height:auto; aspect-ratio:16/10; margin:0;
+  border-radius:13px; overflow:hidden; border:1px solid var(--border-strong);
+  object-fit:cover;
+}
+div.proj-media{
+  place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
+  background:
+    radial-gradient(18rem 12rem at 20% 12%, var(--wash), transparent 70%),
+    linear-gradient(140deg, var(--accent-deep) 0%, var(--bg-card-alt) 52%, var(--alt-wash) 100%);
+}
+div.proj-media::before{
+  content:attr(data-title);
+  font-family:var(--display); font-weight:600; font-size:.95rem;
+  letter-spacing:-.02em; color:var(--text);
+}
+div.proj-media::after{
+  content:attr(data-tags);
+  font-family:var(--mono); font-size:.6rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent-alt-soft);
+}
+@media (max-width:900px), (hover:none), (pointer:coarse){
+  div.proj-media{display:grid;}
+  img.proj-media{display:block;}
+}
+/* touch screens wider than 900px: media gets its own column */
+@media (min-width:901px) and (hover:none), (min-width:901px) and (pointer:coarse){
+  .proj{grid-template-columns:auto 1fr minmax(220px,34%);}
+}
+@media (max-width:900px){
+  .proj-media{order:-1;}
 }
 
 /* cursor-following project preview */
@@ -637,7 +699,8 @@ section{padding-block:var(--sect); position:relative;}
   .about-grid{grid-template-columns:1fr;}
   .code-card{position:static;}
 }
-@media (hover:none), (max-width:760px){
+/* the exact complement of where .proj-media shows in the card */
+@media (max-width:900px), (hover:none), (pointer:coarse){
   .preview{display:none;}
 }
 
@@ -710,9 +773,14 @@ section{padding-block:var(--sect); position:relative;}
     background:var(--panel-bg); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
     flex-direction:column; align-items:flex-start; gap:1.5rem;
     border-bottom:1px solid var(--border);
-    transform:translateY(-105%); transition:transform .38s cubic-bezier(.2,.7,.3,1);
+    transform:translateY(-105%);
+    /* Off-screen is not hidden: without this the closed panel's links stayed
+       in the tab order. visibility flips only after the slide-up ends, so the
+       close still animates, and flips back at once when the menu opens. */
+    visibility:hidden;
+    transition:transform .38s cubic-bezier(.2,.7,.3,1), visibility 0s linear .38s;
   }
-  .nav-links.open{transform:translateY(0);}
+  .nav-links.open{transform:translateY(0); visibility:visible; transition-delay:0s;}
   .nav-links a{
     font-size:1.15rem; min-height:44px;
     display:flex; align-items:center; width:100%;

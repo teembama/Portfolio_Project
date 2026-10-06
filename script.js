@@ -118,18 +118,19 @@
     // trimmed list. Point count is derived from the array, so swapping sets
     // is just a re-run of fibSphere().
     var SKILLS_FULL = [
-      'Python', 'TypeScript', 'JavaScript', 'React', 'React Native',
-      'Django', 'DRF', 'FastAPI', 'Node.js', 'Expo',
-      'PostgreSQL', 'Supabase', 'SQL', 'Docker', 'Git',
-      'Figma', 'VS Code', 'Jupyter', 'React Query', 'JWT',
-      'REST APIs', 'Auth & AuthZ', 'Schema Design', 'OOP', 'Systems Design',
-      'C++', 'Rust', 'HTML/CSS', 'XGBoost', 'Whisper'
+      'Claude', 'Agent SDK', 'MCP', 'n8n', 'Python',
+      'TypeScript', 'JavaScript', 'Node.js', 'React', 'React Native',
+      'Next.js', 'Expo', 'Django', 'DRF', 'FastAPI',
+      'Streamlit', 'Supabase', 'PostgreSQL', 'SQL', 'Docker',
+      'Git', 'Vercel', 'Railway', 'Firecrawl', 'Apify',
+      'Vapi', 'Zod', 'Tailwind', 'React Query', 'REST APIs',
+      'JWT', 'XGBoost', 'Whisper', 'Figma'
     ];
     var SKILLS_SM = [
-      'Python', 'TypeScript', 'React', 'React Native', 'Django',
-      'DRF', 'FastAPI', 'Node.js', 'PostgreSQL', 'Supabase',
-      'Docker', 'Git', 'Figma', 'SQL', 'REST APIs',
-      'JWT', 'C++', 'Rust'
+      'Claude', 'Agent SDK', 'MCP', 'n8n', 'Python',
+      'TypeScript', 'React Native', 'Next.js', 'Django', 'FastAPI',
+      'Supabase', 'PostgreSQL', 'Docker', 'Git', 'Vercel',
+      'Firecrawl', 'Vapi', 'REST APIs'
     ];
     var skills = SKILLS_FULL, pts = null, baseFont = 10;
 
@@ -208,8 +209,13 @@
       return [x2, y2, z3];
     }
 
+    // The loop only runs while the canvas is on screen: off-screen it used to
+    // redraw at 60fps for nothing. The observer restarts it on the way back.
+    var raf = null, onScreen = true;
     function draw() {
-      if (!measured || !pts) { requestAnimationFrame(draw); return; }
+      raf = null;
+      if (!onScreen) return;
+      if (!measured || !pts) { raf = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, W, H);
 
       // sphere outline
@@ -273,7 +279,13 @@
         rotX += velX;
         velX *= 0.98;
       }
-      requestAnimationFrame(draw);
+      raf = requestAnimationFrame(draw);
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        if (onScreen && !raf) raf = requestAnimationFrame(draw);
+      }).observe(canvas);
     }
     draw();
 
@@ -332,8 +344,13 @@
     var box = document.getElementById('preview');
     var img = document.getElementById('phImg');
     var label = document.getElementById('phLabel');
+    var tags = document.getElementById('phTags');
     if(!box) return;
     if(window.matchMedia('(hover: none)').matches) return;
+    // The preview stands in for the in-card media only where CSS hides that
+    // (a fine pointer that can hover, above 900px). Checked on every hover so
+    // a resize across 900px is honoured.
+    var previewMQ = window.matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)');
 
     var tx = 0, ty = 0, cx = 0, cy = 0, active = false, raf = null;
 
@@ -345,15 +362,18 @@
       raf = requestAnimationFrame(loop);
     }
 
-    // Only cards with an actual image bind the preview. Without the guard every
-    // .proj bound it, so an image-less card raised the box on just the gradient
-    // placeholder.
-    document.querySelectorAll('.proj[data-img]').forEach(function(card){
+    // Each card's .proj-media is the single source: its data-title and
+    // data-tags fill the placeholder, and once it is an <img> its src fills
+    // the preview image.
+    document.querySelectorAll('.proj').forEach(function(card){
       card.addEventListener('mouseenter', function(e){
-        label.textContent = card.dataset.label || '';
+        var media = card.querySelector('.proj-media');   // looked up per hover, so a swapped-in <img> is picked up
+        if(!media || !previewMQ.matches) return;
+        label.textContent = media.dataset.title || '';
+        if(tags) tags.textContent = media.dataset.tags || '';
         img.removeAttribute('src');
         img.style.display = 'none';
-        var src = card.dataset.img;
+        var src = media.tagName === 'IMG' ? (media.currentSrc || media.src) : '';
         if(src){
           img.onload  = function(){ img.style.display = 'block'; };
           img.onerror = function(){ img.style.display = 'none'; };
@@ -390,8 +410,8 @@
     // cannot trigger.
     function prewarm(){
       try{
-        document.querySelectorAll('.proj[data-img]').forEach(function(card){
-          var src = card.dataset.img;
+        document.querySelectorAll('.proj img.proj-media').forEach(function(media){
+          var src = media.currentSrc || media.src;
           if(!src) return;
           var warm = new Image();
           warm.onerror = function(){};   // a failed warm is silent; hover retries
@@ -409,6 +429,9 @@
     if(document.readyState === 'complete') schedulePrewarm();
     else window.addEventListener('load', schedulePrewarm);
   })();
+
+  // ─── THERESE.TS LIVE TERMINAL (terminal.js, frames in terminal-frames.js) ───
+  if(window.ThereseTerminal) window.ThereseTerminal.init(document.querySelector('.code-card'));
 
   // ─── ACTIVE NAV LINK ───
   var sections = ['about','skills','projects','experience','contact']
@@ -444,36 +467,64 @@ const errorView    = document.getElementById('errorView');
 const successDismiss = document.getElementById('successDismiss');
 const errorDismiss   = document.getElementById('errorDismiss');
 
-function showView(which) {
+const shell = document.querySelector('.shell');
+let lastFocus = null;
+
+// Where focus lands when each view appears. The form's buttons vanish with the
+// form, so without a target focus drops to <body> on success or error.
+const viewFocus = { form: 'name', success: 'successDismiss', error: 'errorDismiss' };
+
+function showView(which, moveFocus) {
   if (!formView) return;
   formView.style.display    = which === 'form'    ? 'block' : 'none';
   successView.style.display = which === 'success' ? 'block' : 'none';
   errorView.style.display   = which === 'error'   ? 'block' : 'none';
+  if (moveFocus) {
+    const target = document.getElementById(viewFocus[which]);
+    if (target) target.focus();
+  }
 }
 function openModal() {
   if (!emailModal) return;
+  lastFocus = document.activeElement;
   emailModal.classList.add('active');
   emailModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  showView('form');
+  // The page behind the scrim can't take focus or clicks while the form is open.
+  if (shell) shell.inert = true;
+  showView('form', true);
 }
 function closeModal() {
   if (!emailModal) return;
   emailModal.classList.remove('active');
   emailModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  if (shell) shell.inert = false;
   if (contactForm) contactForm.reset();
   if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
   showView('form');
+  // Back to whatever opened it, so keyboard users keep their place.
+  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  lastFocus = null;
 }
 if (openModalBtn) openModalBtn.addEventListener('click', openModal);
 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
 if (successDismiss) successDismiss.addEventListener('click', closeModal);
-if (errorDismiss) errorDismiss.addEventListener('click', () => showView('form'));
+if (errorDismiss) errorDismiss.addEventListener('click', () => showView('form', true));
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && emailModal && emailModal.classList.contains('active')) closeModal();
+  if (!emailModal || !emailModal.classList.contains('active')) return;
+  if (e.key === 'Escape') { closeModal(); return; }
+  if (e.key !== 'Tab') return;
+  // inert keeps focus off the page; this wraps it at the dialog's edges
+  // rather than letting it leave for the browser UI.
+  const items = Array.from(emailModal.querySelectorAll('button, input, textarea, a[href]'))
+    .filter((el) => !el.disabled && el.offsetParent !== null);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
 
 if (contactForm) {
@@ -488,10 +539,10 @@ if (contactForm) {
         body: new FormData(contactForm),
         headers: { 'Accept': 'application/json' }
       });
-      if (res.ok) showView('success');
-      else showView('error');
+      if (res.ok) showView('success', true);
+      else showView('error', true);
     } catch (err) {
-      showView('error');
+      showView('error', true);
     } finally {
       sendBtn.disabled = false;
       sendBtn.textContent = 'Send Message';
