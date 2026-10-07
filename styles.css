@@ -474,14 +474,16 @@ button.btn{appearance:none; margin:0; background:none; color:inherit; line-heigh
    preview's recipe below. That element is the one source for both: the card
    shows it where the cursor preview can't (touch, and 900px and below), and
    the preview shows it on hover everywhere else. Swapping the placeholder div
-   for an <img class="proj-media" ...> is the whole change for a screenshot. */
+   for an <img class="proj-media" ...> is the whole change for a screenshot.
+   A screenshot shows whole, at its own shape (from its width/height
+   attributes); only the placeholder, which has no shape of its own, gets a
+   fixed 16:10 box. */
 .proj-media{
-  display:none; position:relative; width:100%; height:auto; aspect-ratio:16/10; margin:0;
+  display:none; position:relative; width:100%; height:auto; margin:0;
   border-radius:13px; overflow:hidden; border:1px solid var(--border-strong);
-  object-fit:cover;
 }
 div.proj-media{
-  place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
+  aspect-ratio:16/10; place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
   background:
     radial-gradient(18rem 12rem at 20% 12%, var(--wash), transparent 70%),
     linear-gradient(140deg, var(--accent-deep) 0%, var(--bg-card-alt) 52%, var(--alt-wash) 100%);
@@ -531,6 +533,11 @@ div.proj-media::after{
 }
 .preview.on{opacity:1; transform:translate(-50%,-50%) scale(1) rotate(-2.5deg);}
 .preview img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+/* Once a screenshot has loaded, the preview takes the image's own shape and
+   shows it whole; without one it keeps the 16:11 box for the placeholder. */
+.preview.has-img{aspect-ratio:auto;}
+.preview.has-img img{position:relative; inset:auto; height:auto;}
+.preview.has-img .ph{display:none;}
 .preview .ph{
   position:absolute; inset:0; display:grid; place-content:center; gap:.5rem;
   text-align:center; padding:1.1rem;

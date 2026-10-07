@@ -45,7 +45,7 @@ Cards without a screenshot end with a gradient placeholder:
 <div class="proj-media" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl" aria-hidden="true"></div>
 ```
 
-Replace that line with the image, keeping the class and the data attributes. Project images live at the repo root next to `index.html`; `width` and `height` are the file's real pixel size. Export at about 1400px wide, ideally 16:10, which is the card's frame: smaller images look soft on phones and in the lightbox, and wider ones lose their sides in the card.
+Replace that line with the image, keeping the class and the data attributes. Project images live at the repo root next to `index.html`; `width` and `height` are the file's real pixel size. The card and the hover preview show the image whole at its own shape, so any aspect ratio works. Export at about 1400px wide: smaller images look soft on phones and in the lightbox.
 
 ```html
 <img class="proj-media" src="lead-studio.png" alt="…" width="1400" height="875" loading="lazy" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl">

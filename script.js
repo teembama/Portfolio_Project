@@ -416,10 +416,11 @@
         if(tags) tags.textContent = media.dataset.tags || '';
         img.removeAttribute('src');
         img.style.display = 'none';
+        box.classList.remove('has-img');
         var src = media.tagName === 'IMG' ? (media.currentSrc || media.src) : '';
         if(src){
-          img.onload  = function(){ img.style.display = 'block'; };
-          img.onerror = function(){ img.style.display = 'none'; };
+          img.onload  = function(){ img.style.display = 'block'; box.classList.add('has-img'); };
+          img.onerror = function(){ img.style.display = 'none'; box.classList.remove('has-img'); };
           img.src = src;
         }
         tx = cx = e.clientX; ty = cy = e.clientY;
