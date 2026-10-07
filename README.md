@@ -55,7 +55,7 @@ Both views, and the lightbox, pick it up. Clicking the image (tapping it in the 
 
 ### Adding a demo video
 
-Demo videos are plain links in each card's link row, before GitHub. The Demo button is the only thing that opens a video. Lead Triage System has a ready-made one commented out in its link row: replace `VIDEO_LINK` with the video's share link (for Google Drive, shared as "Anyone with the link") and remove the comment markers around the link.
+Demo videos are plain links in each card's link row, before GitHub. The Demo button is the only thing that opens a video. Copy an existing Demo link and change its `href` (for Google Drive, share the video as "Anyone with the link") and its `aria-label`.
 
 ### Editing a project's details
 
