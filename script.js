@@ -374,6 +374,7 @@
       var hw = box.offsetWidth / 2, hh = box.offsetHeight / 2;
       for(var i = 0; i < rows.length; i++){
         var r = rows[i].getBoundingClientRect();
+        if(!r.width) continue;                         // in a card the filters have hidden
         if(x + hw > r.left - pad && x - hw < r.right + pad &&
            y + hh > r.top - pad && y - hh < r.bottom + pad) return true;
       }
@@ -653,4 +654,28 @@ if (projectModal) {
     btn.addEventListener('click', () => openProject(btn.closest('.proj')));
   });
   closeProject.addEventListener('click', closeDialog);
+}
+
+// ─── PROJECT FILTERS ───
+// Toggle buttons (aria-pressed) that hide the cards outside a category. They
+// ship hidden, so without JS every card simply shows.
+const projFilters = document.querySelector('.proj-filters');
+if (projFilters) {
+  const filterBtns = projFilters.querySelectorAll('.filter');
+  const projCards  = document.querySelectorAll('.proj[data-category]');
+  const projCount  = document.getElementById('projCount');
+  projFilters.hidden = false;
+  projFilters.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter');
+    if (!btn) return;
+    const want = btn.dataset.filter;
+    filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    let shown = 0;
+    projCards.forEach((card) => {
+      const show = want === 'all' || card.dataset.category === want;
+      card.hidden = !show;
+      if (show) { shown++; card.classList.add('in'); }   // skip the scroll reveal for cards shown by a filter
+    });
+    if (projCount) projCount.textContent = 'Showing ' + shown + (shown === 1 ? ' project' : ' projects');
+  });
 }

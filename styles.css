@@ -400,6 +400,28 @@ button.btn{appearance:none; margin:0; background:none; color:inherit; line-heigh
    PROJECTS
    ============================================================ */
 .projects{display:grid; gap:1.15rem;}
+
+/* Heading with the category filters to its right; they wrap under it when
+   there's no room. Active is marked by a tick, weight and a solid fill, not
+   colour alone. */
+.proj-bar{
+  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+  gap:1.1rem 2rem; margin-bottom:2.6rem;
+}
+.proj-bar h2.sect-title{margin:0;}
+.proj-filters{display:flex; flex-wrap:wrap; gap:.5rem;}
+.filter{
+  appearance:none; margin:0; cursor:pointer;
+  font-family:var(--mono); font-size:.74rem; letter-spacing:.01em; line-height:1.2;
+  padding:.6rem 1rem; min-height:40px; border-radius:999px;
+  background:none; color:var(--text-soft); border:1px solid var(--border-strong);
+  transition:background .25s ease, border-color .25s ease, color .25s ease;
+}
+.filter:hover{background:var(--wash-soft); border-color:var(--accent); color:var(--text);}
+.filter[aria-pressed="true"]{
+  background:var(--wash); border-color:var(--accent); color:var(--text); font-weight:700;
+}
+.filter[aria-pressed="true"]::before{content:"✓"; content:"✓" / ""; margin-right:.4rem;}
 .proj{
   position:relative; display:grid; grid-template-columns:auto 1fr;
   gap:clamp(1.1rem,3vw,2.6rem); align-items:start;
@@ -762,6 +784,8 @@ div.proj-media::after{
   .scroll-hint{margin-top:2.75rem;}
 
   h2.sect-title{margin-bottom:1.75rem;}
+  .proj-bar{margin-bottom:1.75rem;}
+  .filter{min-height:44px;}
   .eyebrow{margin-bottom:.85rem;}
   .eyebrow::after{max-width:4rem;}
 
