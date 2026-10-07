@@ -435,6 +435,18 @@
       card.addEventListener('mousemove', function(e){
         tx = e.clientX; ty = e.clientY;
       });
+      // A card whose .proj-media has data-demo opens that demo when clicked
+      // while the preview shows, since the click lands on the image the
+      // pointer is carrying. Links, buttons and text selections are left alone.
+      card.addEventListener('click', function(e){
+        var media = card.querySelector('.proj-media');
+        var demo = media && media.dataset.demo;
+        if(!demo || !previewMQ.matches || nearRow) return;
+        if(e.target.closest('a, button')) return;
+        var sel = window.getSelection && window.getSelection();
+        if(sel && String(sel).trim()) return;
+        window.open(demo, '_blank', 'noopener');
+      });
       card.addEventListener('mouseleave', function(){
         box.classList.remove('on');
         active = false;                                // nearRow stays as is, so a fading preview by the buttons doesn't start moving
@@ -477,6 +489,15 @@
     if(document.readyState === 'complete') schedulePrewarm();
     else window.addEventListener('load', schedulePrewarm);
   })();
+
+  // ─── IN-CARD DEMO IMAGES ───
+  // Where the image shows in the card (touch, and 900px and below), tapping a
+  // .proj-media with data-demo opens the demo, like the card's Demo button.
+  document.querySelectorAll('.proj-media[data-demo]').forEach(function(media){
+    media.addEventListener('click', function(){
+      window.open(media.dataset.demo, '_blank', 'noopener');
+    });
+  });
 
   // ─── THERESE.TS LIVE TERMINAL (terminal.js, frames in terminal-frames.js) ───
   if(window.ThereseTerminal) window.ThereseTerminal.init(document.querySelector('.code-card'));

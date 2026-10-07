@@ -500,6 +500,12 @@ div.proj-media::after{
   div.proj-media{display:grid;}
   img.proj-media{display:block;}
 }
+/* data-demo media opens the demo: tapped in the card, or clicked while the
+   hover preview shows on desktop (script.js) */
+.proj-media[data-demo]{cursor:pointer;}
+@media (min-width:901px) and (hover:hover) and (pointer:fine){
+  .proj:has(.proj-media[data-demo]){cursor:pointer;}
+}
 /* touch screens wider than 900px: media gets its own column */
 @media (min-width:901px) and (hover:none), (min-width:901px) and (pointer:coarse){
   .proj{grid-template-columns:auto 1fr minmax(220px,34%);}

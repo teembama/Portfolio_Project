@@ -55,7 +55,7 @@ Both views pick it up. On a desktop with a mouse it appears in the cursor-follow
 
 ### Adding a demo video
 
-Demo videos are plain links in each card's link row, before GitHub. Lead Triage System has a ready-made one commented out in its link row: replace `VIDEO_LINK` with the video's share link (for Google Drive, shared as "Anyone with the link") and remove the comment markers around the link.
+Demo videos are plain links in each card's link row, before GitHub. To make the card's image open the video too, add the same link to its `<img class="proj-media">` as `data-demo="…"` (Bloom does this). The image then opens it when tapped in the card on touch screens, and when clicked while the hover preview shows on desktop. Lead Triage System has a ready-made one commented out in its link row: replace `VIDEO_LINK` with the video's share link (for Google Drive, shared as "Anyone with the link") and remove the comment markers around the link.
 
 ### Editing a project's details
 
