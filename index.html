@@ -341,7 +341,7 @@
             <h4>Problem</h4>
             <p>A fintech help desk answers the same policy and account questions all day, and a voice agent that guesses could tell a caller something the policy doesn't say.</p>
             <h4>Why it matters</h4>
-            <p>Support teams at fintechs and other regulated businesses, where a wrong answer about money or policy, spoken aloud to a customer, is a compliance problem and not just a bad experience.</p>
+            <p>Support teams at fintechs and other regulated businesses, where a voice agent must not tell a caller anything about money or policy that the approved policy doesn't say.</p>
             <h4>How it works</h4>
             <p>The caller talks to the agent in the browser through <strong>Vapi</strong>. A <strong>Claude Agent SDK</strong> agent answers from approved policy and works through a custom <strong>MCP server</strong> with 6 tools over Supabase: it checks account records and books a human callback when a case needs one.</p>
             <h4>Design decisions</h4>
@@ -543,7 +543,7 @@
           </div>
           <template class="proj-detail">
             <h4>Problem</h4>
-            <p>Hypertension detection models had not combined ECG, retinal imaging and clinical data in one framework.</p>
+            <p>No published work had fused ECG, retinal imaging and clinical data for hypertension detection, and the prior published baseline reached 84% accuracy.</p>
             <h4>Why it matters</h4>
             <p>Clinicians and screening programmes looking for hypertension, including for patients whose skin tone makes optical sensor readings less reliable.</p>
             <h4>How it works</h4>
@@ -593,7 +593,7 @@
             <p>A fast-path routing system bypasses the LLM for 80% of requests. Prompt-injection detection, output sanitization and PIN-based transaction authorization guard the rest.</p>
             <div class="detail-results">
               <h4>Results</h4>
-              <p>Response time cut <strong>from ~2s to under 50ms</strong>. <strong>Team Echo placed 1st</strong> at the hackathon, shipping EchoPay and EchoMind in under 24 hours.</p>
+              <p>Requests on the fast path (80%) respond in <strong>under 50ms instead of ~2s</strong>. <strong>Team Echo placed 1st</strong> at the hackathon, shipping EchoPay and EchoMind in under 24 hours.</p>
             </div>
           </template>
         </div>
@@ -622,13 +622,13 @@
           </div>
           <template class="proj-detail">
             <h4>Problem</h4>
-            <p>Expectant mothers need guidance that changes week by week through pregnancy, in one place.</p>
+            <p>In pregnancy and the early weeks after birth, small scares come up constantly — the baby hasn't peed yet, how often to feed, whether to give water — and parents often rush to the hospital only to be told it's normal. Trustworthy answers are scattered, and not everyone has a relative on hand to ask.</p>
             <h4>Why it matters</h4>
-            <p>Expectant mothers looking for personalised, week-by-week pregnancy information and a reason to keep coming back to it.</p>
+            <p>New and expectant mothers who need reliable day-to-day guidance between appointments — especially those without close support — so a quick question doesn't become an unnecessary hospital trip.</p>
             <h4>How it works</h4>
             <p>A React frontend on a Django REST backend, with dynamic pregnancy tracking, a personalized content pipeline and a gamified token rewards system.</p>
             <h4>Design decisions</h4>
-            <p>React Query handles data fetching and caching, with custom hooks and a responsive component architecture.</p>
+            <p>React Query handles data fetching and caching, with custom hooks and a responsive component architecture. Guidance is drawn from certified medical sources, and the app points users to professional care rather than trying to replace it.</p>
             <div class="detail-results">
               <h4>Results</h4>
               <p><strong>40+ weeks of content</strong>, and React Query <strong>cut API calls by 60%</strong>.</p>
@@ -661,13 +661,13 @@
           </div>
           <template class="proj-detail">
             <h4>Problem</h4>
-            <p>Getting answers out of a document usually means reading or typing. EchoMind lets you ask it out loud.</p>
+            <p>During a consultation a clinician often needs one fact buried in a patient's file — a past reaction, a prior episode — and finding it means paging through records while the patient waits.</p>
             <h4>Why it matters</h4>
-            <p>People who would rather ask a document a question by voice than search or type through it.</p>
+            <p>Clinicians who need to pull a specific detail from a patient's history quickly, by voice — for example checking a past reaction before administering something — without breaking away to read through files.</p>
             <h4>How it works</h4>
-            <p>A React and Django app that uses <strong>OpenAI Whisper</strong> for transcription, with a custom <code>useWhisperVoice</code> hook managing live audio streams.</p>
+            <p>The clinician asks a question about a patient's records out loud and the app returns the relevant entry. It's a React and Django app: <strong>OpenAI Whisper</strong> transcribes the spoken query, and a custom <code>useWhisperVoice</code> hook manages the live audio stream.</p>
             <h4>Design decisions</h4>
-            <p>JWT-based authentication with protected routes and persistent sessions across the app.</p>
+            <p>JWT-based authentication with protected routes and persistent sessions across the app. It surfaces the source record for the clinician to confirm — it speeds up finding information, it doesn't make the clinical decision.</p>
             <div class="detail-results">
               <h4>Results</h4>
               <p><strong>Team Echo placed 1st</strong> at the October 2025 hackathon, shipping EchoMind and EchoPay in under 24 hours.</p>
