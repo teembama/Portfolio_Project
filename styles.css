@@ -121,6 +121,7 @@ body{
 section[id]{scroll-margin-top:calc(var(--nav-h, 4.5rem) + 2rem - var(--sect));}
 #home{scroll-margin-top:0;}
 img{max-width:100%;display:block;}
+[hidden]{display:none !important;}
 pre,code{max-width:100%;}
 h1,h2,h3,p,li,a{overflow-wrap:break-word;}
 button,a{-webkit-tap-highlight-color:var(--tap);}
@@ -268,6 +269,7 @@ section{padding-block:var(--sect); position:relative;}
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
   display:inline-block;
 }
+button.btn{appearance:none; margin:0; background:none; color:inherit; line-height:inherit; cursor:pointer;}
 .btn-primary{
   background:linear-gradient(96deg,var(--accent-dim),var(--accent));
   border-color:transparent; color:var(--on-accent); font-weight:700;
@@ -398,6 +400,28 @@ section{padding-block:var(--sect); position:relative;}
    PROJECTS
    ============================================================ */
 .projects{display:grid; gap:1.15rem;}
+
+/* Heading with the category filters to its right; they wrap under it when
+   there's no room. Active is marked by a tick, weight and a solid fill, not
+   colour alone. */
+.proj-bar{
+  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+  gap:1.1rem 2rem; margin-bottom:2.6rem;
+}
+.proj-bar h2.sect-title{margin:0;}
+.proj-filters{display:flex; flex-wrap:wrap; gap:.5rem;}
+.filter{
+  appearance:none; margin:0; cursor:pointer;
+  font-family:var(--mono); font-size:.74rem; letter-spacing:.01em; line-height:1.2;
+  padding:.6rem 1rem; min-height:40px; border-radius:999px;
+  background:none; color:var(--text-soft); border:1px solid var(--border-strong);
+  transition:background .25s ease, border-color .25s ease, color .25s ease;
+}
+.filter:hover{background:var(--wash-soft); border-color:var(--accent); color:var(--text);}
+.filter[aria-pressed="true"]{
+  background:var(--wash); border-color:var(--accent); color:var(--text); font-weight:700;
+}
+.filter[aria-pressed="true"]::before{content:"✓"; content:"✓" / ""; margin-right:.4rem;}
 .proj{
   position:relative; display:grid; grid-template-columns:auto 1fr;
   gap:clamp(1.1rem,3vw,2.6rem); align-items:start;
@@ -450,14 +474,16 @@ section{padding-block:var(--sect); position:relative;}
    preview's recipe below. That element is the one source for both: the card
    shows it where the cursor preview can't (touch, and 900px and below), and
    the preview shows it on hover everywhere else. Swapping the placeholder div
-   for an <img class="proj-media" ...> is the whole change for a screenshot. */
+   for an <img class="proj-media" ...> is the whole change for a screenshot.
+   A screenshot shows whole, at its own shape (from its width/height
+   attributes); only the placeholder, which has no shape of its own, gets a
+   fixed 16:10 box. */
 .proj-media{
-  display:none; position:relative; width:100%; height:auto; aspect-ratio:16/10; margin:0;
+  display:none; position:relative; width:100%; height:auto; margin:0;
   border-radius:13px; overflow:hidden; border:1px solid var(--border-strong);
-  object-fit:cover;
 }
 div.proj-media{
-  place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
+  aspect-ratio:16/10; place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
   background:
     radial-gradient(18rem 12rem at 20% 12%, var(--wash), transparent 70%),
     linear-gradient(140deg, var(--accent-deep) 0%, var(--bg-card-alt) 52%, var(--alt-wash) 100%);
@@ -476,6 +502,12 @@ div.proj-media::after{
   div.proj-media{display:grid;}
   img.proj-media{display:block;}
 }
+/* The media opens a larger view: tapped in the card, or clicked while the
+   hover preview shows on desktop (script.js). */
+.proj-media[role="button"]{cursor:zoom-in;}
+@media (min-width:901px) and (hover:hover) and (pointer:fine){
+  .proj{cursor:zoom-in;}
+}
 /* touch screens wider than 900px: media gets its own column */
 @media (min-width:901px) and (hover:none), (min-width:901px) and (pointer:coarse){
   .proj{grid-template-columns:auto 1fr minmax(220px,34%);}
@@ -484,7 +516,7 @@ div.proj-media::after{
   .proj-media{order:-1;}
 }
 
-/* The earlier cards (_07 onwards) keep the same card, with bullets one step
+/* The earlier cards (_06 onwards) keep the same card, with bullets one step
    down the existing text scale (--text-muted, AA on the card) so the newer
    work reads first. */
 .proj-earlier ul{color:var(--text-muted);}
@@ -501,6 +533,11 @@ div.proj-media::after{
 }
 .preview.on{opacity:1; transform:translate(-50%,-50%) scale(1) rotate(-2.5deg);}
 .preview img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+/* Once a screenshot has loaded, the preview takes the image's own shape and
+   shows it whole; without one it keeps the 16:11 box for the placeholder. */
+.preview.has-img{aspect-ratio:auto;}
+.preview.has-img img{position:relative; inset:auto; height:auto;}
+.preview.has-img .ph{display:none;}
 .preview .ph{
   position:absolute; inset:0; display:grid; place-content:center; gap:.5rem;
   text-align:center; padding:1.1rem;
@@ -681,6 +718,50 @@ div.proj-media::after{
 .form-status p{color:var(--text-soft); font-size:.95rem; margin:0 0 1.4rem;}
 
 /* ============================================================
+   PROJECT DETAILS MODAL
+   Shares the contact modal's shell above; wider, and full-screen
+   at 640px and below. The body is copied from the card's
+   <template class="proj-detail">.
+   ============================================================ */
+.modal-project .modal-content{width:min(720px,100%); padding:2.2rem 2.1rem 2rem;}
+.modal-project .proj-meta{margin:0 2.5rem .35rem 0;}
+.modal-project .modal-title{margin-right:2.5rem;}
+.detail-body h4,
+.detail-stack{
+  font-family:var(--mono); font-size:.7rem; font-weight:500; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent-alt-soft); margin:1.5rem 0 .45rem;
+}
+.detail-body h4:first-child{margin-top:0;}
+.detail-body p{margin:0; color:var(--text-soft); font-size:.97rem;}
+.detail-body strong{color:var(--text); font-weight:600;}
+.detail-body code{font-family:var(--mono); font-size:.9em; color:var(--accent-alt-soft);}
+.detail-results{
+  margin-top:1.6rem; padding:1.1rem 1.25rem;
+  background:var(--wash-soft); border:1px solid var(--border-strong);
+  border-left:3px solid var(--accent); border-radius:10px;
+}
+.detail-results h4{margin-top:0;}
+.detail-results p{color:var(--text);}
+.detail-links{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.6rem;}
+
+/* ============================================================
+   IMAGE LIGHTBOX
+   A copy of the card's .proj-media, shown large. The copy keeps its
+   classes, so the placeholder reuses the card's gradient recipe; these
+   rules only undo the card's hiding and cropping.
+   ============================================================ */
+.modal-image .modal-content{width:min(1100px,100%); padding:3.4rem 1.25rem 1.25rem;}
+.zoom-title{
+  position:absolute; top:1.1rem; left:1.25rem; right:4rem; margin:0;
+  font-family:var(--display); font-weight:600; font-size:1.05rem; letter-spacing:-.02em;
+}
+.modal-image div.proj-media{display:grid; cursor:auto;}
+.modal-image img.proj-media{
+  display:block; cursor:auto; width:100%; height:auto; aspect-ratio:auto;
+  max-height:calc(90vh - 5.5rem); object-fit:contain; background:var(--bg);
+}
+
+/* ============================================================
    MOTION
    ============================================================ */
 .reveal{opacity:0; transform:translateY(22px); transition:opacity .75s cubic-bezier(.2,.7,.3,1), transform .75s cubic-bezier(.2,.7,.3,1);}
@@ -733,6 +814,8 @@ div.proj-media::after{
   .scroll-hint{margin-top:2.75rem;}
 
   h2.sect-title{margin-bottom:1.75rem;}
+  .proj-bar{margin-bottom:1.75rem;}
+  .filter{min-height:44px;}
   .eyebrow{margin-bottom:.85rem;}
   .eyebrow::after{max-width:4rem;}
 
@@ -759,6 +842,12 @@ div.proj-media::after{
   .mail{font-size:.8rem;}
 
   .foot{flex-direction:column; gap:.35rem; font-size:.68rem; text-align:left;}
+
+  .modal-project{padding:0;}
+  .modal-project .modal-content{
+    width:100%; height:100%; max-height:none;
+    border:0; border-radius:0; padding:3.25rem 1.15rem 2rem;
+  }
 }
 
 /* ---------- very small phone ---------- */

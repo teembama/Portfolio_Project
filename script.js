@@ -354,28 +354,25 @@
 
     var tx = 0, ty = 0, cx = 0, cy = 0, active = false, raf = null;
 
-    // The preview must never sit over a Live / Demo / GitHub row: the hovered
-    // card's, or the card above's, which it can reach from a card's top edge.
-    // It hides as soon as a preview centred on the pointer would come within
-    // HIDE_PAD of any row, and stays where it is while it fades, so it can't
-    // drift onto the buttons. It returns only once the pointer is SHOW_PAD
-    // clear and has stayed clear for SHOW_DELAY, so crossing the boundary, or
+    // The preview shows everywhere on a card except while the pointer is over
+    // its Demo / GitHub / Details row. There it hides at once (no fade), so it
+    // never covers the button being aimed at, and stays where it is so it
+    // can't drift. It returns only once the pointer is SHOW_PAD clear of the
+    // row and has stayed clear for SHOW_DELAY, so crossing the row's edge, or
     // leaving a button diagonally, can't make it flicker.
-    var HIDE_PAD = 16, SHOW_PAD = 40, SHOW_DELAY = 150, TILT_PAD = 24;
-    // While the page scrolls, the buttons travel under a still pointer, so the
-    // warning distance grows with scroll speed: about the distance they cover
-    // during the preview's 0.3s fade plus a frame of lag (FADE_FRAMES frames at
-    // the current speed).
-    var FADE_FRAMES = 26, scrollVel = 0, lastScrollY = window.pageYOffset;
+    var SHOW_PAD = 8, SHOW_DELAY = 150;
+    // While the page scrolls, the row travels under a still pointer, so the
+    // hide distance grows by LAG_FRAMES frames at the current scroll speed.
+    var LAG_FRAMES = 2, scrollVel = 0, lastScrollY = window.pageYOffset;
     var rows = document.querySelectorAll('.proj-links');
     var nearRow = false, clearSince = 0;
 
-    function previewHits(x, y, pad){
-      var hw = box.offsetWidth / 2, hh = box.offsetHeight / 2;
+    function pointerOverRow(x, y, pad){
       for(var i = 0; i < rows.length; i++){
         var r = rows[i].getBoundingClientRect();
-        if(x + hw > r.left - pad && x - hw < r.right + pad &&
-           y + hh > r.top - pad && y - hh < r.bottom + pad) return true;
+        if(!r.width) continue;                         // in a card the filters have hidden
+        if(x > r.left - pad && x < r.right + pad &&
+           y > r.top - pad && y < r.bottom + pad) return true;
       }
       return false;
     }
@@ -383,9 +380,9 @@
       var y = window.pageYOffset;
       scrollVel = Math.max(Math.abs(y - lastScrollY), scrollVel * 0.85);
       lastScrollY = y;
-      if(previewHits(tx, ty, HIDE_PAD + scrollVel * FADE_FRAMES)){ nearRow = true; clearSince = 0; return; }
+      if(pointerOverRow(tx, ty, scrollVel * LAG_FRAMES)){ nearRow = true; clearSince = 0; return; }
       if(!nearRow) return;
-      if(previewHits(tx, ty, SHOW_PAD)){ clearSince = 0; return; }
+      if(pointerOverRow(tx, ty, SHOW_PAD)){ clearSince = 0; return; }
       var now = performance.now();
       if(!clearSince) clearSince = now;
       else if(now - clearSince >= SHOW_DELAY){
@@ -403,10 +400,8 @@
         box.style.top  = cy + 'px';
       }
       box.classList.toggle('on', active && !nearRow);
-      // Last line of defence for fast scrolling: if a row reaches the preview
-      // while its fade-out is still finishing, drop what's left of the fade.
-      // TILT_PAD covers the corners the preview's slight rotation adds.
-      box.style.visibility = nearRow && previewHits(cx, cy, TILT_PAD) ? 'hidden' : '';
+      // Over a row the preview would sit on the buttons, so it skips the fade.
+      box.style.visibility = nearRow ? 'hidden' : '';
       raf = requestAnimationFrame(loop);
     }
 
@@ -421,10 +416,11 @@
         if(tags) tags.textContent = media.dataset.tags || '';
         img.removeAttribute('src');
         img.style.display = 'none';
+        box.classList.remove('has-img');
         var src = media.tagName === 'IMG' ? (media.currentSrc || media.src) : '';
         if(src){
-          img.onload  = function(){ img.style.display = 'block'; };
-          img.onerror = function(){ img.style.display = 'none'; };
+          img.onload  = function(){ img.style.display = 'block'; box.classList.add('has-img'); };
+          img.onerror = function(){ img.style.display = 'none'; box.classList.remove('has-img'); };
           img.src = src;
         }
         tx = cx = e.clientX; ty = cy = e.clientY;
@@ -439,6 +435,17 @@
       });
       card.addEventListener('mousemove', function(e){
         tx = e.clientX; ty = e.clientY;
+      });
+      // Clicking a card while the preview shows opens the larger view of its
+      // image, since the click lands on the image the pointer is carrying.
+      // Links, buttons and text selections are left alone.
+      card.addEventListener('click', function(e){
+        var media = card.querySelector('.proj-media');
+        if(!media || !window.openZoom || !previewMQ.matches || nearRow) return;
+        if(e.target.closest('a, button')) return;
+        var sel = window.getSelection && window.getSelection();
+        if(sel && String(sel).trim()) return;
+        window.openZoom(media);
       });
       card.addEventListener('mouseleave', function(){
         box.classList.remove('on');
@@ -506,12 +513,56 @@
   }
 })();
 
+// ─── DIALOGS ───
+// Shared by every .modal: the page behind goes inert, Esc and the overlay
+// close it, Tab wraps at its edges, and focus returns to whatever opened it.
+// Callers move focus into the dialog themselves after openDialog().
+const shell = document.querySelector('.shell');
+let openState = null;
+
+function openDialog(modal, onClose) {
+  if (!modal || openState) return;
+  openState = { modal: modal, onClose: onClose, lastFocus: document.activeElement };
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  // The page behind the scrim can't take focus or clicks while a dialog is open.
+  if (shell) shell.inert = true;
+}
+function closeDialog() {
+  if (!openState) return;
+  const { modal, onClose, lastFocus } = openState;
+  openState = null;
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (shell) shell.inert = false;
+  if (onClose) onClose();
+  // Back to whatever opened it, so keyboard users keep their place.
+  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+}
+document.addEventListener('click', (e) => {
+  if (openState && e.target.classList && e.target.classList.contains('modal-overlay')) closeDialog();
+});
+document.addEventListener('keydown', (e) => {
+  if (!openState) return;
+  if (e.key === 'Escape') { closeDialog(); return; }
+  if (e.key !== 'Tab') return;
+  // inert keeps focus off the page; this wraps it at the dialog's edges
+  // rather than letting it leave for the browser UI.
+  const items = Array.from(openState.modal.querySelectorAll('button, input, textarea, a[href]'))
+    .filter((el) => !el.disabled && el.offsetParent !== null);
+  if (!items.length) return;
+  const first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+
 // ─── EMAIL MODAL + FORMSPREE FETCH ───
 const emailModal   = document.getElementById('emailModal');
 const openModalBtn = document.getElementById('openEmailModal');
 const closeModalBtn= document.getElementById('closeModal');
 const cancelBtn    = document.getElementById('cancelBtn');
-const modalOverlay = emailModal && emailModal.querySelector('.modal-overlay');
 const contactForm  = document.getElementById('contactForm');
 const sendBtn      = document.getElementById('sendBtn');
 const formView     = document.getElementById('formView');
@@ -519,9 +570,6 @@ const successView  = document.getElementById('successView');
 const errorView    = document.getElementById('errorView');
 const successDismiss = document.getElementById('successDismiss');
 const errorDismiss   = document.getElementById('errorDismiss');
-
-const shell = document.querySelector('.shell');
-let lastFocus = null;
 
 // Where focus lands when each view appears. The form's buttons vanish with the
 // form, so without a target focus drops to <body> on success or error.
@@ -537,48 +585,21 @@ function showView(which, moveFocus) {
     if (target) target.focus();
   }
 }
-function openModal() {
-  if (!emailModal) return;
-  lastFocus = document.activeElement;
-  emailModal.classList.add('active');
-  emailModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  // The page behind the scrim can't take focus or clicks while the form is open.
-  if (shell) shell.inert = true;
-  showView('form', true);
-}
-function closeModal() {
-  if (!emailModal) return;
-  emailModal.classList.remove('active');
-  emailModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  if (shell) shell.inert = false;
+function resetEmailModal() {
   if (contactForm) contactForm.reset();
   if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Send Message'; }
   showView('form');
-  // Back to whatever opened it, so keyboard users keep their place.
-  if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
-  lastFocus = null;
+}
+function openModal() {
+  if (!emailModal) return;
+  openDialog(emailModal, resetEmailModal);
+  showView('form', true);
 }
 if (openModalBtn) openModalBtn.addEventListener('click', openModal);
-if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
-if (successDismiss) successDismiss.addEventListener('click', closeModal);
+if (closeModalBtn) closeModalBtn.addEventListener('click', closeDialog);
+if (cancelBtn) cancelBtn.addEventListener('click', closeDialog);
+if (successDismiss) successDismiss.addEventListener('click', closeDialog);
 if (errorDismiss) errorDismiss.addEventListener('click', () => showView('form', true));
-document.addEventListener('keydown', (e) => {
-  if (!emailModal || !emailModal.classList.contains('active')) return;
-  if (e.key === 'Escape') { closeModal(); return; }
-  if (e.key !== 'Tab') return;
-  // inert keeps focus off the page; this wraps it at the dialog's edges
-  // rather than letting it leave for the browser UI.
-  const items = Array.from(emailModal.querySelectorAll('button, input, textarea, a[href]'))
-    .filter((el) => !el.disabled && el.offsetParent !== null);
-  if (!items.length) return;
-  const first = items[0], last = items[items.length - 1];
-  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-});
 
 if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
@@ -600,5 +621,108 @@ if (contactForm) {
       sendBtn.disabled = false;
       sendBtn.textContent = 'Send Message';
     }
+  });
+}
+
+// ─── PROJECT DETAILS MODAL ───
+// Each card carries its own write-up in a <template class="proj-detail">. The
+// pop-up copies that in along with the card's title, meta line, tags and links,
+// so there is one place to edit per project. The Details buttons ship hidden
+// and only appear here, since without JS they would do nothing.
+const projectModal = document.getElementById('projectModal');
+if (projectModal) {
+  const projectContent = projectModal.querySelector('.modal-content');
+  const projectTitle   = document.getElementById('projectTitle');
+  const projectMeta    = document.getElementById('projectMeta');
+  const projectBody    = document.getElementById('projectBody');
+  const projectTags    = document.getElementById('projectTags');
+  const projectLinks   = document.getElementById('projectLinks');
+  const closeProject   = document.getElementById('closeProject');
+
+  const openProject = (card) => {
+    const detail = card.querySelector('.proj-detail');
+    if (!detail) return;
+    const meta = card.querySelector('.proj-meta');
+    projectTitle.textContent = card.querySelector('h3').textContent;
+    projectMeta.textContent  = meta ? meta.textContent : '';
+    projectBody.replaceChildren(detail.content.cloneNode(true));
+    projectTags.replaceChildren(...Array.from(card.querySelectorAll('.tag'), (t) => t.cloneNode(true)));
+    projectLinks.replaceChildren(...Array.from(card.querySelectorAll('.proj-links a'), (a) => a.cloneNode(true)));
+    projectLinks.hidden = !projectLinks.children.length;
+    openDialog(projectModal);
+    projectContent.scrollTop = 0;
+    closeProject.focus();
+  };
+
+  document.querySelectorAll('.proj-details').forEach((btn) => {
+    btn.hidden = false;
+    btn.closest('.proj-links').hidden = false;
+    btn.addEventListener('click', () => openProject(btn.closest('.proj')));
+  });
+  closeProject.addEventListener('click', closeDialog);
+}
+
+// ─── PROJECT FILTERS ───
+// Toggle buttons (aria-pressed) that hide the cards outside a category. They
+// ship hidden, so without JS every card simply shows.
+const projFilters = document.querySelector('.proj-filters');
+if (projFilters) {
+  const filterBtns = projFilters.querySelectorAll('.filter');
+  const projCards  = document.querySelectorAll('.proj[data-category]');
+  const projCount  = document.getElementById('projCount');
+  projFilters.hidden = false;
+  projFilters.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter');
+    if (!btn) return;
+    const want = btn.dataset.filter;
+    filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    let shown = 0;
+    projCards.forEach((card) => {
+      const show = want === 'all' || card.dataset.category === want;
+      card.hidden = !show;
+      if (show) { shown++; card.classList.add('in'); }   // skip the scroll reveal for cards shown by a filter
+    });
+    if (projCount) projCount.textContent = 'Showing ' + shown + (shown === 1 ? ' project' : ' projects');
+  });
+}
+
+// ─── IMAGE LIGHTBOX ───
+// Clicking or tapping a card's image opens a larger copy of it: the screenshot,
+// or the gradient placeholder until there is one. Where the image shows in the
+// card (touch, and 900px and below) it becomes a keyboard-reachable button and
+// gets focus back on close; on desktop the hover preview stands in for it and
+// the card's click handler above calls openZoom(). The Demo button stays the
+// only way to the demo video.
+const imageModal = document.getElementById('imageModal');
+if (imageModal) {
+  const zoomTitle = document.getElementById('zoomTitle');
+  const zoomFrame = document.getElementById('zoomFrame');
+  const closeImage = document.getElementById('closeImage');
+
+  window.openZoom = (media) => {
+    const copy = media.cloneNode(true);
+    ['tabindex', 'role', 'aria-label', 'aria-hidden', 'loading', 'id'].forEach((a) => copy.removeAttribute(a));
+    zoomTitle.textContent = media.dataset.title || '';
+    zoomFrame.replaceChildren(copy);
+    openDialog(imageModal, () => zoomFrame.replaceChildren());
+    closeImage.focus();
+  };
+  closeImage.addEventListener('click', closeDialog);
+
+  document.querySelectorAll('.proj-media').forEach((media) => {
+    const name = media.dataset.title || 'this project';
+    media.removeAttribute('aria-hidden');
+    media.setAttribute('role', 'button');
+    media.setAttribute('tabindex', '0');
+    media.setAttribute('aria-label', 'View a larger image of ' + name);
+    media.addEventListener('click', () => {
+      media.focus({ preventScroll: true });           // so closing returns focus here
+      window.openZoom(media);
+    });
+    media.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      window.openZoom(media);
+    });
   });
 }
