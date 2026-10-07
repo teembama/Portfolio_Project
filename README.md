@@ -45,10 +45,10 @@ Cards without a screenshot end with a gradient placeholder:
 <div class="proj-media" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl" aria-hidden="true"></div>
 ```
 
-Replace that line with the image, keeping the class and the data attributes:
+Replace that line with the image, keeping the class and the data attributes. Project images live at the repo root next to `index.html`; `width` and `height` are the file's real pixel size. Export at about 1400px wide, ideally 16:10, which is the card's frame: smaller images look soft on phones and in the lightbox, and wider ones lose their sides in the card.
 
 ```html
-<img class="proj-media" src="assets/projects/lead-studio.webp" alt="…" width="1440" height="900" loading="lazy" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl">
+<img class="proj-media" src="lead-studio.png" alt="…" width="1400" height="875" loading="lazy" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl">
 ```
 
 Both views, and the lightbox, pick it up. Clicking the image (tapping it in the card, or clicking the card while the hover preview shows on desktop) opens a larger copy of it; until a card has a screenshot, that copy is its placeholder. On a desktop with a mouse it appears in the cursor-following hover preview, which hides while the pointer is over the card's button row. On touch screens, and at 900px and below, it shows as a static image inside the card.
