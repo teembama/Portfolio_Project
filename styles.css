@@ -514,7 +514,7 @@ div.proj-media::after{
   .proj-media{order:-1;}
 }
 
-/* The earlier cards (_07 onwards) keep the same card, with bullets one step
+/* The earlier cards (_06 onwards) keep the same card, with bullets one step
    down the existing text scale (--text-muted, AA on the card) so the newer
    work reads first. */
 .proj-earlier ul{color:var(--text-muted);}

@@ -15,7 +15,6 @@ window.THERESE_FRAMES = [
     "a grounded voice agent",
     "lead research + triage",
     "a content pipeline",
-    "a proposal approval app",
     "an n8n reporting flow"
   ]
 };`,
