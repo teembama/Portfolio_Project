@@ -45,7 +45,7 @@ window.THERESE_FRAMES = [
   ]
 };
 
-// try it: see projects below`,
+// explore projects below`,
 
 `const therese = {
   principles: {
