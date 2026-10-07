@@ -354,29 +354,25 @@
 
     var tx = 0, ty = 0, cx = 0, cy = 0, active = false, raf = null;
 
-    // The preview must never sit over a Live / Demo / GitHub row: the hovered
-    // card's, or the card above's, which it can reach from a card's top edge.
-    // It hides as soon as a preview centred on the pointer would come within
-    // HIDE_PAD of any row, and stays where it is while it fades, so it can't
-    // drift onto the buttons. It returns only once the pointer is SHOW_PAD
-    // clear and has stayed clear for SHOW_DELAY, so crossing the boundary, or
+    // The preview shows everywhere on a card except while the pointer is over
+    // its Demo / GitHub / Details row. There it hides at once (no fade), so it
+    // never covers the button being aimed at, and stays where it is so it
+    // can't drift. It returns only once the pointer is SHOW_PAD clear of the
+    // row and has stayed clear for SHOW_DELAY, so crossing the row's edge, or
     // leaving a button diagonally, can't make it flicker.
-    var HIDE_PAD = 16, SHOW_PAD = 40, SHOW_DELAY = 150, TILT_PAD = 24;
-    // While the page scrolls, the buttons travel under a still pointer, so the
-    // warning distance grows with scroll speed: about the distance they cover
-    // during the preview's 0.3s fade plus a frame of lag (FADE_FRAMES frames at
-    // the current speed).
-    var FADE_FRAMES = 26, scrollVel = 0, lastScrollY = window.pageYOffset;
+    var SHOW_PAD = 8, SHOW_DELAY = 150;
+    // While the page scrolls, the row travels under a still pointer, so the
+    // hide distance grows by LAG_FRAMES frames at the current scroll speed.
+    var LAG_FRAMES = 2, scrollVel = 0, lastScrollY = window.pageYOffset;
     var rows = document.querySelectorAll('.proj-links');
     var nearRow = false, clearSince = 0;
 
-    function previewHits(x, y, pad){
-      var hw = box.offsetWidth / 2, hh = box.offsetHeight / 2;
+    function pointerOverRow(x, y, pad){
       for(var i = 0; i < rows.length; i++){
         var r = rows[i].getBoundingClientRect();
         if(!r.width) continue;                         // in a card the filters have hidden
-        if(x + hw > r.left - pad && x - hw < r.right + pad &&
-           y + hh > r.top - pad && y - hh < r.bottom + pad) return true;
+        if(x > r.left - pad && x < r.right + pad &&
+           y > r.top - pad && y < r.bottom + pad) return true;
       }
       return false;
     }
@@ -384,9 +380,9 @@
       var y = window.pageYOffset;
       scrollVel = Math.max(Math.abs(y - lastScrollY), scrollVel * 0.85);
       lastScrollY = y;
-      if(previewHits(tx, ty, HIDE_PAD + scrollVel * FADE_FRAMES)){ nearRow = true; clearSince = 0; return; }
+      if(pointerOverRow(tx, ty, scrollVel * LAG_FRAMES)){ nearRow = true; clearSince = 0; return; }
       if(!nearRow) return;
-      if(previewHits(tx, ty, SHOW_PAD)){ clearSince = 0; return; }
+      if(pointerOverRow(tx, ty, SHOW_PAD)){ clearSince = 0; return; }
       var now = performance.now();
       if(!clearSince) clearSince = now;
       else if(now - clearSince >= SHOW_DELAY){
@@ -404,10 +400,8 @@
         box.style.top  = cy + 'px';
       }
       box.classList.toggle('on', active && !nearRow);
-      // Last line of defence for fast scrolling: if a row reaches the preview
-      // while its fade-out is still finishing, drop what's left of the fade.
-      // TILT_PAD covers the corners the preview's slight rotation adds.
-      box.style.visibility = nearRow && previewHits(cx, cy, TILT_PAD) ? 'hidden' : '';
+      // Over a row the preview would sit on the buttons, so it skips the fade.
+      box.style.visibility = nearRow ? 'hidden' : '';
       raf = requestAnimationFrame(loop);
     }
 
