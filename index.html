@@ -305,7 +305,7 @@
     <h2 class="sect-title reveal">Selected <em>Projects</em></h2>
 
     <div class="projects">
-      <article class="proj reveal">
+      <article data-category="ai" class="proj reveal">
         <div class="proj-num">_01</div>
         <div>
           <div class="proj-head">
@@ -327,12 +327,27 @@
             <a class="btn btn-ghost" href="https://relaypay-backend-production-aa34.up.railway.app/" target="_blank" rel="noopener noreferrer" aria-label="Live demo of RelayPay Voice Support (opens in a new tab)">Live&nbsp;<span aria-hidden="true">↗</span></a>
             <a class="btn btn-ghost" href="https://drive.google.com/file/d/1A45lurev7b0nvZ-LVs9Stncekbghh1sj/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Watch the RelayPay Voice Support demo (opens in a new tab)">Demo&nbsp;<span aria-hidden="true">↗</span></a>
             <a class="btn btn-ghost" href="https://github.com/teembama/Therese-week6-support-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for RelayPay Voice Support (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about RelayPay Voice Support" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
           </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>A fintech help desk answers the same policy and account questions all day, and a voice agent that guesses could tell a caller something the policy doesn't say.</p>
+            <h4>Why it matters</h4>
+            <p>Support teams at fintechs and other regulated businesses, where a wrong answer about money or policy, spoken aloud to a customer, is a compliance problem and not just a bad experience.</p>
+            <h4>How it works</h4>
+            <p>The caller talks to the agent in the browser through <strong>Vapi</strong>. A <strong>Claude Agent SDK</strong> agent answers from approved policy and works through a custom <strong>MCP server</strong> with 6 tools over Supabase: it checks account records and books a human callback when a case needs one.</p>
+            <h4>Design decisions</h4>
+            <p>Every answer passes a <strong>grounding gate in code</strong> before it's spoken: it must cite knowledge-base passages the agent actually retrieved, and each sentence is filtered again before it's spoken. Caller text is escaped and marked untrusted. Each turn is capped at $0.05 of spend and 4 model turns, with at most 3 calls at once.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p>Evals went from <strong>15/34 to 31/34 passing</strong>. The first spoken sentence comes in <strong>~1.4s</strong> (median, deployed) at <strong>~$0.003</strong> of model spend per turn, with 31 test files.</p>
+            </div>
+          </template>
         </div>
         <div class="proj-media" data-title="RelayPay Voice Support" data-tags="Agent SDK · MCP · Vapi" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal">
+      <article data-category="ai" class="proj reveal">
         <div class="proj-num">_02</div>
         <div>
           <div class="proj-head">
@@ -353,12 +368,27 @@
           <div class="proj-links">
             <a class="btn btn-ghost" href="https://drive.google.com/file/d/1f9Ie1-iGhrjTumYwi0imA8Zj1cw8aOOs/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Watch the Lead Studio demo (opens in a new tab)">Demo&nbsp;<span aria-hidden="true">↗</span></a>
             <a class="btn btn-ghost" href="https://github.com/teembama/Therese-week-5-lead-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Lead Studio (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about Lead Studio" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
           </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>Turning a sales brief into a list of qualified companies means hours of searching, reading company sites and writing first-touch emails, and an agent doing it unsupervised can cite pages it never read or spend without limit.</p>
+            <h4>Why it matters</h4>
+            <p>Sales and business-development teams who want researched, evidence-backed leads but can't let an agent send outreach or run up costs on its own.</p>
+            <h4>How it works</h4>
+            <p>The agent plans the search, discovers companies through <strong>Apify</strong>, reads their sites with <strong>Firecrawl</strong>, qualifies each lead against the brief and drafts outreach for a reviewer.</p>
+            <h4>Design decisions</h4>
+            <p>Every cited URL must be a page the run actually scraped. <strong>Hard per-run limits the model can't raise:</strong> 10 leads, 40 scrapes, 120 tool calls and $5 of spend, with budgets reserved before parallel tool calls run so they can't overspend. Nothing is sent automatically: reviewers approve, reject or regenerate each draft.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p>Evidence-cited leads with outreach drafts waiting for approval, every tool call logged, and <strong>162 tests</strong>.</p>
+            </div>
+          </template>
         </div>
         <div class="proj-media" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal">
+      <article data-category="ai" class="proj reveal">
         <div class="proj-num">_03</div>
         <div>
           <div class="proj-head">
@@ -379,12 +409,27 @@
           <div class="proj-links">
             <a class="btn btn-ghost" href="https://lead-triage-system1.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="Live demo of Lead Triage System (opens in a new tab)">Live&nbsp;<span aria-hidden="true">↗</span></a>
             <!-- Demo video: replace VIDEO_LINK with the share link and remove the comment markers around this link. <a class="btn btn-ghost" href="VIDEO_LINK" target="_blank" rel="noopener noreferrer" aria-label="Watch the Lead Triage System demo (opens in a new tab)">Demo&nbsp;<span aria-hidden="true">↗</span></a> -->
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about Lead Triage System" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
           </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>An agency was reviewing hundreds of inbound leads a month by hand to decide who to call.</p>
+            <h4>Why it matters</h4>
+            <p>Agencies and small sales teams whose inbound volume has outgrown manual review, where good leads wait while someone works through the list.</p>
+            <h4>How it works</h4>
+            <p>It cleans the raw lead export (contact details, company info and notes from earlier conversations) into a consistent dataset, reads each lead's notes to judge intent and fit, and scores every lead.</p>
+            <h4>Design decisions</h4>
+            <p>Every lead is scored against the same qualification criteria, defined up front. The pipeline runs again on the next export with minimal manual effort.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p>A ranked call list with a recommendation for every lead: <strong>contact now</strong>, <strong>nurture</strong> or <strong>disqualify</strong>.</p>
+            </div>
+          </template>
         </div>
         <div class="proj-media" data-title="Lead Triage System" data-tags="Clean · Score · Rank" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal">
+      <article data-category="ai" class="proj reveal">
         <div class="proj-num">_04</div>
         <div>
           <div class="proj-head">
@@ -405,12 +450,27 @@
           <div class="proj-links">
             <a class="btn btn-ghost" href="https://drive.google.com/file/d/1sAjcuNrbFNaTj9lqGtOcQkTkS5l_QxrK/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Watch the Content Lab demo (opens in a new tab)">Demo&nbsp;<span aria-hidden="true">↗</span></a>
             <a class="btn btn-ghost" href="https://github.com/teembama/aat-c3-week-4-content-agent" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Content Lab (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about Content Lab" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
           </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>Turning a topic into a publishable article and social posts takes research, drafting and fact-checking, and AI drafts can state claims their sources don't support.</p>
+            <h4>Why it matters</h4>
+            <p>Marketing and content teams who publish across a blog, LinkedIn, X and a newsletter, and need every claim to hold up with a person signing off before anything goes out.</p>
+            <h4>How it works</h4>
+            <p>It researches with <strong>Firecrawl</strong> and <strong>Claude's web search</strong>, drafts two angles, scores each against 8 criteria and revises up to twice, then adapts the article for LinkedIn, X and a newsletter.</p>
+            <h4>Design decisions</h4>
+            <p>It refuses to draft from fewer than 2 usable sources and checks the draft <strong>claim by claim</strong> against them. Rule checks flag any X post over 280 characters. Creator and approver roles share a server-enforced review queue, and LinkedIn and X drafts are approved there, not posted automatically.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p>Source-checked articles and channel drafts with per-request cost estimates and an activity log. Approved newsletters are emailed to subscribers.</p>
+            </div>
+          </template>
         </div>
         <div class="proj-media" data-title="Content Lab" data-tags="Claude · Web search · Firecrawl" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal">
+      <article data-category="ai" class="proj reveal">
         <div class="proj-num">_05</div>
         <div>
           <div class="proj-head">
@@ -430,12 +490,27 @@
           </div>
           <div class="proj-links">
             <a class="btn btn-ghost" href="https://github.com/teembama/therese-week3-proposal-app" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Proposal Studio (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about Proposal Studio" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
           </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>Writing a client proposal after a discovery call is slow, and a proposal sent without review can promise the client the wrong thing.</p>
+            <h4>Why it matters</h4>
+            <p>Agencies and consultancies that send a proposal after every discovery call and need a second person to approve it before it reaches the client.</p>
+            <h4>How it works</h4>
+            <p>Claude can pre-fill the intake form from a pasted transcript, then writes a six-section proposal. Generated sections are parsed and validated before anything is saved. Approval requests ping Discord, and email goes through Resend.</p>
+            <h4>Design decisions</h4>
+            <p>A status lifecycle (draft → pending approval → approved → sent) is <strong>checked on the server</strong> for approve, send and PDF, and the approver can't be the proposal's author. A shared cap of 3 AI regenerations per proposal keeps cost bounded.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p>A six-section client proposal that can only be emailed once a different person has approved it.</p>
+            </div>
+          </template>
         </div>
         <div class="proj-media" data-title="Proposal Studio" data-tags="Claude · Supabase · Resend" aria-hidden="true"></div>
       </article>
 
-      <article class="proj reveal">
+      <article data-category="ai" class="proj reveal">
         <div class="proj-num">_06</div>
         <div>
           <div class="proj-head">
@@ -457,12 +532,27 @@
           <div class="proj-links">
             <a class="btn btn-ghost" href="https://drive.google.com/file/d/1ZPw13w1kJBHWdEjneJeWogFcjn_sO-bc/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Watch the Ops Reporting Dashboard demo (opens in a new tab)">Demo&nbsp;<span aria-hidden="true">↗</span></a>
             <a class="btn btn-ghost" href="https://github.com/teembama/therese-week2-ops-reporting" target="_blank" rel="noopener noreferrer" aria-label="GitHub source for Ops Reporting Dashboard (opens in a new tab)">GitHub&nbsp;<span aria-hidden="true">↗</span></a>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about Ops Reporting Dashboard" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
           </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>One report, for any period, across Sales, Delivery and People data held in Google Sheets, Airtable and an internal API.</p>
+            <h4>Why it matters</h4>
+            <p>Operations leads who assemble a cross-team report from several systems by hand, and need the numbers to be right even when the write-up is AI-generated.</p>
+            <h4>How it works</h4>
+            <p>The dashboard triggers an <strong>n8n</strong> workflow that pulls all three sources, calculates the metrics deterministically, sends a summary to <strong>Claude</strong> for commentary, and stores the report in Supabase. The page polls and renders it.</p>
+            <h4>Design decisions</h4>
+            <p>The numbers never come from the model. If one source is down, the report still renders with those metrics labelled <strong>“unknown, not zero”</strong>. If the AI step fails, a banner says the metrics are unaffected. Stored reports are reused unless a recalculation is forced.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p>A one-page report with <strong>23 metrics</strong>, AI commentary and data-quality warnings for any chosen period.</p>
+            </div>
+          </template>
         </div>
         <div class="proj-media" data-title="Ops Reporting Dashboard" data-tags="n8n · Claude · Supabase" aria-hidden="true"></div>
       </article>
 
-      <article class="proj proj-earlier reveal">
+      <article data-category="research" class="proj proj-earlier reveal">
         <div class="proj-num">_07</div>
         <div>
           <div class="proj-head">
@@ -480,11 +570,28 @@
             <span class="tag">EfficientNet-B0</span><span class="tag">XGBoost</span>
             <span class="tag">Multimodal Fusion</span>
           </div>
+          <div class="proj-links" hidden>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about Multimodal Hypertension Detection" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
+          </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>Hypertension detection models had not combined ECG, retinal imaging and clinical data in one framework.</p>
+            <h4>Why it matters</h4>
+            <p>Clinicians and screening programmes looking for hypertension, including for patients whose skin tone makes optical sensor readings less reliable.</p>
+            <h4>How it works</h4>
+            <p>A trimodal attention-based fusion framework: ECG through a custom CNN + Transformer, retinal fundus images through EfficientNet-B0, and clinical parameters through XGBoost.</p>
+            <h4>Design decisions</h4>
+            <p>An equity-conscious design that relies on internal biological markers rather than optical sensors, to avoid bias across skin tones.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p><strong>91.45% accuracy</strong>, a 7.45 percentage-point improvement over the prior published baseline of 84%. The first work to fuse all three modalities for this task. Publication manuscript in preparation.</p>
+            </div>
+          </template>
         </div>
         <div class="proj-media" data-title="Multimodal Hypertension Detection" data-tags="CNN + Transformer · EfficientNet-B0 · XGBoost" aria-hidden="true"></div>
       </article>
 
-      <article class="proj proj-earlier reveal">
+      <article data-category="fullstack" class="proj proj-earlier reveal">
         <div class="proj-num">_08</div>
         <div>
           <div class="proj-head">
@@ -504,11 +611,28 @@
             <span class="tag">Django REST</span><span class="tag">FastAPI</span>
             <span class="tag">LLM Routing</span>
           </div>
+          <div class="proj-links" hidden>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about EchoPay" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
+          </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>A voice banking assistant has to feel instant and stay safe, but sending every request through an LLM took around 2 seconds and opens the door to prompt injection.</p>
+            <h4>Why it matters</h4>
+            <p>Mobile banking customers who want to check a balance or make a transfer by speaking, and the bank that has to keep every transaction authorised.</p>
+            <h4>How it works</h4>
+            <p>A three-tier architecture: a React Native/Expo client, a Django REST Framework backend and FastAPI middleware handling real-time audio and multi-turn conversation state.</p>
+            <h4>Design decisions</h4>
+            <p>A fast-path routing system bypasses the LLM for 80% of requests. Prompt-injection detection, output sanitization and PIN-based transaction authorization guard the rest.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p>Response time cut <strong>from ~2s to under 50ms</strong>. <strong>Team Echo placed 1st</strong> at the hackathon, shipping EchoPay and EchoMind in under 24 hours.</p>
+            </div>
+          </template>
         </div>
         <img class="proj-media" src="echopay.jpg" alt="EchoPay running on an iPhone: the Echo voice assistant answers &quot;What is my account balance?&quot; with the balance in naira." width="800" height="591" loading="lazy" data-title="EchoPay" data-tags="React Native · Django REST · FastAPI">
       </article>
 
-      <article class="proj proj-earlier reveal">
+      <article data-category="fullstack" class="proj proj-earlier reveal">
         <div class="proj-num">_09</div>
         <div>
           <div class="proj-head">
@@ -524,11 +648,28 @@
             <span class="tag">React</span><span class="tag">Django REST</span>
             <span class="tag">React Query</span><span class="tag">Python</span>
           </div>
+          <div class="proj-links" hidden>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about Bloom" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
+          </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>Expectant mothers need guidance that changes week by week through pregnancy, in one place.</p>
+            <h4>Why it matters</h4>
+            <p>Expectant mothers looking for personalised, week-by-week pregnancy information and a reason to keep coming back to it.</p>
+            <h4>How it works</h4>
+            <p>A React frontend on a Django REST backend, with dynamic pregnancy tracking, a personalized content pipeline and a gamified token rewards system.</p>
+            <h4>Design decisions</h4>
+            <p>React Query handles data fetching and caching, with custom hooks and a responsive component architecture.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p><strong>40+ weeks of content</strong>, and React Query <strong>cut API calls by 60%</strong>.</p>
+            </div>
+          </template>
         </div>
         <img class="proj-media" src="bloom.jpg" alt="Bloom's landing page: the headline &quot;Nurturing mothers.&quot; over a photo of a pregnant belly, with Features, How It Works and Rewards in the navigation." width="1900" height="871" loading="lazy" data-title="Bloom" data-tags="React · Django REST · React Query">
       </article>
 
-      <article class="proj proj-earlier reveal">
+      <article data-category="fullstack" class="proj proj-earlier reveal">
         <div class="proj-num">_10</div>
         <div>
           <div class="proj-head">
@@ -546,6 +687,23 @@
             <span class="tag">React</span><span class="tag">Django</span>
             <span class="tag">OpenAI Whisper</span><span class="tag">JWT Auth</span>
           </div>
+          <div class="proj-links" hidden>
+            <button type="button" class="btn btn-ghost proj-details" aria-haspopup="dialog" aria-label="Details about EchoMind" hidden>Details&nbsp;<span aria-hidden="true">→</span></button>
+          </div>
+          <template class="proj-detail">
+            <h4>Problem</h4>
+            <p>Getting answers out of a document usually means reading or typing. EchoMind lets you ask it out loud.</p>
+            <h4>Why it matters</h4>
+            <p>People who would rather ask a document a question by voice than search or type through it.</p>
+            <h4>How it works</h4>
+            <p>A React and Django app that uses <strong>OpenAI Whisper</strong> for transcription, with a custom <code>useWhisperVoice</code> hook managing live audio streams.</p>
+            <h4>Design decisions</h4>
+            <p>JWT-based authentication with protected routes and persistent sessions across the app.</p>
+            <div class="detail-results">
+              <h4>Results</h4>
+              <p><strong>Team Echo placed 1st</strong> at the October 2025 hackathon, shipping EchoMind and EchoPay in under 24 hours.</p>
+            </div>
+          </template>
         </div>
         <img class="proj-media" src="echo.jpg" alt="Illustration of a doctor talking a patient through her medical history, shown by an AI assistant on a laptop." width="1536" height="1024" loading="lazy" data-title="EchoMind" data-tags="React · Django · OpenAI Whisper">
       </article>
@@ -707,6 +865,22 @@
       <p>Your message didn't send. Please try again or email me directly at mbamatherese2005@gmail.com.</p>
       <button type="button" class="btn-send" id="errorDismiss">Try Again</button>
     </div>
+  </div>
+</div>
+
+<!-- ================= PROJECT DETAILS MODAL ================= -->
+<!-- Filled from the clicked card: its h3, meta line, <template class="proj-detail">,
+     tags and links. Each project's write-up lives in its own card. -->
+<div id="projectModal" class="modal modal-project" aria-hidden="true">
+  <div class="modal-overlay"></div>
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="projectTitle">
+    <button class="modal-close" id="closeProject" aria-label="Close">&times;</button>
+    <p class="proj-meta" id="projectMeta"></p>
+    <h3 class="modal-title" id="projectTitle"></h3>
+    <div class="detail-body" id="projectBody"></div>
+    <h4 class="detail-stack">Stack</h4>
+    <div class="tags" id="projectTags"></div>
+    <div class="detail-links" id="projectLinks"></div>
   </div>
 </div>
 

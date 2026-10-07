@@ -616,3 +616,41 @@ if (contactForm) {
     }
   });
 }
+
+// ─── PROJECT DETAILS MODAL ───
+// Each card carries its own write-up in a <template class="proj-detail">. The
+// pop-up copies that in along with the card's title, meta line, tags and links,
+// so there is one place to edit per project. The Details buttons ship hidden
+// and only appear here, since without JS they would do nothing.
+const projectModal = document.getElementById('projectModal');
+if (projectModal) {
+  const projectContent = projectModal.querySelector('.modal-content');
+  const projectTitle   = document.getElementById('projectTitle');
+  const projectMeta    = document.getElementById('projectMeta');
+  const projectBody    = document.getElementById('projectBody');
+  const projectTags    = document.getElementById('projectTags');
+  const projectLinks   = document.getElementById('projectLinks');
+  const closeProject   = document.getElementById('closeProject');
+
+  const openProject = (card) => {
+    const detail = card.querySelector('.proj-detail');
+    if (!detail) return;
+    const meta = card.querySelector('.proj-meta');
+    projectTitle.textContent = card.querySelector('h3').textContent;
+    projectMeta.textContent  = meta ? meta.textContent : '';
+    projectBody.replaceChildren(detail.content.cloneNode(true));
+    projectTags.replaceChildren(...Array.from(card.querySelectorAll('.tag'), (t) => t.cloneNode(true)));
+    projectLinks.replaceChildren(...Array.from(card.querySelectorAll('.proj-links a'), (a) => a.cloneNode(true)));
+    projectLinks.hidden = !projectLinks.children.length;
+    openDialog(projectModal);
+    projectContent.scrollTop = 0;
+    closeProject.focus();
+  };
+
+  document.querySelectorAll('.proj-details').forEach((btn) => {
+    btn.hidden = false;
+    btn.closest('.proj-links').hidden = false;
+    btn.addEventListener('click', () => openProject(btn.closest('.proj')));
+  });
+  closeProject.addEventListener('click', closeDialog);
+}
