@@ -635,7 +635,7 @@
             </div>
           </template>
         </div>
-        <img class="proj-media" src="bloom.jpg" alt="Bloom's landing page: the headline &quot;Nurturing mothers.&quot; over a photo of a pregnant belly, with Features, How It Works and Rewards in the navigation." width="1900" height="871" loading="lazy" data-title="Bloom" data-tags="React · Django REST · React Query" data-demo="https://drive.google.com/file/d/1qKP7uBKTYY_iEKtWLgBujtUkfXWFrlYk/view?usp=sharing">
+        <img class="proj-media" src="bloom.jpg" alt="Bloom's landing page: the headline &quot;Nurturing mothers.&quot; over a photo of a pregnant belly, with Features, How It Works and Rewards in the navigation." width="1900" height="871" loading="lazy" data-title="Bloom" data-tags="React · Django REST · React Query">
       </article>
 
       <article data-category="fullstack" class="proj proj-earlier reveal">
@@ -850,6 +850,17 @@
     <h4 class="detail-stack">Stack</h4>
     <div class="tags" id="projectTags"></div>
     <div class="detail-links" id="projectLinks"></div>
+  </div>
+</div>
+
+<!-- ================= IMAGE LIGHTBOX ================= -->
+<!-- Shows a larger copy of a card's .proj-media (screenshot or placeholder). -->
+<div id="imageModal" class="modal modal-image" aria-hidden="true">
+  <div class="modal-overlay"></div>
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="zoomTitle">
+    <button class="modal-close" id="closeImage" aria-label="Close">&times;</button>
+    <h3 class="zoom-title" id="zoomTitle"></h3>
+    <div class="zoom-frame" id="zoomFrame"></div>
   </div>
 </div>
 

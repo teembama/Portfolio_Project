@@ -435,17 +435,16 @@
       card.addEventListener('mousemove', function(e){
         tx = e.clientX; ty = e.clientY;
       });
-      // A card whose .proj-media has data-demo opens that demo when clicked
-      // while the preview shows, since the click lands on the image the
-      // pointer is carrying. Links, buttons and text selections are left alone.
+      // Clicking a card while the preview shows opens the larger view of its
+      // image, since the click lands on the image the pointer is carrying.
+      // Links, buttons and text selections are left alone.
       card.addEventListener('click', function(e){
         var media = card.querySelector('.proj-media');
-        var demo = media && media.dataset.demo;
-        if(!demo || !previewMQ.matches || nearRow) return;
+        if(!media || !window.openZoom || !previewMQ.matches || nearRow) return;
         if(e.target.closest('a, button')) return;
         var sel = window.getSelection && window.getSelection();
         if(sel && String(sel).trim()) return;
-        window.open(demo, '_blank', 'noopener');
+        window.openZoom(media);
       });
       card.addEventListener('mouseleave', function(){
         box.classList.remove('on');
@@ -489,15 +488,6 @@
     if(document.readyState === 'complete') schedulePrewarm();
     else window.addEventListener('load', schedulePrewarm);
   })();
-
-  // ─── IN-CARD DEMO IMAGES ───
-  // Where the image shows in the card (touch, and 900px and below), tapping a
-  // .proj-media with data-demo opens the demo, like the card's Demo button.
-  document.querySelectorAll('.proj-media[data-demo]').forEach(function(media){
-    media.addEventListener('click', function(){
-      window.open(media.dataset.demo, '_blank', 'noopener');
-    });
-  });
 
   // ─── THERESE.TS LIVE TERMINAL (terminal.js, frames in terminal-frames.js) ───
   if(window.ThereseTerminal) window.ThereseTerminal.init(document.querySelector('.code-card'));
@@ -692,5 +682,46 @@ if (projFilters) {
       if (show) { shown++; card.classList.add('in'); }   // skip the scroll reveal for cards shown by a filter
     });
     if (projCount) projCount.textContent = 'Showing ' + shown + (shown === 1 ? ' project' : ' projects');
+  });
+}
+
+// ─── IMAGE LIGHTBOX ───
+// Clicking or tapping a card's image opens a larger copy of it: the screenshot,
+// or the gradient placeholder until there is one. Where the image shows in the
+// card (touch, and 900px and below) it becomes a keyboard-reachable button and
+// gets focus back on close; on desktop the hover preview stands in for it and
+// the card's click handler above calls openZoom(). The Demo button stays the
+// only way to the demo video.
+const imageModal = document.getElementById('imageModal');
+if (imageModal) {
+  const zoomTitle = document.getElementById('zoomTitle');
+  const zoomFrame = document.getElementById('zoomFrame');
+  const closeImage = document.getElementById('closeImage');
+
+  window.openZoom = (media) => {
+    const copy = media.cloneNode(true);
+    ['tabindex', 'role', 'aria-label', 'aria-hidden', 'loading', 'id'].forEach((a) => copy.removeAttribute(a));
+    zoomTitle.textContent = media.dataset.title || '';
+    zoomFrame.replaceChildren(copy);
+    openDialog(imageModal, () => zoomFrame.replaceChildren());
+    closeImage.focus();
+  };
+  closeImage.addEventListener('click', closeDialog);
+
+  document.querySelectorAll('.proj-media').forEach((media) => {
+    const name = media.dataset.title || 'this project';
+    media.removeAttribute('aria-hidden');
+    media.setAttribute('role', 'button');
+    media.setAttribute('tabindex', '0');
+    media.setAttribute('aria-label', 'View a larger image of ' + name);
+    media.addEventListener('click', () => {
+      media.focus({ preventScroll: true });           // so closing returns focus here
+      window.openZoom(media);
+    });
+    media.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      window.openZoom(media);
+    });
   });
 }

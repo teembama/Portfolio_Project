@@ -51,11 +51,11 @@ Replace that line with the image, keeping the class and the data attributes:
 <img class="proj-media" src="assets/projects/lead-studio.webp" alt="…" width="1440" height="900" loading="lazy" data-title="Lead Studio" data-tags="Agent SDK · Apify · Firecrawl">
 ```
 
-Both views pick it up. On a desktop with a mouse it appears in the cursor-following hover preview, which hides while the pointer is over the card's button row. On touch screens, and at 900px and below, it shows as a static image inside the card.
+Both views, and the lightbox, pick it up. Clicking the image (tapping it in the card, or clicking the card while the hover preview shows on desktop) opens a larger copy of it; until a card has a screenshot, that copy is its placeholder. On a desktop with a mouse it appears in the cursor-following hover preview, which hides while the pointer is over the card's button row. On touch screens, and at 900px and below, it shows as a static image inside the card.
 
 ### Adding a demo video
 
-Demo videos are plain links in each card's link row, before GitHub. To make the card's image open the video too, add the same link to its `<img class="proj-media">` as `data-demo="…"` (Bloom does this). The image then opens it when tapped in the card on touch screens, and when clicked while the hover preview shows on desktop. Lead Triage System has a ready-made one commented out in its link row: replace `VIDEO_LINK` with the video's share link (for Google Drive, shared as "Anyone with the link") and remove the comment markers around the link.
+Demo videos are plain links in each card's link row, before GitHub. The Demo button is the only thing that opens a video. Lead Triage System has a ready-made one commented out in its link row: replace `VIDEO_LINK` with the video's share link (for Google Drive, shared as "Anyone with the link") and remove the comment markers around the link.
 
 ### Editing a project's details
 
