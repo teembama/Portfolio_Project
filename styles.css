@@ -89,6 +89,7 @@
   --card-shadow:   var(--shadow);
   --btn-glow:      0 12px 32px -10px rgba(193,160,172,0.55);
   --proj-glow:     rgba(128,108,121,0.13);
+  --preview-shadow:0 34px 70px -28px rgba(0,0,0,0.85), 0 0 40px -18px rgba(193,160,172,0.50);
   --modal-scrim:   rgba(13,11,19,0.72);
 }
 
@@ -445,17 +446,18 @@ section{padding-block:var(--sect); position:relative;}
 .proj-links{display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.35rem;}
 
 /* Project media: a screenshot (<img class="proj-media">) or, until there is
-   one, a placeholder drawn from its data-title / data-tags. It always shows:
-   its own column above 900px, above the text at 900px and below. Swapping the
-   placeholder div for an <img class="proj-media" ...> is the whole change for
-   a screenshot. */
+   one, a placeholder drawn from its data-title / data-tags with the hover
+   preview's recipe below. That element is the one source for both: the card
+   shows it where the cursor preview can't (touch, and 900px and below), and
+   the preview shows it on hover everywhere else. Swapping the placeholder div
+   for an <img class="proj-media" ...> is the whole change for a screenshot. */
 .proj-media{
-  display:block; position:relative; width:100%; height:auto; aspect-ratio:16/10; margin:0;
+  display:none; position:relative; width:100%; height:auto; aspect-ratio:16/10; margin:0;
   border-radius:13px; overflow:hidden; border:1px solid var(--border-strong);
   object-fit:cover;
 }
 div.proj-media{
-  display:grid; place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
+  place-content:center; gap:.5rem; text-align:center; padding:1.1rem;
   background:
     radial-gradient(18rem 12rem at 20% 12%, var(--wash), transparent 70%),
     linear-gradient(140deg, var(--accent-deep) 0%, var(--bg-card-alt) 52%, var(--alt-wash) 100%);
@@ -470,8 +472,12 @@ div.proj-media::after{
   font-family:var(--mono); font-size:.6rem; letter-spacing:.16em;
   text-transform:uppercase; color:var(--accent-alt-soft);
 }
-/* wider than 900px: media gets its own column */
-@media (min-width:901px){
+@media (max-width:900px), (hover:none), (pointer:coarse){
+  div.proj-media{display:grid;}
+  img.proj-media{display:block;}
+}
+/* touch screens wider than 900px: media gets its own column */
+@media (min-width:901px) and (hover:none), (min-width:901px) and (pointer:coarse){
   .proj{grid-template-columns:auto 1fr minmax(220px,34%);}
 }
 @media (max-width:900px){
@@ -483,6 +489,33 @@ div.proj-media::after{
    work reads first. */
 .proj-earlier ul{color:var(--text-muted);}
 .proj-earlier li strong{color:var(--text-soft);}
+
+/* cursor-following project preview */
+.preview{
+  position:fixed; top:0; left:0; z-index:55; pointer-events:none;
+  width:clamp(210px,21vw,320px); aspect-ratio:16/11;
+  border-radius:13px; overflow:hidden; border:1px solid var(--border-strong);
+  box-shadow:var(--preview-shadow);
+  opacity:0; transform:translate(-50%,-50%) scale(.88) rotate(-4deg);
+  transition:opacity .3s ease, transform .38s cubic-bezier(.2,.7,.3,1);
+}
+.preview.on{opacity:1; transform:translate(-50%,-50%) scale(1) rotate(-2.5deg);}
+.preview img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+.preview .ph{
+  position:absolute; inset:0; display:grid; place-content:center; gap:.5rem;
+  text-align:center; padding:1.1rem;
+  background:
+    radial-gradient(18rem 12rem at 20% 12%, var(--wash), transparent 70%),
+    linear-gradient(140deg, var(--accent-deep) 0%, var(--bg-card-alt) 52%, var(--alt-wash) 100%);
+}
+.preview .ph b{
+  font-family:var(--display); font-weight:600; font-size:.95rem;
+  letter-spacing:-.02em; color:var(--text);
+}
+.preview .ph small{
+  font-family:var(--mono); font-size:.6rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent-alt-soft);
+}
 
 /* ============================================================
    EXPERIENCE
@@ -672,6 +705,11 @@ div.proj-media::after{
   .about-grid{grid-template-columns:1fr;}
   .code-card{position:static;}
 }
+/* the exact complement of where .proj-media shows in the card */
+@media (max-width:900px), (hover:none), (pointer:coarse){
+  .preview{display:none;}
+}
+
 /* ---------- tablet / large phone ---------- */
 @media (max-width:900px){
   :root{--sect:clamp(4rem,10vw,6rem);}
