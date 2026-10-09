@@ -351,7 +351,7 @@ button.btn{appearance:none; margin:0; background:none; color:inherit; line-heigh
    each connector draws in, then the stage it reaches lights up, 260ms apart.
    Every colour is an existing token. */
 .pipeline{margin:clamp(3rem,7vw,5rem) 0 0;}
-.pipeline .eyebrow{margin-bottom:1.4rem; text-transform:none;}   /* keeps the capital in "how I build" */
+.pipeline .eyebrow{margin-bottom:1.4rem;}
 .pipe{
   --gap:2.2rem;
   list-style:none; margin:0; padding:0;
