@@ -77,34 +77,75 @@
   });
 
   // ─── SCROLL REVEAL (with fallbacks) ───
+  // Elements that enter view together are staggered 70ms apart (up to 4 steps),
+  // so a batch of cards doesn't fire at once. The delay is cleared once the
+  // reveal is done, so it never lags a later hover.
   var items = document.querySelectorAll('.reveal');
   function reveal(el){ el.classList.add('in'); }
+  function revealAll(){ items.forEach(reveal); }
   function checkReveal(){
     var vh = window.innerHeight;
     items.forEach(function(el){
       if(el.getBoundingClientRect().top < vh - 40) reveal(el);
     });
   }
+  var observing = false;
   if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){
-          reveal(en.target);
-          io.unobserve(en.target);
-        }
-      });
-    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
-    items.forEach(function(el, i){
-      el.style.transitionDelay = (Math.min(i,4) * 60) + 'ms';
-      io.observe(el);
-    });
-  } else {
-    window.addEventListener('scroll', checkReveal);
+    try {
+      var io = new IntersectionObserver(function(entries){
+        var k = 0;
+        entries.forEach(function(en){
+          if(!en.isIntersecting) return;
+          var el = en.target, delay = Math.min(k++, 4) * 70;
+          el.style.transitionDelay = delay + 'ms';
+          reveal(el);
+          setTimeout(function(){ el.style.transitionDelay = ''; }, delay + 450);
+          io.unobserve(el);
+        });
+      }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+      items.forEach(function(el){ io.observe(el); });
+      observing = true;
+    } catch(e){}
   }
-  window.addEventListener('scroll', checkReveal);
-  setTimeout(checkReveal, 50);
-  // Final safety: force-reveal anything still hidden after 2s (CSS @keyframes also covers this)
-  setTimeout(function(){ items.forEach(reveal); }, 2000);
+  if(!observing){
+    window.addEventListener('scroll', checkReveal, {passive:true});
+    setTimeout(checkReveal, 50);
+    // Final safety: force-reveal anything still hidden after 2s (CSS @keyframes
+    // covers the no-JS case the same way)
+    setTimeout(revealAll, 2000);
+  }
+
+  // ─── INTRO: hero settle, once per session ───
+  // The inline script in <head> sets html.intro. Any click, key, wheel, touch
+  // or scroll ends it at once; otherwise it is cleared after 1.2s.
+  var root = document.documentElement;
+  if(root.classList.contains('intro')){
+    try { sessionStorage.setItem('introSeen', '1'); } catch(e){}
+    var skipEvents = ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'];
+    var endIntro = function(){
+      root.classList.remove('intro');
+      skipEvents.forEach(function(t){ window.removeEventListener(t, endIntro, true); });
+    };
+    skipEvents.forEach(function(t){ window.addEventListener(t, endIntro, {capture:true, passive:true}); });
+    setTimeout(endIntro, 1200);
+  }
+
+  // ─── PIPELINE: stages light up in sequence ───
+  // Lit is the CSS default. Only with the observer and full motion is the strip
+  // armed (unlit) and then run once when most of it is in view.
+  var pipe = document.querySelector('.pipe');
+  if(pipe && 'IntersectionObserver' in window &&
+     !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    try {
+      var pio = new IntersectionObserver(function(entries){
+        if(!entries[0].isIntersecting) return;
+        pipe.classList.add('run');
+        pio.disconnect();
+      }, {threshold:0.6});
+      pipe.classList.add('armed');
+      pio.observe(pipe);
+    } catch(e){ pipe.classList.remove('armed'); }
+  }
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

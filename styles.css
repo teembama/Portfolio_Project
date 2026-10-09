@@ -344,6 +344,69 @@ button.btn{appearance:none; margin:0; background:none; color:inherit; line-heigh
 }
 @keyframes tblink{50%{opacity:0;}}
 
+/* ---------- pipeline: "how I build" strip under About ----------
+   Five stages in one row (a column on phones), joined by connectors. Lit is
+   the default, so without JS or with reduced motion it simply shows complete.
+   script.js adds .armed (unlit) and then .run when the strip scrolls into view:
+   each connector draws in, then the stage it reaches lights up, 260ms apart.
+   Every colour is an existing token. */
+.pipeline{margin:clamp(3rem,7vw,5rem) 0 0;}
+.pipeline .eyebrow{margin-bottom:1.4rem; text-transform:none;}   /* keeps the capital in "how I build" */
+.pipe{
+  --gap:2.2rem;
+  list-style:none; margin:0; padding:0;
+  display:flex; gap:var(--gap);
+}
+.pipe-stage{
+  --i:0;
+  position:relative; flex:1 1 0; min-width:0;
+  display:flex; align-items:center; gap:.6rem;
+  padding:.85rem 1rem; border:1px solid var(--border-strong); border-radius:10px;
+  background:var(--wash-soft); box-shadow:0 0 0 3px var(--wash-faint);
+  font-family:var(--mono); font-size:.74rem; line-height:1.4; letter-spacing:.02em;
+  color:var(--text);
+  transition:color .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
+  transition-delay:calc(var(--i) * 260ms);
+}
+.pipe-stage:nth-child(2){--i:1;}
+.pipe-stage:nth-child(3){--i:2;}
+.pipe-stage:nth-child(4){--i:3;}
+.pipe-stage:nth-child(5){--i:4;}
+/* the stage's marker dot */
+.pipe-stage::before{
+  content:""; flex:none; width:6px; height:6px; border-radius:50%;
+  background:var(--accent);
+  transition:background .22s ease; transition-delay:inherit;
+}
+/* the connector into this stage: a hairline track, with the accent line
+   drawn over it (::after) */
+.pipe-stage + .pipe-stage::after{
+  content:""; position:absolute; top:50%; left:calc(-1 * var(--gap) - 1px);
+  width:var(--gap); height:1px;
+  background:linear-gradient(90deg,var(--border-strong),var(--accent));
+  transform-origin:left; transform:none;
+  transition:transform .2s linear; transition-delay:calc(var(--i) * 260ms - 200ms);
+}
+/* armed: unlit until the strip scrolls into view */
+.pipe.armed:not(.run) .pipe-stage{
+  color:var(--text-muted); border-color:var(--border); background:var(--wash-faint); box-shadow:none;
+  transition-delay:0s;
+}
+.pipe.armed:not(.run) .pipe-stage::before{background:var(--border-strong);}
+.pipe.armed:not(.run) .pipe-stage::after{transform:scaleX(0); transition-delay:0s;}
+
+@media (max-width:640px){
+  .pipe{--gap:1rem; flex-direction:column;}
+  .pipe-stage{padding:.75rem .95rem;}
+  .pipe-stage + .pipe-stage::after{
+    top:calc(-1 * var(--gap) - 1px); left:calc(.95rem + 3px);
+    width:1px; height:var(--gap);
+    background:linear-gradient(180deg,var(--border-strong),var(--accent));
+    transform-origin:top;
+  }
+  .pipe.armed:not(.run) .pipe-stage::after{transform:scaleY(0);}
+}
+
 /* ============================================================
    STACK + GLOBE
    ============================================================ */
@@ -764,12 +827,34 @@ div.proj-media::after{
 /* ============================================================
    MOTION
    ============================================================ */
-.reveal{opacity:0; transform:translateY(22px); transition:opacity .75s cubic-bezier(.2,.7,.3,1), transform .75s cubic-bezier(.2,.7,.3,1);}
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .4s cubic-bezier(.2,.7,.3,1), transform .4s cubic-bezier(.2,.7,.3,1);}
 .reveal.in{opacity:1; transform:none;}
-/* safety net: if neither the observer nor the scroll fallback fires
-   (JS disabled, IO throwing), nothing stays invisible past 2s */
-.reveal{animation:revealSafety .01s linear 2s forwards;}
+/* safety net: without JS nothing stays invisible past 2s. The inline script in
+   <head> adds .js, and script.js runs its own 2s fallback if the observer is
+   missing or throws, so with JS working, reveals wait for the scroll. */
+html:not(.js) .reveal{animation:revealSafety .01s linear 2s forwards;}
 @keyframes revealSafety{to{opacity:1; transform:none;}}
+
+/* ---------- intro: the hero settles in, once per session ----------
+   html.intro is set by the inline script in <head> (first visit this session,
+   no reduced motion, no #hash). Opacity and transform only, so nothing moves
+   in the layout; script.js drops the class on any click, key, wheel, touch or
+   scroll, and after 1.2s, which lands every element on its final state. */
+.intro .hero-eyebrow,
+.intro .hero-sub,
+.intro .hero-stack,
+.intro .hero .btn-row,
+.intro .scroll-hint{animation:introFade .45s ease-out both;}
+.intro .hero h1 .ln{animation:introRise .5s cubic-bezier(.2,.7,.3,1) both;}
+.intro .hero h1 .ln:nth-child(1){animation-delay:.1s;}
+.intro .hero h1 .ln:nth-child(2){animation-delay:.19s;}
+.intro .hero h1 .ln:nth-child(3){animation-delay:.28s;}
+.intro .hero-sub{animation-delay:.4s;}
+.intro .hero-stack{animation-delay:.46s;}
+.intro .hero .btn-row,
+.intro .scroll-hint{animation-delay:.5s;}
+@keyframes introFade{from{opacity:0;}}
+@keyframes introRise{from{opacity:0; transform:translateY(12px);}}
 
 :focus-visible{outline:2px solid var(--accent-alt); outline-offset:3px; border-radius:4px;}
 
@@ -777,6 +862,8 @@ div.proj-media::after{
   *{animation:none !important; transition-duration:.01ms !important;}
   .reveal{opacity:1; transform:none;}
   html{scroll-behavior:auto;}
+  /* the pipeline shows fully lit, with no sequence */
+  .pipe-stage, .pipe-stage::before, .pipe-stage::after{transition:none !important;}
 }
 
 /* ============================================================

@@ -74,6 +74,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<script>
+  // Runs before first paint. .js lets the CSS reveal wait for the scroll;
+  // .intro plays the hero settle once per session (script.js ends it).
+  (function(){
+    var root = document.documentElement, seen = false;
+    root.classList.add('js');
+    try { seen = !!sessionStorage.getItem('introSeen'); } catch(e){}
+    if (!seen && !location.hash && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      root.classList.add('intro');
+    }
+  })();
+</script>
 </head>
 <body>
 <div class="shell">
@@ -200,6 +212,17 @@
  </code></pre>
       </div>
     </div>
+
+    <figure class="pipeline reveal" aria-labelledby="pipelineTitle">
+      <figcaption class="eyebrow" id="pipelineTitle">// how I build</figcaption>
+      <ol class="pipe">
+        <li class="pipe-stage">data</li>
+        <li class="pipe-stage">computed in code</li>
+        <li class="pipe-stage">grounded &amp; validated</li>
+        <li class="pipe-stage">human approval</li>
+        <li class="pipe-stage">output</li>
+      </ol>
+    </figure>
   </div>
 </section>
 
